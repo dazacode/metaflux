@@ -1,0 +1,3887 @@
+
+
+
+
+
+
+
+
+<!doctype html>
+
+
+<html lang="en">
+<head>
+
+
+
+
+
+
+
+
+
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<link rel="shortcut icon" href="https://webtoons-static.pstatic.net/image/favicon/favicon.ico?dt=2017082301" type="image/x-icon">
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+
+
+    
+    
+        <link rel="stylesheet" type="text/css" href="/static/bundle/linewebtoon-b125f1a94ebdf4437938.css">
+    
+
+
+
+
+
+<script type="text/javascript">
+	window.__headerState__ = {
+		domain: "www.webtoons.com",
+		phase : "release",
+		languageCode: "en",
+		cssCode: "en",
+		cssCodePrefix: "",
+		gaTrackingId: "UA-57082184-1",
+		ga4TrackingId: "G-ZTE4EZ7DVX",
+		contentLanguage: "ENGLISH",
+		contentLanguageCode : 'en',
+		gakSerName: "gak.webtoons.com",
+		gakPlatformName: "WEB_PC",
+		serviceZone: 'GLOBAL',
+		facebookAdId: "",
+		lcsServer: 'lcs.loginfra.com',
+		browserType : "UNKNOWN",
+		gaPageName : "",
+		
+		googleAdsState : {
+			gadWebtoonReadEvent : "",
+			title : "",
+			titleNo : "",
+			episodeNo : "",
+			gadConversion : {
+				"th": [{
+					// GAD 태국 광고 계정 1
+					conversionId: "AW-761239969", // AW-CONVERSION_ID : Google Ads 계정에 고유한 전환 ID
+					conversionLabel: "yhf1CLXkr-0CEKGz_uoC" // AW-CONVERSION_LABEL : 각 전환 액션에 고유하게 부여되는 전환 라벨
+				}, {
+					// GAD 태국 광고 계정 2
+					conversionId: "AW-758804776",
+					conversionLabel: "GzVDCNuRsO0CEKji6ekC"
+				}]
+				// 언어가 추가되면 배열로 넣음
+			}
+		},
+		afPbaKey: "fe890007-9461-4b38-a417-7611db3b631e",
+	}
+
+	let lcs_SerName = window.lcs_SerName = window.__headerState__.lcsServer;
+</script>
+<script type="text/javascript" src="/static/bundle/common/cmp-350b9bf6fc52363adec2.js" charset="utf-8"></script>
+<script type="text/javascript" src="/static/bundle/header-3eb11a4f70f2b036f532.js" charset="utf-8"></script>
+<script type="text/javascript" src="/static/bundle/common/header-ab5d4c7d9b697965842b.js" charset="utf-8"></script>
+
+
+
+
+<title>WEBTOON - The official home for all things WEBTOON</title>
+<meta name="keywords" content="Top Comics, Daily Updated, Online Comics, Free Comics," />
+<meta name="description" content="Get in on the latest original romance, comedy, action, fantasy, horror, and more from big names and big names to be - made just for WEBTOON. We&#039;re available anywhere, anytime, and always for free." />
+
+
+
+
+
+ 
+
+	
+	<link rel="alternate" hreflang="en" href="https://www.webtoons.com/en/originals/tuesday" />
+
+	
+	<link rel="alternate" hreflang="zh-TW" href="https://www.webtoons.com/zh-hant/originals/tuesday" />
+
+	
+	<link rel="alternate" hreflang="th" href="https://www.webtoons.com/th/originals/tuesday" />
+
+	
+	<link rel="alternate" hreflang="id" href="https://www.webtoons.com/id/originals/tuesday" />
+
+	
+	<link rel="alternate" hreflang="es" href="https://www.webtoons.com/es/originals/tuesday" />
+
+	
+	<link rel="alternate" hreflang="fr" href="https://www.webtoons.com/fr/originals/tuesday" />
+
+	
+	<link rel="alternate" hreflang="de" href="https://www.webtoons.com/de/originals/tuesday" />
+
+<link rel="alternate" hreflang="x-default" href="https://www.webtoons.com/en/originals/tuesday" />	
+<link rel="canonical" href="https://www.webtoons.com/en/originals/tuesday" />
+<link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.webtoons.com/en/originals/tuesday" />	
+
+
+</head>
+<body class="en">
+<div id="wrap" class="header_bdr">
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+<!-- skip navigation -->
+<div id="u_skip">
+	<a href="#content" onclick="document.getElementById('content').tabIndex=-1;document.getElementById('content').focus();return false;"><span>skip to content</span></a>
+</div>
+<!-- //skip navigation -->
+
+<!-- header -->
+<header id="header" class="">
+	<div class="header_inner">
+		<div class="header_left">
+			<a href="https://www.webtoons.com/en/" class="btn_logo" onclick='return publishGakPageEvent("GNB_FOR_YOU_TAB_CLICK") && publishGa4Event("gnb_home_click", "{\"contents_language\": \"EN\"}")'><span class="blind">WEBTOON</span></a>
+			<p class="blind">MENU</p>
+			
+			<ul class="lnb type_hover" role="navigation">
+				<li>
+					
+					
+					<a href="https://www.webtoons.com/en/originals" class="link" aria-current='true' onclick='return publishGakPageEvent("GNB_ORIGINALS_TAB_TAB_CLICK") && publishGa4Event("gnb_originals_click", "{\"contents_language\": \"EN\"}")'><h1>ORIGINALS</h1></a><span class="blind">(selected)</span>
+				</li>
+				<li>
+					<a href="https://www.webtoons.com/en/genres" class="link"  onclick='return publishGakPageEvent("GNB_GENRE_CLICK") && publishGa4Event("gnb_genres_click", "{\"contents_language\": \"EN\"}")'>CATEGORIES</a>
+				</li>
+				<li>
+					<a href="https://www.webtoons.com/en/ranking" class="link"  onclick='return publishGakPageEvent("GNB_RANKING_CLICK") && publishGa4Event("gnb_rankings_click", "{\"contents_language\": \"EN\"}")'>RANKINGS</a>
+				</li>
+				
+				<li>
+					<a href="https://www.webtoons.com/en/canvas" class="link"  onclick='return publishGakPageEvent("GNB_CANVAS_TAB_CLICK") && publishGa4Event("gnb_canvas_click", "{\"contents_language\": \"EN\"}")'>CANVAS</a>
+				</li>
+				
+			</ul>
+			
+		</div>
+		<div class="header_right">
+			
+			<a href="https://shop.webtoon.com" id="webshopLink" class="link_menu" onclick='return publishGakPageEvent("GNB_WEBTOONSHOP_CLICK") && publishGa4Event("gnb_webtoonshop_click", "{\"contents_language\": \"EN\"}")'>WEBTOON SHOP</a>
+			
+			
+			
+			<a href="https://creators.webtoon.com/en" class="link_menu type_creators" target="_blank" onclick='return publishGakPageEvent("GNB_CREATOR101_CLICK") && publishGa4Event("gnb_creator101_click", "{\"contents_language\": \"EN\"}")'><span class="link_text">CREATORS</span><span class="ico_new" aria-hidden="true"></span></a>
+			
+			
+			<div class="util_cont">
+				
+				<a href="#" class="link_publish" id="btnPublish">DASHBOARD</a>
+				
+				<div class="login_cont">
+					
+					<button type="button" class="link_login" id="btnLogin" aria-haspopup="dialog">Log In</button>
+					
+					<button type="button" class="link_login" id="btnLoginInfo" aria-expanded="false" style="display: none;"></button>	
+					<div class="ly_loginbox" id="layerMy">
+						<button type="button" title="Close" class="login_name _btnClose">Close the Login window</button>
+					</div>
+				</div>
+				<div class="search_cont">
+					<button class="btn_search _btnSearch"><span class="blind">Search</span></button>
+					
+					<div class="search_area _searchArea">
+						<div class="input_box _inputArea">
+							<input type="text" class="input_search _txtKeyword" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-owns="gnb_search_box" aria-autocomplete="list" aria-activedescendant aria-label="Search series or creators" placeholder="Search series or creators">
+							<a href="#" class="btn_delete_search _btnDelete" style="display: none;">Delete</a>
+						</div>
+						
+						<ul id="gnb_search_box" role="listbox" class="ly_autocomplete _searchLayer" style="display:none">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<!-- //header -->
+
+	
+	
+	
+	<main id="container">
+		<div id="content">
+			
+			
+			<div class="snb_wrap">
+				<div class="snb_inner">
+					<ul aria-label="originals" class="snb">
+						
+							<li class="snb_item ">
+								
+									
+									
+										
+									
+								
+								<a href="https://www.webtoons.com/en/originals/monday?sortOrder=MANA"
+								   class="snb_tab _snb_tab_a" data-update-schedule-item="MONDAY" data-weekday-log-code="MON"
+								   aria-current="false">MON</a>
+							</li>
+						
+							<li class="snb_item is_selected">
+								
+									
+									
+										
+									
+								
+								<a href="https://www.webtoons.com/en/originals/tuesday?sortOrder=MANA"
+								   class="snb_tab _snb_tab_a" data-update-schedule-item="TUESDAY" data-weekday-log-code="TUE"
+								   aria-current="true">TUE</a>
+							</li>
+						
+							<li class="snb_item ">
+								
+									
+									
+										
+									
+								
+								<a href="https://www.webtoons.com/en/originals/wednesday?sortOrder=MANA"
+								   class="snb_tab _snb_tab_a" data-update-schedule-item="WEDNESDAY" data-weekday-log-code="WED"
+								   aria-current="false">WED</a>
+							</li>
+						
+							<li class="snb_item ">
+								
+									
+									
+										
+									
+								
+								<a href="https://www.webtoons.com/en/originals/thursday?sortOrder=MANA"
+								   class="snb_tab _snb_tab_a" data-update-schedule-item="THURSDAY" data-weekday-log-code="THU"
+								   aria-current="false">THU</a>
+							</li>
+						
+							<li class="snb_item ">
+								
+									
+									
+										
+									
+								
+								<a href="https://www.webtoons.com/en/originals/friday?sortOrder=MANA"
+								   class="snb_tab _snb_tab_a" data-update-schedule-item="FRIDAY" data-weekday-log-code="FRI"
+								   aria-current="false">FRI</a>
+							</li>
+						
+							<li class="snb_item ">
+								
+									
+									
+										
+									
+								
+								<a href="https://www.webtoons.com/en/originals/saturday?sortOrder=MANA"
+								   class="snb_tab _snb_tab_a" data-update-schedule-item="SATURDAY" data-weekday-log-code="SAT"
+								   aria-current="false">SAT</a>
+							</li>
+						
+							<li class="snb_item ">
+								
+									
+									
+										
+									
+								
+								<a href="https://www.webtoons.com/en/originals/sunday?sortOrder=MANA"
+								   class="snb_tab _snb_tab_a" data-update-schedule-item="SUNDAY" data-weekday-log-code="SUN"
+								   aria-current="false">SUN</a>
+							</li>
+						
+							<li class="snb_item ">
+								
+									
+										
+									
+									
+								
+								<a href="https://www.webtoons.com/en/originals/complete?sortOrder=MANA"
+								   class="snb_tab _snb_tab_a" data-update-schedule-item="COMPLETE" data-weekday-log-code="COMPLETED"
+								   aria-current="false">COMPLETED</a>
+							</li>
+						
+					</ul>
+				</div>
+			</div>
+			
+
+			<div class="webtoon_list_wrap">
+				<div class="section_header">
+					<div class="series_count">
+						<em class="number">160</em>
+						<span>series</span>
+					</div>
+					<div class="sort_area">
+						
+							<div class="sort_by_area">
+								<a class="sort_by _sort_by_a" href="https://www.webtoons.com/en/originals/tuesday?sortOrder=MANA"
+								   data-selected-schedule="TUESDAY" data-weekday-log-code=TUE data-sort-log-code="popularity"
+								   aria-current="true">by Popularity</a>
+							</div>
+						
+							<div class="sort_by_area">
+								<a class="sort_by _sort_by_a" href="https://www.webtoons.com/en/originals/tuesday?sortOrder=LIKEIT"
+								   data-selected-schedule="TUESDAY" data-weekday-log-code=TUE data-sort-log-code="Likes"
+								   aria-current="false">by Likes</a>
+							</div>
+						
+							<div class="sort_by_area">
+								<a class="sort_by _sort_by_a" href="https://www.webtoons.com/en/originals/tuesday?sortOrder=UPDATE"
+								   data-selected-schedule="TUESDAY" data-weekday-log-code=TUE data-sort-log-code="update"
+								   aria-current="false">by Date</a>
+							</div>
+						
+					</div>
+				</div>
+				<ul class="webtoon_list">
+					
+						<li>
+							<a href="https://www.webtoons.com/en/supernatural/superfish/list?title_no=7777"
+							   class="link _originals_title_a" data-title-no="7777" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251122_289/1763749819666zsNNI_JPEG/Thumb_Poster_7777.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Supernatural</div>
+									<strong class="title">Superfish</strong>
+									<div class="view_count type_like">1.8M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/the-mafia-nanny/list?title_no=5879"
+							   class="link _originals_title_a" data-title-no="5879" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260512_219/1778525566678kYNzg_JPEG/2Thumb_Poster_5879.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">The Mafia Nanny</strong>
+									<div class="view_count type_like">15.7M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/down-to-earth/list?title_no=1817"
+							   class="link _originals_title_a" data-title-no="1817" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260721_254/1784563542323KDWGF_JPEG/6Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Down To Earth</strong>
+									<div class="view_count type_like">29M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/thriller/i-dare-you/list?title_no=10036"
+							   class="link _originals_title_a" data-title-no="10036" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260505_74/1777925469986bEdg0_JPEG/4Thumb_Poster_10036.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Thriller</div>
+									<strong class="title">I Dare You</strong>
+									<div class="view_count type_like">1M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/drama/daytime-in-the-bunker/list?title_no=9842"
+							   class="link _originals_title_a" data-title-no="9842" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260404_91/1775232574906JIo1A_JPEG/1Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Drama</div>
+									<strong class="title">Daytime in the Bunker</strong>
+									<div class="view_count type_like">757,316</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/sweet-romance-spicy-roommates/list?title_no=9578"
+							   class="link _originals_title_a" data-title-no="9578" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260223_221/17718141445867C9sh_JPEG/2Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Sweet Romance, Spicy Roommates</strong>
+									<div class="view_count type_like">304,694</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/fog-land/list?title_no=9299"
+							   class="link _originals_title_a" data-title-no="9299" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260303_87/1772529537244BXF3q_JPEG/3Thumb_Poster_9299.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">FOG LAND</strong>
+									<div class="view_count type_like">1.2M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/eleceed/list?title_no=1571"
+							   class="link _originals_title_a" data-title-no="1571" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_253/1738646007830Yuew4_JPEG/1571.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Eleceed</strong>
+									<div class="view_count type_like">39.7M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/the-otherworldly-family-man/list?title_no=10750"
+							   class="link _originals_title_a" data-title-no="10750" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260731_85/1785454526599HtbiA_JPEG/9Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">The Otherworldly Family Man</strong>
+									<div class="view_count type_like">181,088</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/slice-of-life/boyfriends/list?title_no=2616"
+							   class="link _originals_title_a" data-title-no="2616" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260107_287/1767738614069fHGb9_JPEG/Thumb_Poster_2616.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Slice of life</div>
+									<strong class="title">Boyfriends.</strong>
+									<div class="view_count type_like">27M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/the-shepherd-wizard/list?title_no=10039"
+							   class="link _originals_title_a" data-title-no="10039" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260430_37/17775071121412Swl3_JPEG/5Thumb_Poster_10039.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">The Shepherd Wizard</strong>
+									<div class="view_count type_like">361,382</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/reborn-as-a-hatchling/list?title_no=10737"
+							   class="link _originals_title_a" data-title-no="10737" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260821_154/1787256095443jmEs6_JPEG/7Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Reborn as a Hatchling</strong>
+									<div class="view_count type_like">121,661</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/my-bias-gets-on-the-last-train/list?title_no=7857"
+							   class="link _originals_title_a" data-title-no="7857" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250512_95/1747021584941voMYR_JPEG/Thumb_Poster_7857.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">My Bias Gets on the Last Train</strong>
+									<div class="view_count type_like">1.4M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/title-unlocked-this-life-i-dominate-the-game/list?title_no=11439"
+							   class="link _originals_title_a" data-title-no="11439" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261028_223/1793120373587PS3FJ_JPEG/1Title_UnlockedThis_LifeHero_Thumb_Poster_11032.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+		<span class="badge_new2">NEW</span>
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Title Unlocked: This Life, I Dominate the Game</strong>
+									<div class="view_count type_like">20,419</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/villain-to-kill/list?title_no=2857"
+							   class="link _originals_title_a" data-title-no="2857" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_287/1738718529540vYc6g_JPEG/2857.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Villain to Kill</strong>
+									<div class="view_count type_like">11M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/horror/44th-period-survival-class/list?title_no=8013"
+							   class="link _originals_title_a" data-title-no="8013" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260904_245/1788460506699yrNEC_JPEG/9Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Horror</div>
+									<strong class="title">44th Period: Survival Class</strong>
+									<div class="view_count type_like">600,239</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/reincarnated-as-the-grand-dukes-third-son/list?title_no=9700"
+							   class="link _originals_title_a" data-title-no="9700" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260312_272/1773302421765B2MCn_JPEG/0Thumb_Poster_9700.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Reincarnated as the Grand Duke’s Third Son</strong>
+									<div class="view_count type_like">310,841</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/the-northern-warriors-beloved-bride/list?title_no=10476"
+							   class="link _originals_title_a" data-title-no="10476" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260711_268/1783701874323a1Uda_JPEG/7Thumb_Poster_10476.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">The Northern Warrior’s Beloved Bride</strong>
+									<div class="view_count type_like">101,972</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/my-s-class-hunters/list?title_no=3963"
+							   class="link _originals_title_a" data-title-no="3963" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260609_290/1780947460493K1cSq_JPEG/1Thumb_Poster_3963.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">My S-Class Hunters</strong>
+									<div class="view_count type_like">7.5M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/the-returned-c-rank-tank-wont-die/list?title_no=8474"
+							   class="link _originals_title_a" data-title-no="8474" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250829_157/17564293515737TIxm_PNG/Thumb_Poster_8474.png?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">The Returned C-Rank Tank Won't Die!</strong>
+									<div class="view_count type_like">1M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/knee-pads/list?title_no=11119"
+							   class="link _originals_title_a" data-title-no="11119" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260910_85/1788995744802Wn1i8_JPEG/5Thumb_Poster_11119.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Knee Pads</strong>
+									<div class="view_count type_like">87,917</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/parenting-first-love-later/list?title_no=10056"
+							   class="link _originals_title_a" data-title-no="10056" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260520_155/1779251994130uq0a6_JPEG/9Thumb_Poster_10056.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Parenting First, Love Later</strong>
+									<div class="view_count type_like">209,911</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/funtime-phobia/list?title_no=7346"
+							   class="link _originals_title_a" data-title-no="7346" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251114_180/1763078677283vN1id_JPEG/Thumb_Poster_7346.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Funtime Phobia</strong>
+									<div class="view_count type_like">714,152</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/duchesss-lo-fi-coffeehouse/list?title_no=9659"
+							   class="link _originals_title_a" data-title-no="9659" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260305_106/1772670095403xPnaN_JPEG/6Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Duchess's Lo-Fi Coffeehouse</strong>
+									<div class="view_count type_like">279,103</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/stalker-x-stalker/list?title_no=6080"
+							   class="link _originals_title_a" data-title-no="6080" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_240/1738719668499GGI7l_JPEG/6080.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Stalker x Stalker</strong>
+									<div class="view_count type_like">3.9M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/thriller/the-classmate/list?title_no=10258"
+							   class="link _originals_title_a" data-title-no="10258" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260613_38/1781289262062qMUNA_JPEG/2TheClassmate_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Thriller</div>
+									<strong class="title">The Classmate</strong>
+									<div class="view_count type_like">161,921</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/paranoid-mage/list?title_no=6079"
+							   class="link _originals_title_a" data-title-no="6079" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251205_283/1764885503070pgw9H_JPEG/4) Thumb_Poster_6079.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Paranoid Mage</strong>
+									<div class="view_count type_like">2M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/the-archduchys-fierce-little-captain/list?title_no=10526"
+							   class="link _originals_title_a" data-title-no="10526" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260729_68/1785263954121t2JMP_JPEG/6The_Archduchy_s_Fierce_Little_Captain_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">The Archduchy’s Fierce Little Captain</strong>
+									<div class="view_count type_like">112,416</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/waiting-in-the-wheat-field/list?title_no=11354"
+							   class="link _originals_title_a" data-title-no="11354" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261020_5/1792431946820NESBC_JPEG/2Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+		<span class="badge_new2">NEW</span>
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Waiting in the Wheat Field</strong>
+									<div class="view_count type_like">14,696</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/the-corruption-immune-hunter/list?title_no=11542"
+							   class="link _originals_title_a" data-title-no="11542" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261104_291/1793738212817Wtcxq_JPEG/2Thumb_Poster_11542.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+		<span class="badge_new2">NEW</span>
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">The Corruption-Immune Hunter</strong>
+									<div class="view_count type_like">9,267</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/be-a-bad-boy/list?title_no=9861"
+							   class="link _originals_title_a" data-title-no="9861" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260424_121/1777012348628xrfEm_JPEG/3Thumb_Poster_9861.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Be a Bad Boy!</strong>
+									<div class="view_count type_like">106,629</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/the-royal-tea/list?title_no=8914"
+							   class="link _originals_title_a" data-title-no="8914" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260320_151/17739602482129p3QX_JPEG/4Thumb_Poster_8914.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">The Royal Tea</strong>
+									<div class="view_count type_like">170,056</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/cinderella-boy/list?title_no=5912"
+							   class="link _originals_title_a" data-title-no="5912" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260410_267/1775780692477NIojy_JPEG/3Cinderella_Boy_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Cinderella Boy</strong>
+									<div class="view_count type_like">3.4M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/the-necromancer-saint/list?title_no=10494"
+							   class="link _originals_title_a" data-title-no="10494" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260709_189/1783567919304vTdpl_JPEG/4Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">The Necromancer Saint</strong>
+									<div class="view_count type_like">47,938</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/historical/reincarnated-murim-lord/list?title_no=6742"
+							   class="link _originals_title_a" data-title-no="6742" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251122_86/1763757543525Sz5lm_JPEG/Thumb_Poster_6742.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Historical</div>
+									<strong class="title">Reincarnated Murim Lord</strong>
+									<div class="view_count type_like">897,084</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/the-greatest-assassin-in-another-world/list?title_no=8996"
+							   class="link _originals_title_a" data-title-no="8996" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251113_82/17629794039874Ezq1_JPEG/4) Thumb_Poster_8996.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">The Top Assassin in Another World</strong>
+									<div class="view_count type_like">244,455</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/the-100000x-exp-transcendent-hunter/list?title_no=11021"
+							   class="link _originals_title_a" data-title-no="11021" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260922_99/1790010508514BOcxe_JPEG/8Thumb_Poster_11021.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">The 100,000x EXP Transcendent Hunter</strong>
+									<div class="view_count type_like">19,747</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/marriage-under-wraps/list?title_no=10338"
+							   class="link _originals_title_a" data-title-no="10338" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260618_215/1781735547993uDAx5_JPEG/1Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Marriage Under Wraps</strong>
+									<div class="view_count type_like">90,792</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/marriage-contract/list?title_no=11049"
+							   class="link _originals_title_a" data-title-no="11049" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260925_163/1790280261743VWJsS_JPEG/7Thumb_Poster_11049.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Marriage Contract</strong>
+									<div class="view_count type_like">29,925</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/the-otherworldly-genius-method-actor/list?title_no=9660"
+							   class="link _originals_title_a" data-title-no="9660" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260224_35/17719051078643YyAE_JPEG/4Thumb_Poster_9660.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">The Otherworldly Genius Method Actor</strong>
+									<div class="view_count type_like">165,430</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/the-fox-club/list?title_no=4079"
+							   class="link _originals_title_a" data-title-no="4079" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260818_223/1786981143920Viewq_JPEG/8Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">The Fox Club</strong>
+									<div class="view_count type_like">2.5M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/bloodbath-of-the-fallen-the-reborn-hero-gron/list?title_no=10851"
+							   class="link _originals_title_a" data-title-no="10851" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260804_116/1785777600863Cwx19_JPEG/1Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Bloodbath of the Fallen: The Reborn Hero Gron</strong>
+									<div class="view_count type_like">49,937</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/fantasy-high/list?title_no=7686"
+							   class="link _originals_title_a" data-title-no="7686" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250411_56/1744324458848eJH58_JPEG/Thumb_Poster_7686.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Fantasy High</strong>
+									<div class="view_count type_like">621,162</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/when-to-villains-meet/list?title_no=7112"
+							   class="link _originals_title_a" data-title-no="7112" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251212_162/1765480714110IqWqp_JPEG/Thumb_Poster_7112.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">When Two Villains Meet</strong>
+									<div class="view_count type_like">918,097</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/whos-that-girl/list?title_no=8520"
+							   class="link _originals_title_a" data-title-no="8520" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250823_100/1755881667673YNnp1_JPEG/4) Thumb_Poster_8520.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Who’s That Girl?</strong>
+									<div class="view_count type_like">455,156</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/misi/list?title_no=10110"
+							   class="link _originals_title_a" data-title-no="10110" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260623_294/1782170207302XC8b3_JPEG/0Thumb_Poster_10110.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Misi</strong>
+									<div class="view_count type_like">193,997</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/elegant-aubrey/list?title_no=8374"
+							   class="link _originals_title_a" data-title-no="8374" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250808_39/1754590306785LOXoH_JPEG/Thumb_Poster_8374.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Elegant Aubrey</strong>
+									<div class="view_count type_like">329,103</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/all-kinds-of-nonsense/list?title_no=10744"
+							   class="link _originals_title_a" data-title-no="10744" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260801_135/1785518317437C7yG7_JPEG/510744_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">All Kinds of Nonsense</strong>
+									<div class="view_count type_like">59,468</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/another-typical-fantasy-romance/list?title_no=9363"
+							   class="link _originals_title_a" data-title-no="9363" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260206_297/1770315645011w32mj_JPEG/6Thumb_Poster_9363.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Another Typical Fantasy Romance</strong>
+									<div class="view_count type_like">233,710</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/adventures-of-god/list?title_no=853"
+							   class="link _originals_title_a" data-title-no="853" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261007_71/179130824237291FOD_JPEG/8AdventuresofGod_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Adventures of God</strong>
+									<div class="view_count type_like">37.1M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/paperteeth/list?title_no=5969"
+							   class="link _originals_title_a" data-title-no="5969" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_35/17387196436099uK6k_JPEG/5969.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Paperteeth!</strong>
+									<div class="view_count type_like">2.5M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/the-acting-empress-still-spends-the-first-night/list?title_no=7171"
+							   class="link _originals_title_a" data-title-no="7171" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260421_8/1776705255027APWVs_JPEG/0Thumb_Poster_7171.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">The Acting Empress Still Spends the First Night</strong>
+									<div class="view_count type_like">933,416</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/playboy-helper/list?title_no=11538"
+							   class="link _originals_title_a" data-title-no="11538" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261110_95/17942488505167dFC4_JPEG/0Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+		<span class="badge_new2">NEW</span>
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Playboy Helper</strong>
+									<div class="view_count type_like">1,308</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/horror/gotham-by-daylight/list?title_no=11011"
+							   class="link _originals_title_a" data-title-no="11011" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261016_114/17920987347004rDJs_JPEG/811011_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+		<span class="badge_new2">NEW</span>
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Horror</div>
+									<strong class="title">Gotham By Daylight</strong>
+									<div class="view_count type_like">9,278</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/academy-of-marginalized-superpowers/list?title_no=6919"
+							   class="link _originals_title_a" data-title-no="6919" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261020_146/1792438514895siYSt_JPEG/2Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Academy of Marginalized Superpowers</strong>
+									<div class="view_count type_like">473,057</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/nina-lives-alone/list?title_no=7317"
+							   class="link _originals_title_a" data-title-no="7317" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_140/1738646159759RbCM6_JPEG/7317.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Nina Lives Alone</strong>
+									<div class="view_count type_like">1.1M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/defense-breaker/list?title_no=9139"
+							   class="link _originals_title_a" data-title-no="9139" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251223_278/1766459857730Ym4Rm_JPEG/4) Thumb_Poster_9139.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Defense Breaker</strong>
+									<div class="view_count type_like">126,774</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/katlaya-rising/list?title_no=4843"
+							   class="link _originals_title_a" data-title-no="4843" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260630_218/1782783247962L9yYx_JPEG/9Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Katlaya Rising</strong>
+									<div class="view_count type_like">205,820</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/savior-of-divine-blood/list?title_no=6409"
+							   class="link _originals_title_a" data-title-no="6409" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261017_287/1792201106117h88DW_JPEG/5Thumb_Poster_14621.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Savior of Divine Blood</strong>
+									<div class="view_count type_like">564,961</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/so-not-my-type/list?title_no=6020"
+							   class="link _originals_title_a" data-title-no="6020" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260421_213/1776719804864jGV8c_JPEG/4Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">So Not My Type</strong>
+									<div class="view_count type_like">2.2M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/the-constellations-are-my-disciples/list?title_no=5638"
+							   class="link _originals_title_a" data-title-no="5638" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_289/1738719636529z9EeY_JPEG/5638.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+		<span class="badge_up2">UP</span>
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">The Constellations Are My Disciples</strong>
+									<div class="view_count type_like">2.6M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/i-thought-i-was-the-real-daughter/list?title_no=9588"
+							   class="link _originals_title_a" data-title-no="9588" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260213_36/1770941635499NEYig_JPEG/7Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">I Thought I was the Real Daughter</strong>
+									<div class="view_count type_like">70,604</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/turning-point/list?title_no=11433"
+							   class="link _originals_title_a" data-title-no="11433" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261002_266/1790904621248tEYdt_JPEG/0TurningPoint_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Turning Point</strong>
+									<div class="view_count type_like">11,267</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/sunny-side-up/list?title_no=8129"
+							   class="link _originals_title_a" data-title-no="8129" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260529_255/1779987849311BKhfc_JPEG/5SunnySideUp_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Sunny Side Up!</strong>
+									<div class="view_count type_like">64,914</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/red-spine/list?title_no=6845"
+							   class="link _originals_title_a" data-title-no="6845" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251119_252/1763494613540pTp2N_JPEG/Thumb_Poster_6845.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Red Spine</strong>
+									<div class="view_count type_like">331,257</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/my-angelic-husband-is-actually-a-devil-in-disguise/list?title_no=9368"
+							   class="link _originals_title_a" data-title-no="9368" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260103_2/1767389433431BxHQx_JPEG/My Angelic Husband is actually a Devil in Disguise_EN_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">My Angelic Husband is actually a Devil in Disguise</strong>
+									<div class="view_count type_like">412,562</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/the-regressed-doctor-just-wanted-to-live-quietly/list?title_no=8196"
+							   class="link _originals_title_a" data-title-no="8196" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260523_69/17794856359317gJxd_JPEG/1Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">The Regressed Doctor Just Wanted to Live Quietly</strong>
+									<div class="view_count type_like">275,569</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/resigning-and-healing-in-another-world/list?title_no=5264"
+							   class="link _originals_title_a" data-title-no="5264" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261105_159/1793824794935jvy2S_JPEG/0Thumb_Poster_5264.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Resigning and Healing in Another World</strong>
+									<div class="view_count type_like">1.5M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/arena/list?title_no=7826"
+							   class="link _originals_title_a" data-title-no="7826" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260203_6/1770080096072k4lq4_JPEG/5Thumb_Poster_7826.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Arena</strong>
+									<div class="view_count type_like">54,096</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/shadows-in-paradise/list?title_no=10763"
+							   class="link _originals_title_a" data-title-no="10763" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260723_33/1784771875865Pfvrj_JPEG/1ShadowsinParadise_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Shadows in Paradise</strong>
+									<div class="view_count type_like">9,740</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/till-crimes-do-us-part/list?title_no=7521"
+							   class="link _originals_title_a" data-title-no="7521" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250613_216/1749781394664pdWPI_JPEG/Till Crime Do Us Part_Thumb_Poster_A.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Till Crimes Do Us Part</strong>
+									<div class="view_count type_like">297,191</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/supernatural/spectral-bonds/list?title_no=6592"
+							   class="link _originals_title_a" data-title-no="6592" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260808_124/1786123882638PNEnR_JPEG/1Thumb_Poster_6592.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Supernatural</div>
+									<strong class="title">Spectral Bonds</strong>
+									<div class="view_count type_like">248,076</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/genius-grandson-of-the-loan-shark-king/list?title_no=10087"
+							   class="link _originals_title_a" data-title-no="10087" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260429_20/1777405819721YSlsJ_JPEG/6Thumb_Poster_10087.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Genius Grandson of the Loan Shark King</strong>
+									<div class="view_count type_like">38,217</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/supreme-zerg-lord-the-catastrophe/list?title_no=11232"
+							   class="link _originals_title_a" data-title-no="11232" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260902_221/1788287134185qO9uG_JPEG/0Thumb_Poster_10820.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Supreme Zerg Lord: The Catastrophe</strong>
+									<div class="view_count type_like">18,637</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/nothing-special/list?title_no=1188"
+							   class="link _originals_title_a" data-title-no="1188" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_287/1738645884485nYmkS_JPEG/1188.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Nothing Special</strong>
+									<div class="view_count type_like">3.3M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/a-dying-maids-guide-to-revenge/list?title_no=10246"
+							   class="link _originals_title_a" data-title-no="10246" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260625_237/17823372920413BQIM_JPEG/0Thumb_Poster_10246.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">A Dying Maid’s Guide to Revenge</strong>
+									<div class="view_count type_like">37,580</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/the-legend-of-aaaa/list?title_no=9718"
+							   class="link _originals_title_a" data-title-no="9718" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260321_207/1774043911047WyOHe_JPEG/7Thumb_Poster_9718.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">The Legend of AAAA</strong>
+									<div class="view_count type_like">99,922</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/graphic-novel/something-is-killing-the-children/list?title_no=9354"
+							   class="link _originals_title_a" data-title-no="9354" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260314_257/1773426224853wWpKv_JPEG/9Thumb_Poster_9354.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Graphic Novel</div>
+									<strong class="title">Something is Killing the Children</strong>
+									<div class="view_count type_like">83,242</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/supernatural/rabbit-holes/list?title_no=8915"
+							   class="link _originals_title_a" data-title-no="8915" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260915_68/1789413299327Ydr3h_JPEG/4Thumb_Poster_8915.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Supernatural</div>
+									<strong class="title">Rabbit Holes</strong>
+									<div class="view_count type_like">12,278</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/mimosa/list?title_no=9881"
+							   class="link _originals_title_a" data-title-no="9881" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260401_64/17749845091222NH7k_JPEG/4Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Mimosa</strong>
+									<div class="view_count type_like">57,588</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/defeating-dungeons-via-copy-paste/list?title_no=8197"
+							   class="link _originals_title_a" data-title-no="8197" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250619_252/1750269682283q3cNx_JPEG/Thumb_Poster_8197.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Defeating Dungeons via Copy Paste!</strong>
+									<div class="view_count type_like">225,547</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/my-father-the-possessive-demi-god/list?title_no=10758"
+							   class="link _originals_title_a" data-title-no="10758" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260805_81/1785866594194oYXpd_JPEG/3Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">My Father, the Possessive Demi-God</strong>
+									<div class="view_count type_like">20,148</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/shutter-flutters/list?title_no=11123"
+							   class="link _originals_title_a" data-title-no="11123" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260903_46/1788398787886TN8A4_JPEG/7Shutter_Flutters_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Shutter Flutters</strong>
+									<div class="view_count type_like">11,695</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/professional-bridesmaid/list?title_no=11442"
+							   class="link _originals_title_a" data-title-no="11442" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261009_61/1791494520636MTOVo_JPEG/5Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Professional Bridesmaid</strong>
+									<div class="view_count type_like">5,778</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/the-accidental-legend/list?title_no=10742"
+							   class="link _originals_title_a" data-title-no="10742" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260825_237/1787624013444fTQ0W_JPEG/8Thumb_Poster_10742.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">The Accidental Legend</strong>
+									<div class="view_count type_like">13,541</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/thriller/pretty-collection/list?title_no=9704"
+							   class="link _originals_title_a" data-title-no="9704" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260326_298/1774467216224zJSjN_JPEG/7Thumb_Poster_9704.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Thriller</div>
+									<strong class="title">Pretty Collection</strong>
+									<div class="view_count type_like">67,654</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/sf/false-paradise/list?title_no=7404"
+							   class="link _originals_title_a" data-title-no="7404" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_199/1738646171619s9jHK_JPEG/7404.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Sci-fi</div>
+									<strong class="title">False Paradise</strong>
+									<div class="view_count type_like">345,548</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/all-hail-lady-blanche/list?title_no=9226"
+							   class="link _originals_title_a" data-title-no="9226" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260103_217/17673932103665wEL8_JPEG/4) Thumb_Poster_9226.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">All Hail Lady Blanche!</strong>
+									<div class="view_count type_like">138,352</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/the-mighty-delinquent-of-the-dan-clan/list?title_no=9596"
+							   class="link _originals_title_a" data-title-no="9596" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260211_53/1770766248380IBKKa_JPEG/0Thumb_Poster_9596.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">The Mighty Delinquent of the Dan Clan</strong>
+									<div class="view_count type_like">38,902</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/horror/hell-city/list?title_no=10485"
+							   class="link _originals_title_a" data-title-no="10485" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260703_169/1783014074712WsNQE_JPEG/6Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Horror</div>
+									<strong class="title">Hell City</strong>
+									<div class="view_count type_like">20,542</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/it-wasnt-love-at-first-sight/list?title_no=7402"
+							   class="link _originals_title_a" data-title-no="7402" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260728_149/1785181362509PXhLV_JPEG/1Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">It Wasn't Love at First Sight</strong>
+									<div class="view_count type_like">353,403</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/stigma-of-patronage/list?title_no=11546"
+							   class="link _originals_title_a" data-title-no="11546" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261110_243/1794282308427WGEGx_JPEG/8Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+		<span class="badge_new2">NEW</span>
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Stigma of Patronage</strong>
+									<div class="view_count type_like">1,069</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/radiant-rewind/list?title_no=7359"
+							   class="link _originals_title_a" data-title-no="7359" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_102/1738646162701AqNIo_JPEG/7359.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Radiant Rewind</strong>
+									<div class="view_count type_like">481,189</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/drama/the-counts-secret-maid/list?title_no=7124"
+							   class="link _originals_title_a" data-title-no="7124" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251021_288/1760996524857nWiNp_JPEG/Thumb_Poster_7124.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Drama</div>
+									<strong class="title">The Count's Secret Maid</strong>
+									<div class="view_count type_like">1M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/horror/platfrom-zero/list?title_no=10488"
+							   class="link _originals_title_a" data-title-no="10488" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260701_252/1782859833915eLMYA_JPEG/3Thumb_Poster_10488.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Horror</div>
+									<strong class="title">Platform Zero</strong>
+									<div class="view_count type_like">29,377</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/beyond-our-marriage-contract/list?title_no=7915"
+							   class="link _originals_title_a" data-title-no="7915" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261117_180/17948558334485ROQo_JPEG/1Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Beyond Our Marriage Contract</strong>
+									<div class="view_count type_like">155,920</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/drama/cry-or-better-yet-beg/list?title_no=5815"
+							   class="link _originals_title_a" data-title-no="5815" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251114_217/1763093740362ah7N9_JPEG/4) Thumb_Poster_5815.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Drama</div>
+									<strong class="title">Cry, or Better Yet, Beg</strong>
+									<div class="view_count type_like">2.3M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/paper-tiger/list?title_no=7693"
+							   class="link _originals_title_a" data-title-no="7693" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250522_151/1747847933107GtLGx_JPEG/Thumb_Poster_7693.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Paper Tiger</strong>
+									<div class="view_count type_like">150,683</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/supernatural/demon-devourer/list?title_no=11067"
+							   class="link _originals_title_a" data-title-no="11067" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260829_134/1787971635944QWuEl_JPEG/9Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Supernatural</div>
+									<strong class="title">Demon Devourer</strong>
+									<div class="view_count type_like">7,638</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/ephemeral-bloom/list?title_no=7925"
+							   class="link _originals_title_a" data-title-no="7925" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250618_19/1750181762130djTB3_JPEG/Thumb_Poster_7925.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Ephemeral Bloom</strong>
+									<div class="view_count type_like">101,056</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/apotheosis-in-nine-acts-how-i-end-up-saving-the-world/list?title_no=11666"
+							   class="link _originals_title_a" data-title-no="11666" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261103_209/1793638996849nlYtP_JPEG/7Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+		<span class="badge_new2">NEW</span>
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Apotheosis in Nine Acts: How I End Up Saving the World</strong>
+									<div class="view_count type_like">4,305</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/the-garden-of-secrets/list?title_no=9860"
+							   class="link _originals_title_a" data-title-no="9860" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260411_238/17758712464865S2Aj_JPEG/1Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">The Garden of Secrets</strong>
+									<div class="view_count type_like">34,090</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/beware-of-double-trouble/list?title_no=9180"
+							   class="link _originals_title_a" data-title-no="9180" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260106_211/1767638361954ko2PJ_JPEG/Thumb_Poster_9180.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Beware of Double Trouble!</strong>
+									<div class="view_count type_like">67,899</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/drama/trauma-center-dr-baek/list?title_no=7880"
+							   class="link _originals_title_a" data-title-no="7880" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260520_40/1779210439306Ym7DP_JPEG/3Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Drama</div>
+									<strong class="title">Trauma Center: Dr. Baek</strong>
+									<div class="view_count type_like">87,250</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/princess-hurricane/list?title_no=6312"
+							   class="link _originals_title_a" data-title-no="6312" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_263/17386461150836JV1h_JPEG/6312.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Princess Hurricane</strong>
+									<div class="view_count type_like">326,404</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/sports/deadpoint/list?title_no=7405"
+							   class="link _originals_title_a" data-title-no="7405" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260106_29/1767661523735XkwnC_JPEG/4) Thumb_Poster_7405.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Sports</div>
+									<strong class="title">Deadpoint</strong>
+									<div class="view_count type_like">209,170</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/black-surge/list?title_no=9468"
+							   class="link _originals_title_a" data-title-no="9468" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260108_108/1767822914242pgsQ1_JPEG/4) Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">BLACK SURGE</strong>
+									<div class="view_count type_like">31,906</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/the-ex-mercenary-prosecutor/list?title_no=9222"
+							   class="link _originals_title_a" data-title-no="9222" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260120_250/1768839835665RN63M_JPEG/Thumb_Poster_9222.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">The Ex-Mercenary Prosecutor</strong>
+									<div class="view_count type_like">29,522</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/doomsday-virus-monarch/list?title_no=11438"
+							   class="link _originals_title_a" data-title-no="11438" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20261010_241/1791573044081lVf3F_JPEG/5Thumb_Poster_11438.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Doomsday: Virus Monarch</strong>
+									<div class="view_count type_like">5,343</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/legend-of-dangun/list?title_no=11211"
+							   class="link _originals_title_a" data-title-no="11211" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260905_195/1788560352367fTMWK_JPEG/411211_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Legend of Dangun</strong>
+									<div class="view_count type_like">6,732</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/zero-game/list?title_no=1704"
+							   class="link _originals_title_a" data-title-no="1704" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_26/1738646022890RTG6c_JPEG/1704.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Zero Game</strong>
+									<div class="view_count type_like">3.2M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/necromancer-the-ultimate-scourge/list?title_no=9767"
+							   class="link _originals_title_a" data-title-no="9767" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260225_243/1771960545762TFuHY_JPEG/7Thumb_Poster_9767.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Necromancer, the Ultimate Scourge!</strong>
+									<div class="view_count type_like">142,152</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/a-kiss-before-i-sleep/list?title_no=7496"
+							   class="link _originals_title_a" data-title-no="7496" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250411_191/1744335340098sVUSw_JPEG/Thumb_Poster_7496.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">A Kiss Before I Sleep</strong>
+									<div class="view_count type_like">234,086</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/drama/acting-gangster/list?title_no=8471"
+							   class="link _originals_title_a" data-title-no="8471" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250927_188/1758905592836Ce2L2_JPEG/4) Thumb_Poster_8562.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Drama</div>
+									<strong class="title">Acting Gangster</strong>
+									<div class="view_count type_like">113,035</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/double-mafia-godfather/list?title_no=7527"
+							   class="link _originals_title_a" data-title-no="7527" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260430_139/1777482435487Y9qbp_JPEG/8Thumb_Poster_7527.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Double Mafia Godfather!</strong>
+									<div class="view_count type_like">9,575</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/the-return-of-the-disaster-class-hero/list?title_no=9013"
+							   class="link _originals_title_a" data-title-no="9013" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251022_105/1761110859282pODEW_JPEG/4) Thumb_Poster_9013.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">The Return of the Disaster-Class Hero</strong>
+									<div class="view_count type_like">180,159</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/the-cleaner/list?title_no=9653"
+							   class="link _originals_title_a" data-title-no="9653" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260207_4/1770429555488oQwYI_JPEG/0Thumb_Poster_9653.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">The Cleaner</strong>
+									<div class="view_count type_like">31,890</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/drama/mistake/list?title_no=4118"
+							   class="link _originals_title_a" data-title-no="4118" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_233/173871926971269eqA_JPEG/4118.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Drama</div>
+									<strong class="title">Mistake</strong>
+									<div class="view_count type_like">776,587</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/horror/shape-of-the-nightmare/list?title_no=8741"
+							   class="link _originals_title_a" data-title-no="8741" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251023_200/1761191212162PKjyj_JPEG/4) Thumb_Poster_8741.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Horror</div>
+									<strong class="title">Shape of the Nightmare</strong>
+									<div class="view_count type_like">28,545</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/the-knight-of-the-sightless-sky/list?title_no=9053"
+							   class="link _originals_title_a" data-title-no="9053" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251113_219/1762982168332t58kM_JPEG/Thumb_Poster_9053.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">The Knight of the Sightless Sky</strong>
+									<div class="view_count type_like">30,772</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/love-by-mistake/list?title_no=10411"
+							   class="link _originals_title_a" data-title-no="10411" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260605_38/1780611275272Du1CH_JPEG/9LoveByMistake_Thumb_Poster.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Love by Mistake</strong>
+									<div class="view_count type_like">73,101</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/prison-guard-zero/list?title_no=9288"
+							   class="link _originals_title_a" data-title-no="9288" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251223_180/1766429774779RxocS_JPEG/Thumb_Poster_9288.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Prison Guard Zero</strong>
+									<div class="view_count type_like">29,465</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/fake-wife/list?title_no=10059"
+							   class="link _originals_title_a" data-title-no="10059" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260515_274/1778811084982RbR80_JPEG/0Thumb_Poster_10059.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Fake Wife</strong>
+									<div class="view_count type_like">7,914</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/your-throne/list?title_no=2009"
+							   class="link _originals_title_a" data-title-no="2009" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260530_259/1780077764209xUkmH_JPEG/9Thumb_Poster_2009.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Your Throne</strong>
+									<div class="view_count type_like">19.6M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/mia-is-back/list?title_no=9117"
+							   class="link _originals_title_a" data-title-no="9117" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251223_130/1766457228299g3bPd_JPEG/4) Thumb_Poster_9117.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Mia is Back</strong>
+									<div class="view_count type_like">134,376</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/mystery/betwixt/list?title_no=2962"
+							   class="link _originals_title_a" data-title-no="2962" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250305_143/1741112019118wMULR_JPEG/2962.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Mystery</div>
+									<strong class="title">Betwixt</strong>
+									<div class="view_count type_like">320,241</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/tiptoon/it-rhymes-with-takei/list?title_no=10334"
+							   class="link _originals_title_a" data-title-no="10334" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260630_117/1782771209463dLAcN_JPEG/5Thumb_Poster__2_.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Informative</div>
+									<strong class="title">It Rhymes With Takei</strong>
+									<div class="view_count type_like">18,242</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/shirai/list?title_no=6723"
+							   class="link _originals_title_a" data-title-no="6723" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_51/1738719878399jEJWv_JPEG/6723.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">SHIRAI</strong>
+									<div class="view_count type_like">240,165</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/cuffing-cupid/list?title_no=7590"
+							   class="link _originals_title_a" data-title-no="7590" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251023_159/1761167496201uRTRl_JPEG/Thumb_Poster_7590.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Cuffing Cupid</strong>
+									<div class="view_count type_like">775,213</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/drama/acception/list?title_no=1513"
+							   class="link _originals_title_a" data-title-no="1513" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250221_195/1740105474611HyXm4_JPEG/Thumb_Poster_1513.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Drama</div>
+									<strong class="title">Acception</strong>
+									<div class="view_count type_like">17.6M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/supernatural/the-witcher/list?title_no=7821"
+							   class="link _originals_title_a" data-title-no="7821" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20260307_215/1772851606512f0VyH_JPEG/9TheWitcher_PosterThumbnail.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Supernatural</div>
+									<strong class="title">The Witcher</strong>
+									<div class="view_count type_like">32,234</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/system-universe/list?title_no=8178"
+							   class="link _originals_title_a" data-title-no="8178" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250912_211/1757634370190WTIaI_JPEG/Thumb_Poster_8178.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">System Universe</strong>
+									<div class="view_count type_like">275,679</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/the-villainess-just-wants-to-live-in-peace/list?title_no=6879"
+							   class="link _originals_title_a" data-title-no="6879" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251104_29/1762207631860XAWcg_JPEG/4) Thumb_Poster_6879.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">The Villainess Just Wants to Live in Peace!</strong>
+									<div class="view_count type_like">2.5M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/double-kill/list?title_no=8578"
+							   class="link _originals_title_a" data-title-no="8578" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250826_147/1756164045629uwhSC_JPEG/Thumb_Poster_8337.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Double Kill</strong>
+									<div class="view_count type_like">32,952</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/snow-and-briar/list?title_no=6847"
+							   class="link _originals_title_a" data-title-no="6847" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_63/17387198508783XdMy_JPEG/6847.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Snow and Briar</strong>
+									<div class="view_count type_like">736,290</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/playing-the-perfect-fox-eyed-villain/list?title_no=8375"
+							   class="link _originals_title_a" data-title-no="8375" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250812_286/1754932156568NDXkb_JPEG/4) Thumb_Poster_8375.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Playing the Perfect Fox-Eyed Villain</strong>
+									<div class="view_count type_like">192,471</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/ark-of-the-law/list?title_no=7207"
+							   class="link _originals_title_a" data-title-no="7207" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_105/1738646152812fkb7d_JPEG/7207.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Ark of the Law</strong>
+									<div class="view_count type_like">130,480</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/girlfriend-manual/list?title_no=7343"
+							   class="link _originals_title_a" data-title-no="7343" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_156/1738646159940jdqM7_JPEG/7343.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Girlfriend Manual </strong>
+									<div class="view_count type_like">2.3M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/azarinth-healer/list?title_no=9248"
+							   class="link _originals_title_a" data-title-no="9248" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20251213_225/1765566983391Mmlh1_JPEG/Thumb_Poster_9248.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Azarinth Healer</strong>
+									<div class="view_count type_like">33,241</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/new-magical-me/list?title_no=7059"
+							   class="link _originals_title_a" data-title-no="7059" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250809_252/1754677421304gv5Ep_JPEG/Thumb_Poster_7059.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">New Magical Me</strong>
+									<div class="view_count type_like">435,870</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/super-cake/list?title_no=4086"
+							   class="link _originals_title_a" data-title-no="4086" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_55/1738719264242K6t9Q_JPEG/4086.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Super Cake</strong>
+									<div class="view_count type_like">12,074</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/thriller/zombie-funeral-services/list?title_no=6650"
+							   class="link _originals_title_a" data-title-no="6650" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_264/1738719891060Trjx0_JPEG/6650.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Thriller</div>
+									<strong class="title">Zombie Funeral Services</strong>
+									<div class="view_count type_like">147,652</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/fatal-reset/list?title_no=7167"
+							   class="link _originals_title_a" data-title-no="7167" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_13/1738646146343Md51u_JPEG/7167.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Fatal Reset</strong>
+									<div class="view_count type_like">59,317</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/1hp-club/list?title_no=2960"
+							   class="link _originals_title_a" data-title-no="2960" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_177/1738718543928kbUIH_JPEG/2960.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">1HP Club</strong>
+									<div class="view_count type_like">8.9M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/romance/honey-lemon/list?title_no=2762"
+							   class="link _originals_title_a" data-title-no="2762" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250826_104/175616457203666t2k_JPEG/Thumb_Poster_2762.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Romance</div>
+									<strong class="title">Honey Lemon</strong>
+									<div class="view_count type_like">1.4M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/world-eater-yulian/list?title_no=4521"
+							   class="link _originals_title_a" data-title-no="4521" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_241/1738719262750gQUQ3_JPEG/4521.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">WORLD EATER YULIAN</strong>
+									<div class="view_count type_like">291,393</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/a-practical-guide-to-evil/list?title_no=6921"
+							   class="link _originals_title_a" data-title-no="6921" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_51/1738646122843XOBfs_JPEG/6921.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">A Practical Guide to Evil</strong>
+									<div class="view_count type_like">314,933</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/dead-mansion/list?title_no=6757"
+							   class="link _originals_title_a" data-title-no="6757" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_159/1738719893010O0gR0_JPEG/6757.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">Dead Mansion</strong>
+									<div class="view_count type_like">310,271</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/action/the-genius-assassin-who-takes-it-all/list?title_no=6216"
+							   class="link _originals_title_a" data-title-no="6216" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_27/1738719535614jX1qV_JPEG/6216.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Action</div>
+									<strong class="title">The Genius Assassin Who Takes It All</strong>
+									<div class="view_count type_like">761,308</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/little-matcha-girl/list?title_no=1665"
+							   class="link _originals_title_a" data-title-no="1665" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_26/1738646017539Cu1Gh_JPEG/1665.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Little Matcha Girl</strong>
+									<div class="view_count type_like">3M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/wrong-quest/list?title_no=6282"
+							   class="link _originals_title_a" data-title-no="6282" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_16/1738719671026d7g69_JPEG/6282.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Wrong Quest</strong>
+									<div class="view_count type_like">440,311</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/sable-curse/list?title_no=2735"
+							   class="link _originals_title_a" data-title-no="2735" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_54/1738718108880vWArB_JPEG/2735.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Sable Curse</strong>
+									<div class="view_count type_like">1.4M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/not-so-shoujo-love-story/list?title_no=2189"
+							   class="link _originals_title_a" data-title-no="2189" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_144/1738646044733yDozg_JPEG/2189.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Not So Shoujo Love Story</strong>
+									<div class="view_count type_like">8.9M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/love-on-target/list?title_no=4088"
+							   class="link _originals_title_a" data-title-no="4088" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_289/1738719207383r6crY_JPEG/4088.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Love on Target</strong>
+									<div class="view_count type_like">228,676</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/dragon-savior/list?title_no=4687"
+							   class="link _originals_title_a" data-title-no="4687" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_208/1738646069013LweGo_JPEG/4687.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Dragon Savior</strong>
+									<div class="view_count type_like">111,078</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/from-morning-to-night/list?title_no=3207"
+							   class="link _originals_title_a" data-title-no="3207" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_223/1738718715981CREf4_JPEG/3207.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">From Morning to Night</strong>
+									<div class="view_count type_like">321,315</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/comedy/boyfriend-of-the-dead/list?title_no=1102"
+							   class="link _originals_title_a" data-title-no="1102" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_15/1738645882803cv4hJ_JPEG/1102.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Comedy</div>
+									<strong class="title">Boyfriend of the Dead</strong>
+									<div class="view_count type_like">30.6M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/mystery/purple-hyacinth/list?title_no=1621"
+							   class="link _originals_title_a" data-title-no="1621" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="true" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250204_285/1738646012744DVSUz_JPEG/1621.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Mystery</div>
+									<strong class="title">Purple Hyacinth</strong>
+									<div class="view_count type_like">17.4M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/fantasy/regina-lena-to-the-unforgiven/list?title_no=3920"
+							   class="link _originals_title_a" data-title-no="3920" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_54/1738719253684vCxbQ_JPEG/3920.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Fantasy</div>
+									<strong class="title">Regina Rena: To the Unforgiven</strong>
+									<div class="view_count type_like">2M</div>
+								</div>
+							</a>
+						</li>
+					
+						<li>
+							<a href="https://www.webtoons.com/en/mystery/royale/list?title_no=2748"
+							   class="link _originals_title_a" data-title-no="2748" data-selected-schedule="TUESDAY" data-weekday-log-code="TUE" data-language-code="en">
+								<div class="image_wrap" data-title-unsuitable-for-children="false" data-title-unsuitable-for-children-skin="harmful_black_skin1">
+									<img loading="lazy" src="https://webtoon-phinf.pstatic.net/20250205_170/1738718539810ea5Mx_JPEG/2748.jpg?type=q90" width="192" height="249" alt="">
+									
+<div class="badge_area _badge_area">
+	
+	
+</div>
+
+								</div>
+								<div class="info_text">
+									<div class="genre">Mystery</div>
+									<strong class="title">Royale</strong>
+									<div class="view_count type_like">71,296</div>
+								</div>
+							</a>
+						</li>
+					
+				</ul>
+			</div>
+		</div>
+	</main>
+	
+	<hr>
+
+	
+
+
+
+
+
+
+	<footer id="footer">
+		
+		<div class="go_top" id="_topBtn" style="display:none;">
+			<a href="#" title="Go Top" class="btn_top">
+				Go Top
+			</a>
+		</div>
+		
+		<div class="notice_area" id="noticeArea" style="display: none;"></div>
+		
+		<div class="foot_app">
+			<div class="foot_cont">
+				<span class="ico_qrcode"><span class="blind">qrcode</span></span>
+				<div class="foot_down_msg">
+					<p class="txt">Download WEBTOON now!</p>
+					<div class="footapp_icon_cont">
+						<a href="https://play.google.com/store/apps/details?id=com.naver.linewebtoon&referrer=utm_source%3Dlinewebtoon%26utm_medium%3Dmobileweb" target="_blank" class="btn_google">GET IT on Google Play</a>
+						<a href="https://itunes.apple.com/app/line-webtoon/id894546091?mt=8" target="_blank" class="btn_ios">Download on the App Store</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<ul class="foot_sns">
+			
+			<li><a href="https://www.facebook.com/webtoonofficial/" target="_blank" class="btn_foot_facebook">facebook</a></li>
+			
+			<li><a href="https://www.instagram.com/webtoonofficial/" target="_blank" class="btn_foot_instagram">instagram</a></li>
+			
+			<li><a href="https://x.com/webtoonofficial" target="_blank" class="btn_foot_twitter">twitter</a></li>
+			
+			<li><a href="https://www.youtube.com/webtoonofficial" target="_blank" class="btn_foot_youtube">youtube</a></li>
+			
+		</ul>
+		
+		<ul class="foot_menu _footer">
+			
+			
+			<li><a href="https://about.webtoon.com">About</a></li>
+			
+			
+			
+			
+			<li><a href="https://webtoon.zendesk.com/hc/en-us/requests/new" rel="nofollow" target="_blank">Feedback</a></li>
+			
+			
+			<li><a href="https://webtoon.zendesk.com/hc/en-us" rel="nofollow" target="_blank">Help</a></li>
+			<li><a href="https://www.webtoons.com/en/terms">Terms</a></li>
+			<li><a href="https://www.webtoons.com/en/terms/privacyPolicy">Privacy</a></li>
+			
+			
+			
+			<li class="gdprFooter" style="display: none"><a href="https://www.webtoons.com/en/consentsManagement">Personal Data</a></li>
+			
+			
+			
+			<li><a href="https://advertising.webtoon.com/en/home">Advertise</a></li>
+			
+			
+			
+			<li class="ccpaFooter _dnsmpi" style="display: none"><a href="#">Do Not Sell or Share My Personal Information</a></li>
+			
+			
+			<li><a href="https://jobs.lever.co/wattpad" target="_blank">Career</a></li>
+			
+			
+			<li><a href="https://www.webtoons.com/en/contact">Contact</a></li>
+			
+			<li class="language" id="languageArea">
+				
+				<button type="button" aria-expanded="false" class="lk_lang _selectedLanguage"><span class="blind">change language</span><span class="_selectedLanguageText"></span></button>
+				<ul class="ly_lang _languageList">
+					<li class="on"><a href="#" class="ver_en _en _language" data-content-language="en" data-locale="en" aria-current="true">English</a></li>
+					<li ><a href="#" class="ver_tw _zh-hant _language" data-content-language="zh-hant" data-locale="zh-TW" aria-current="false">中文 (繁體)</a></li>
+					<li ><a href="#" class="ver_th _th _language" data-content-language="th" data-locale="th-TH" aria-current="false">ภาษาไทย</a></li>
+					<li ><a href="#" class="ver_id _id _language" data-content-language="id" data-locale="id" aria-current="false">Indonesia</a></li>
+					<li ><a href="#" class="ver_es _es _language" data-content-language="es" data-locale="es" aria-current="false">Español</a></li>
+					<li ><a href="#" class="ver_fr _fr _language" data-content-language="fr" data-locale="fr" aria-current="false">Français</a></li>
+					<li ><a href="#" class="ver_de _de _language" data-content-language="de" data-locale="de" aria-current="false">Deutsch</a></li>
+				</ul>
+			</li>
+		</ul>
+		
+		<p class="foot_logo"><span class="ico_foot_logo">WEBTOON</span></p>
+		
+			
+			
+				<p class="copyright"><a>ⓒ NAVER WEBTOON Ltd.</a></p>
+			
+		
+	</footer>
+	
+
+
+	
+
+
+
+
+<script type="text/javascript" src="/static/bundle/vendor-2b6294ae4a9154fe5d0f.js" charset="utf-8"></script>
+
+
+
+
+
+
+<script type="text/javascript">
+
+window.defaultErrorMessage = {
+	'alert.error.no_internet_connection' : 'No Internet Connection.\nPlease check the network connection.',
+	'alert.error.invalid_input' : 'Invalid input value.',
+	'alert.error.unknown' : 'Unknown error has occurred. Please try again in a moment.'
+};
+window.__commonScriptState__ = {
+	contentLanguage : 'ENGLISH',
+	contentLanguageCode : "en",
+	browserType : "UNKNOWN",
+	countryCode : "US",
+	isNotNoticePage : true,
+	domain : 'www.webtoons.com',
+	imageDomain : 'https://webtoon-phinf.pstatic.net',
+	recentBarParam : {
+		imgDomain : 'https://webtoon-phinf.pstatic.net',
+		language : 'en',
+		title : 'Recently viewed',
+		domain : 'www.webtoons.com',
+		contentLanguage : 'en'
+	},
+	noticeParam : {
+		domain : "www.webtoons.com",
+		contentLanguageCode : "en",
+		messages : {
+			"menu.notice" : "Notice"
+		}
+	},
+	gdprChildProtectionPopupMessages : {
+		'gdpr.child_protection_popup.challenge.header' : 'CANVAS is unavailable to children under the age of 16 residing in Germany.',
+		'gdpr.child_protection_popup.challenge.desc' : 'In order to comply with the German Youth Protection Law, the use of CANVAS has been restricted. Please refer to our \u003Ca href=\"https:\/\/webtoon.zendesk.com\/hc\/en-us\/articles\/4402125154580-What-content-will-be-unavailable-to-children-under-the-age-of-16-residing-in-Germany\" target=\"_blank\"\u003EHelp\u003C\/a\u003E section for more information.',
+		'button.ok' : 'OK'
+	},
+	canvasToUAgreePopupParam : {
+		domain : "www.webtoons.com",
+		contentLanguageCode : "en",
+		messages : {
+			'canvas.tou.popup.title' : 'Updated Terms of Use',
+			'canvas.tou.popup.text' : 'We\'ve updated the WEBTOON CANVAS Terms of Use.',
+			'canvas.tou.popup.desc' : 'I agree to the {0} of WEBTOON. (Required)',
+			'canvas.tou.popup.desc.canvasToU' : 'CANVAS Terms of Use',
+			'canvas.tou.popup.caution' : 'Check above to proceed.',
+			'policy.popup.submit' : 'Done',
+			'canvas.tou.popup.postpone' : 'Not now',
+		}
+	},
+	cmpChildRestrictPopupMessages : {
+		'ccpa' : 'The sale or sharing of personal information is restricted for your account in accordance with applicable privacy laws. No further action is needed on your part.',
+		'gdpr' : 'Cookie preferences for your account are managed in accordance with applicable privacy laws. Only essential cookies are active on your account.',
+		'ok' : 'OK'
+	},
+	ssoReloginPopupParam: {
+		domain : "www.webtoons.com",
+		contentLanguageCode : "en",
+		messages: {
+			'sso_relogin.popup.title': 'Get updates and special offers',
+			'sso_relogin.popup.info' : 'Get updates and special offers',
+			'sso_relogin.popup.desc' : 'Subscribe to our emails to get updates and exclusive offers. You will receive information from WEBTOON regarding service and marketing emails. If you no longer wish to receive service and marketing emails, you can adjust your settings anytime in WEBTOON \u003E Settings. To learn more about the processing of your personal information, please refer to our \u003Ca href=\"https:\/\/www.webtoons.com\/en\/terms\/privacyPolicy\" class=\"link\" target=\"_blank\"\u003EPrivacy Policy\u003C\/a\u003E.',
+			'sso_relogin.popup.subscribe' : 'Subscribe',
+			'sso_relogin.popup.cancel' : 'Not Now',
+			'sso_relogin.popup.subscribe_confirm.title' : 'Subscribed successfully',
+			'sso_relogin.popup.subscribe_confirm.info' : 'Enjoy updates and exclusive offers!',
+			'sso_relogin.popup.subscribe_confirm.ok' : 'OK',
+		}
+	},
+	policyAgreeModalParam: {
+		termsUrls: {
+			accountTermsOfUse : 'https://account.webtoon.com/en/terms/terms-of-use',
+			accountPrivacyPolicy : 'https://account.webtoon.com/en/terms/privacy-policy',
+			serviceTermsOfUse : 'https://www.webtoons.com/en/terms',
+			servicePrivacyPolicy : 'https://www.webtoons.com/en/terms/privacyPolicy',
+		},
+		messages: {
+			'policy_agree_modal.title' : 'Updated Terms of Use',
+			'policy_agree_modal.desc' : 'We\'ve updated our Terms of Use. We encourage you to read them in full below. Scroll if needed.',
+			'policy_agree_modal.legal.account_and_service' : 'By tapping \'Agree & Continue\', you agree to the \u003Ca href=\"{0}\" class=\"link\" target=\"_blank\"\u003EWEBTOON ACCOUNT Terms of Use\u003C\/a\u003E and \u003Ca href=\"{1}\" class=\"link\" target=\"_blank\"\u003EWEBTOON Service Terms of Use\u003C\/a\u003E and acknowledge reading the \u003Ca href=\"{2}\" class=\"link\" target=\"_blank\"\u003EWEBTOON ACCOUNT Privacy Policy\u003C\/a\u003E and \u003Ca href=\"{3}\" class=\"link\" target=\"_blank\"\u003EWEBTOON Service Privacy Policy\u003C\/a\u003E.',
+			'policy_agree_modal.legal.account' : 'By tapping \"Agree & Continue\", you agree to the \u003Ca href=\"{0}\" class=\"link\" target=\"_blank\"\u003EWEBTOON ACCOUNT Terms of Use\u003C\/a\u003E and acknowledge that you have read the \u003Ca href=\"{1}\" class=\"link\" target=\"_blank\"\u003EWEBTOON ACCOUNT Privacy Policy\u003C\/a\u003E.',
+			'policy_agree_modal.legal.service' : 'By tapping \'Agree & Continue\', you agree to the \u003Ca href=\"{0}\" class=\"link\" target=\"_blank\"\u003EWEBTOON Service Terms of Use\u003C\/a\u003E and acknowledge reading the \u003Ca href=\"{1}\" class=\"link\" target=\"_blank\"\u003EWEBTOON Service Privacy Policy\u003C\/a\u003E.',
+			'policy_agree_modal.submit' : 'Agree and Continue',
+			'policy_agree_modal.notice_button' : 'What happens if I don\'t agree?',
+			'policy_agree_modal.notice.text' : 'These terms cover how we protect your information and how the WEBTOON service and WEBTOON ACCOUNT work. Your agreement is required to keep using the WEBTOON service. For more information, please refer to the \u003Ca href=\"{0}\" class=\"link\" target=\"_blank\"\u003Enotice\u003C\/a\u003E.',
+			'button.ok' : 'OK',
+		}
+	},
+	isCreatorsPage : false,
+}
+</script>
+<script type="text/javascript" src="/static/bundle/common/commonScript-a2977b30faf2ec11a560.js" charset="utf-8"></script>
+
+
+
+
+
+
+
+
+	
+
+
+
+
+<script>
+	window.__gnbState__ = {
+		locale: 'en',
+		gnbLayerId: '#header',
+		message: {
+			logoutMessage: 'Are you sure you want to log out?',
+			cmpLogoutMessage: 'Are you sure you want to log out?\nYour account\'s privacy preferences will no longer apply after logout. This device\'s default privacy settings will be used instead.',
+			systemErrorMessage: 'Unknown error has occurred. Please try again in a moment.'
+		},
+		searchParam: {
+			locale: 'en',
+			message: {
+				'confirm.search.delete_history': 'Are you sure you want to delete your recent search history?',
+				'message.search.clear': 'Clear Recent Searches',
+				'message.search.autocomplete.webtoon': 'Series',
+				'message.search.autocomplete.artist': 'Creators',
+				'message.search.autocomplete.view_all': 'View All',
+				'message.search.autocomplete.close': 'Close'
+			},
+			imgDomain: 'https://webtoon-phinf.pstatic.net',
+			templateParam: {
+				imageDomain: "https://webtoon-phinf.pstatic.net",
+				messages: {
+					'confirm.search.delete_history': 'Are you sure you want to delete your recent search history?',
+					'message.search.clear': 'Clear Recent Searches',
+					'button.close': 'Close',
+					'message.search.no_recent_search': 'No recent search.',
+					'message.search.autocomplete.webtoon': 'Series',
+					'message.search.autocomplete.artist': 'Creators',
+					'message.search.autocomplete.view_all': 'View All',
+					'message.search.autocomplete.close': 'Close'
+				}
+			}
+		},
+		myLayerParam: {
+			domain: "www.webtoons.com",
+			contentLanguageCode: "en",
+			isAvailableCoinShop: false,
+			supportsAuthorCommunity: true,
+			messages: {
+				'menu.favorite': 'Subscriptions',
+				'menu.mycomment': 'Comments',
+				'menu.creator': 'Following',
+				'menu.mypost': 'My Profile',
+				'menu.account': 'Account',
+				'menu.coin.shop': 'Coin Shop',
+				'button.logout': 'Logout'
+			}
+		},
+		languageCode: 'en',
+		childProtectorParams: {
+			messages: {
+				"main": "This feature is unavailable. Please refer to\u003Cbr\u003Ethe {childpp} for more information.",
+				"childpp": "Children’s Privacy Policy",
+				"ok": "Close",
+			},
+			childppLink: "https://www.webtoons.com/en/terms/childrensPrivacyPolicy"
+		},
+		signUpLayerParam: {
+			domain: "www.webtoons.com",
+			contentLanguageCode: "en",
+			messages: {
+				"message.signup.desc": "I agree to WEBTOON\'s \u003Ca href=\"https:\/\/www.webtoons.com\/en\/terms?noLogin=true\" target=\"_blank\"\u003E\n\t\tTerms of Use\n\t\u003C\/a\u003E and \u003Ca href=\"https:\/\/www.webtoons.com\/en\/terms\/privacyPolicy?noLogin=true\" target=\"_blank\"\u003E\n\t\tPrivacy Policy\n\t\u003C\/a\u003E.",
+				'message.signup.need_agree': 'Click the check button before submitting.',
+				'button.sign_up': 'Submit'
+			}
+		},
+	};
+</script>
+<script type="text/javascript" src="/static/bundle/common/gnb-f427d1c31060d86c8ea4.js" charset="utf-8"></script>
+
+	<script type="text/javascript" src="/static/bundle/originals-380d11b0ded89a294fa0.js" charset="utf-8"></script>
+</div>
+</body>
+</html>

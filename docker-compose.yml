@@ -1,0 +1,17 @@
+services:
+  metaflux:
+    build: .
+    ports: ["8787:8787"]
+    environment:
+      METAFLUX_DB: /data/metaflux.sqlite
+      METAFLUX_CORS: "*"
+    volumes:
+      - metaflux-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8787/health"]
+      interval: 30s
+      timeout: 3s
+
+volumes:
+  metaflux-data:

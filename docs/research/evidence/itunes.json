@@ -1,0 +1,11 @@
+
+
+
+{
+ "resultCount":1,
+ "results": [
+{"wrapperType":"track", "kind":"song", "artistId":409076743, "collectionId":1560113132, "trackId":1560113134, "artistName":"IU", "collectionName":"IU 5th Album 'LILAC'", "trackName":"Lilac", "collectionCensoredName":"IU 5th Album 'LILAC'", "trackCensoredName":"Lilac", "artistViewUrl":"https://music.apple.com/us/artist/iu/409076743?uo=4", "collectionViewUrl":"https://music.apple.com/us/album/lilac/1560113132?i=1560113134&uo=4", "trackViewUrl":"https://music.apple.com/us/album/lilac/1560113132?i=1560113134&uo=4", 
+"previewUrl":"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/be/62/d2/be62d240-fe27-0514-9e20-b29645cc3dcb/mzaf_8930037822844249227.plus.aac.p.m4a", "artworkUrl30":"https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/35/9f/83/359f83b3-1423-3153-1641-98e948b7fc65/cover_-_EDAM_5_LILAC.jpg/30x30bb.jpg", "artworkUrl60":"https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/35/9f/83/359f83b3-1423-3153-1641-98e948b7fc65/cover_-_EDAM_5_LILAC.jpg/60x60bb.jpg", "artworkUrl100":"https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/35/9f/83/359f83b3-1423-3153-1641-98e948b7fc65/cover_-_EDAM_5_LILAC.jpg/100x100bb.jpg", "collectionPrice":9.99, "trackPrice":1.29, "releaseDate":"2021-03-25T12:00:00Z", "collectionExplicitness":"notExplicit", "trackExplicitness":"notExplicit", "discCount":1, "discNumber":1, "trackCount":10, "trackNumber":1, "trackTimeMillis":214253, "country":"USA", "currency":"USD", "primaryGenreName":"K-Pop", "isStreamable":true}]
+}
+
+

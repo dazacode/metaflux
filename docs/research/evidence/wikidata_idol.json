@@ -1,0 +1,13 @@
+{
+  "head" : {
+    "vars" : [ "a", "aLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "a" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q406909"
+      }
+    } ]
+  }
+}

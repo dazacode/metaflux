@@ -1,0 +1,136 @@
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<title>Unable to connect : WEBTOON</title>
+<style>
+/* common */
+html,body{height:100%}
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
+body,input,textarea,select,button,table{font-size:14px;line-height:1.25em}
+body{position:relative;background-color:#fff;font-family:-apple-system, BlinkMacSystemFont, roboto, Segoe UI, Apple SD Gothic Neo, sans-serif;-webkit-text-size-adjust:none;color:#000}
+img,fieldset{border:0}
+ul,ol{list-style:none}
+em,address{font-style:normal}
+a{color:#000;text-decoration:none}
+#ct{clear:both;width:100%}
+#ct::after{display:block;clear:both;content:''}
+
+/* content */
+#wrap{position:relative;min-height:100%}
+footer{position:absolute;bottom:0;width:100%;height:44px}
+#ct{height:280px}
+h1{border-bottom:1px solid #e0e0e0;font-size:17px;line-height:40px;font-weight:normal;text-align:center}
+.copyright{font-size:9px;color:#707070;text-align:center}
+.error{position:absolute;top:50%;left:0;width:100%;margin-top:20px;text-align:center}
+.error .btn_area a{display:inline-block;width:126px;height:44px;background:#2f2f2f;line-height:44px;font-size:16px;color:#fff}
+.error .btn_area a:first-child{margin-right:5px}
+.error .dsc{position:absolute;width:100%;bottom:73px;font-size:21px;line-height:23px}
+.error .dsc:before{display:block;width:48px;height:41px;margin:0 auto 15px;background:url(https://webtoons-static.pstatic.net/image/mobile/error_ico.png) no-repeat;background-size:48px 41px;-webkit-background-size:48px 41px;content:''}
+
+@media all and (min-width:768px){
+footer{height:67px}
+#ct{height:500px}
+h1{font-size:27px;line-height:57px}
+.copyright{font-size:15px}
+.error{margin-top:-22px}
+.error .btn_area a{width:178px;height:62px;line-height:62px;font-size:23px}
+.error .btn_area a:first-child{margin-right:10px}
+.error .dsc{bottom:101px;font-size:30px;line-height:35px}
+.error .dsc:before{width:68px;height:57px;margin:0 auto 21px;background:url(https://webtoons-static.pstatic.net/image/mobile/error_ico_ipad.png) no-repeat;background-size:68px 57px;-webkit-background-size:68px 57px}
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+	<header role="banner">
+		<h1 id="title">WEBTOON</h1>
+	</header>
+
+	<div id="ct" role="main">
+		<div class="error">
+			<p class="dsc" id="desc">Unable to connect to<br>Webtoon service</p>
+			<div class="btn_area"><a href="#" id="back" onclick="history.back(); return false;">Back</a><a href="/" id="home">Home</a></div>
+		</div>
+	</div>
+
+	<footer role="contentinfo">
+		<p class="copyright" id="corp">© NAVER WEBTOON Ltd.</p>
+	</footer>
+</div>
+<script type="text/javascript">
+	const messages = {
+		"zh-hant" : {
+			"pageTitle" : "Unable to connect : LINE WEBTOON",
+			"title" : "LINE WEBTOON",
+			"desc" : "目前無法連線觀看漫畫",
+			"back" : "返回",
+			"home" : "首頁",
+		},
+		"th" : {
+			"pageTitle" : "Unable to connect : WEBTOON",
+			"title" : "WEBTOON",
+			"desc" : "ขออภัย! เราไม่สามารถเชื่อมต่อการให้บริการเว็บตูนได้",
+			"back" : "กลับ",
+			"home" : "หน้าหลัก",
+		},
+		"id" : {
+			"pageTitle" : "Tidak bisa terhubung : WEBTOON",
+			"title" : "WEBTOON",
+			"desc" : "Tidak bisa terhubung ke <br> Layanan WEBTOON",
+			"back" : "Back",
+			"home" : "Home",
+		},
+		"es" : {
+			"pageTitle" : "No es posible conectarse a WEBTOON. : WEBTOON",
+			"title" : "WEBTOON",
+			"desc" : "No es posible conectarse a WEBTOON.",
+			"back" : "Atrás",
+			"home" : "Inicio",
+		},
+		"fr" : {
+			"pageTitle" : "Connexion impossible : WEBTOON",
+			"title" : "WEBTOON",
+			"desc" : "Connexion au service Webtoon<br>impossible",
+			"back" : "Retour",
+			"home" : "Accueil",
+		},
+		"de" : {
+			"pageTitle" : "Verbindung zum Server fehlgeschlagen : WEBTOON",
+			"title" : "WEBTOON",
+			"desc" : "Verbindung zum <br> Webtoon Service ist fehlgeschlagen",
+			"back" : "Zurück",
+			"home" : "Startseite",
+		},
+	};
+	const contentLanguage = getContentLanguageFromCookie(/contentLanguage=([a-z\-]+)/) || getContentLanguageFromCookie(/locale=([a-zA-Z\-]+)/);
+	const message = messages[contentLanguage];
+	if (!!message) {
+		document.title = message.pageTitle;
+		document.getElementById("title").innerHTML = message.title;
+		document.getElementById("desc").innerHTML = message.desc;
+		document.getElementById("back").innerHTML = message.back;
+		document.getElementById("home").innerHTML = message.home;
+	}
+
+	function getContentLanguageFromCookie(regEx) {
+		const aMatch = document.cookie.match(regEx);
+		if (aMatch && aMatch.length >= 2) {
+			if (aMatch[1] === "zh-TW") {
+				return "zh-hant";
+			} else if (aMatch[1] === "th-TH") {
+				return "th";
+			} else {
+				return aMatch[1];
+			}
+		}
+
+		return null;
+	}
+</script>
+</body>
+</html>

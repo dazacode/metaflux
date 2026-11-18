@@ -1,0 +1,62 @@
+{
+  "name": "metaflux",
+  "version": "0.1.0",
+  "description": "One keyless, self-hostable API for entertainment metadata: film, TV, anime, manga, comics, books, music, sports, IPTV, idols and vtubers.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "metaflux": "src/cli/index.ts"
+  },
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "test": "METAFLUX_DB=:memory: METAFLUX_LOG=silent bun test",
+    "typecheck": "tsc --noEmit",
+    "dossier": "bun scripts/dossier.ts",
+    "ingest": "bun scripts/ingest.ts",
+    "smoke": "bun scripts/smoke.ts",
+    "openapi": "bun scripts/openapi.ts",
+    "mcp": "bun src/mcp.ts"
+  },
+  "dependencies": {
+    "@hono/zod-openapi": "^1.6.3",
+    "hono": "^4.13.19",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "bun": ">=1.2.0"
+  },
+  "keywords": [
+    "metadata",
+    "api",
+    "anime",
+    "manga",
+    "movies",
+    "tv",
+    "books",
+    "music",
+    "sports",
+    "iptv",
+    "vtubers",
+    "kpop",
+    "open-source",
+    "keyless"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./sdk": "./src/sdk/index.ts",
+    "./schema": "./src/schema/entities.ts"
+  },
+  "files": [
+    "src",
+    "scripts",
+    "docs",
+    "README.md",
+    "LICENSE",
+    "PLAN.md"
+  ]
+}
