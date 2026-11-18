@@ -5,6 +5,16 @@ import type { Provider } from "./_types.ts";
 
 const BASE = "https://v3-cinemeta.strem.io";
 
+const COUNTRY: Record<string, string> = {
+  "south korea": "KR", korea: "KR", "republic of korea": "KR", japan: "JP", china: "CN", taiwan: "TW", "hong kong": "HK",
+  thailand: "TH", philippines: "PH", "united states": "US", usa: "US", "united kingdom": "GB", uk: "GB", india: "IN",
+  indonesia: "ID", vietnam: "VN", malaysia: "MY", singapore: "SG", france: "FR", germany: "DE", spain: "ES", canada: "CA",
+};
+function countryCode(raw: string): string | null {
+  const first = String(raw).split(",")[0].trim().toLowerCase();
+  return COUNTRY[first] ?? (first.length === 2 ? first.toUpperCase() : null);
+}
+
 function map(m: any, kind: Kind): Entity {
   const e = baseEntity(kind, m.name, "cinemeta", `https://www.imdb.com/title/${m.imdb_id}/`);
   addId(e, "imdb", m.imdb_id);
@@ -36,7 +46,24 @@ function map(m: any, kind: Kind): Entity {
       air_date: v.firstAired ?? v.released, image: v.thumbnail ?? null, rating: v.rating ?? null, kind: "regular", sources: [],
     });
   }
-  for (const t of m.trailers ?? []) e.media.trailers.push({ id: t.source, site: t.type, url: t.source });
+  for (const t of m.trailers ?? []) {
+    if (!t?.source) continue;
+    e.media.trailers.push({ id: t.source, site: "youtube", kind: t.type ?? "Trailer", url: `https://www.youtube.com/watch?v=${t.source}`, thumbnail: `https://i.ytimg.com/vi/${t.source}/hqdefault.jpg` });
+  }
+  e.format = kind === "movie" ? "MOVIE" : "SERIES";
+  if (m.country) e.broadcast.country = countryCode(m.country);
+  const seasons = [...new Set((m.videos ?? []).map((v: any) => v.season).filter((n: any) => typeof n === "number"))] as number[];
+  for (const n of seasons.sort((a, b) => a - b)) {
+    const eps = (m.videos ?? []).filter((v: any) => v.season === n);
+    const dates = eps.map((v: any) => v.firstAired ?? v.released).filter(Boolean).sort();
+    e.seasons.push({ id: `imdb:${m.imdb_id}:season:${n}`, number: n, title: n === 0 ? "Specials" : `Season ${n}`, episodes: eps.length, air_date: dates[0] ?? null, end_date: dates.at(-1) ?? null, sources: [] });
+  }
+  if (kind === "tv_show") {
+    e.technical.season_count = seasons.filter((n) => n > 0).length || null;
+    e.technical.episode_count = (m.videos ?? []).filter((v: any) => v.season > 0).length || null;
+  } else {
+    e.technical.episode_count = 1;
+  }
   for (const l of m.links ?? []) e.links.push({ url: l.url, site: l.name, kind: l.category });
   e.raw.cinemeta = m;
   tag(e, `type:${m.type}`);
@@ -85,9 +112,14 @@ export const cinemeta: Provider = {
   async get(ctx, ref) {
     const imdb = ref.externalIds?.imdb ?? (/^tt\d+$/.test(ref.id) ? ref.id : null);
     if (!imdb) return null;
-    for (const type of ["movie", "series"]) {
-      const res = await fetchJson<any>(`${BASE}/meta/${type}/${imdb}.json`, { provider: "cinemeta", ttlMs: 3600_000, allowStatus: [404] }).catch(() => null);
-      if (res?.data?.meta) return map(res.data.meta, type === "movie" ? "movie" : "tv_show");
+    // Ask for the requested type first, and only accept a document about this exact IMDb id:
+    // the movie route has answered series ids with an unrelated film.
+    const order = ref.kind === "movie" ? ["movie", "series"] : ["series", "movie"];
+    for (const type of order) {
+      const res: any = await fetchJson<any>(`${BASE}/meta/${type}/${imdb}.json`, { provider: "cinemeta", ttlMs: 3600_000, allowStatus: [404] }).catch(() => null);
+      const meta: any = res?.data?.meta;
+      if (!meta || (meta.imdb_id ?? meta.id) !== imdb) continue;
+      return map(meta, meta.type === "series" ? "tv_show" : "movie");
     }
     return null;
   },

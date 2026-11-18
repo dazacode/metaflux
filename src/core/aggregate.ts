@@ -258,11 +258,9 @@ function addTo(ids: Record<string, string[]>, provider: string, value: unknown) 
   if (!arr.includes(String(value))) arr.push(String(value));
 }
 
-/** A row answers a request when it is in the same id scope (an anime row never answers /manga). */
+/** A row answers a request only from the same id scope: an anime row never answers /manga, a film never answers /tv_show. */
 function kindCompatible(requested: Kind, got: Kind): boolean {
-  if (requested === got) return true;
-  if (idScope(requested) === idScope(got)) return true;
-  return kindFamily(requested).includes(got) && idScope(got) !== "person" && idScope(got) !== "character";
+  return requested === got || idScope(requested) === idScope(got);
 }
 
 async function refresh(doc: Entity, opts: QueryOptions): Promise<Entity> {
