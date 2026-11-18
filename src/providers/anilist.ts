@@ -226,6 +226,7 @@ async function query(_ctx: ProviderContext | null, body: string, vars: Record<st
 const PAGE_ARGS = `$type:MediaType,$page:Int,$per:Int,$q:String,$sort:[MediaSort],$season:MediaSeason,$year:Int,$genres:[String],$format:MediaFormat,$status:MediaStatus,$country:CountryCode,$adult:Boolean`;
 const PAGE = `query(${PAGE_ARGS}){Page(page:$page,perPage:$per){pageInfo{total currentPage lastPage hasNextPage} media(type:$type,search:$q,sort:$sort,season:$season,seasonYear:$year,genre_in:$genres,format:$format,status:$status,countryOfOrigin:$country,isAdult:$adult){${LIST_FIELDS}}}}`;
 const GET = `query($id:Int,$type:MediaType){Media(id:$id,type:$type){${MEDIA_FIELDS}}}`;
+const DETAIL_TTL = 15 * 60_000;
 const GET_MAL = `query($id:Int,$type:MediaType){Media(idMal:$id,type:$type){${MEDIA_FIELDS}}}`;
 const SCHEDULE = `query($from:Int,$to:Int,$page:Int,$per:Int){Page(page:$page,perPage:$per){pageInfo{hasNextPage} airingSchedules(airingAt_greater:$from,airingAt_lesser:$to,sort:TIME){airingAt episode timeUntilAiring media{${LIST_FIELDS}}}}}`;
 const GENRES = `query{GenreCollection}`;
@@ -239,6 +240,8 @@ const SORTS: Record<string, string[]> = {
   popular: ["POPULARITY_DESC"], trending: ["TRENDING_DESC", "POPULARITY_DESC"], score: ["SCORE_DESC"],
   newest: ["START_DATE_DESC"], title: ["TITLE_ROMAJI"], episodes: ["EPISODES_DESC"], chapters: ["CHAPTERS_DESC"],
   favourites: ["FAVOURITES_DESC"], relevance: ["SEARCH_MATCH"],
+  // Aliases the Yorozo client sends.
+  popularity: ["POPULARITY_DESC"], start_date_desc: ["START_DATE_DESC"], start_date: ["START_DATE"],
 };
 const STATUS_IN: Record<string, string> = {
   releasing: "RELEASING", airing: "RELEASING", ongoing: "RELEASING", finished: "FINISHED", completed: "FINISHED",
@@ -368,7 +371,7 @@ export const anilist: Provider = {
     if (ref.kind === "character" || ns === "anilist_character") return /^\d+$/.test(ref.id) ? getCharacter(ref.id) : null;
     if (!/^\d+$/.test(ref.id)) return null;
     const type = isManga(ref.kind) ? "MANGA" : "ANIME";
-    const data = await query(ctx, ns === "mal" ? GET_MAL : GET, { id: Number(ref.id), type }, CACHE);
+    const data = await query(ctx, ns === "mal" ? GET_MAL : GET, { id: Number(ref.id), type }, DETAIL_TTL);
     return data?.Media ? map(data.Media) : null;
   },
   async trending(ctx, kind) {

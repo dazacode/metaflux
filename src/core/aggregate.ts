@@ -7,6 +7,7 @@ import { effectiveKind, idScope, idsConflict, isIdentityKey, parseExternal, type
 import { singleflight } from "./store.ts";
 import { chain, getProvider, ownedNamespaces, type Operation, type Provider, type ProviderContext } from "../providers/_types.ts";
 import { kindFamily, kindsForDomain } from "../schema/kinds.ts";
+import { bridgeScreenIds } from "../providers/wikidata.ts";
 import type { Entity, Kind } from "../schema/entities.ts";
 
 export interface QueryOptions {
@@ -88,8 +89,12 @@ export async function searchEntities(q: string, kinds: Kind[], opts: QueryOption
   }
   const familySet = new Set(families);
   const inFamily = candidates.filter((e) => familySet.has(e.kind));
+  // A requested kind is a contract: kind=anime returns anime rows, not Cinemeta films, whenever any exist.
+  const scopes = new Set(kinds.map((k) => idScope(k)));
+  const inScope = candidates.filter((e) => scopes.has(idScope(e.kind)));
+  const pool = kinds.length && inScope.length ? inScope : inFamily.length ? inFamily : candidates;
 
-  const merged = collapse(inFamily.length ? inFamily : candidates)
+  const merged = collapse(pool)
     .map((e) => {
       e.score = Math.max(e.score ?? 0, rank(e, query, kinds));
       e.provenance.sources = e.provenance.sources.filter((s, i, a) => a.findIndex((x) => x.provider === s.provider) === i);
@@ -103,6 +108,7 @@ export async function searchEntities(q: string, kinds: Kind[], opts: QueryOption
     })
     .slice(0, c.limit);
 
+  await deadline(bridgeScreenIds(merged), 2_500).catch(() => undefined);
   for (const e of merged) entityStore.put(e as any, { index: false });
   return { entities: merged, unavailable, providers_hit: [...new Set(hit)], partial: unavailable.length > 0 };
 }
@@ -364,13 +370,23 @@ export async function listEntities(op: Operation, kind: Kind | undefined, params
   const unavailable: Outcome["unavailable"] = [];
   const hit: string[] = [];
   const family = new Set(kind ? kindFamily(kind) : []);
+  // Ranked lists answer for exactly the requested kind's id space: a manga lane never shows anime.
+  const strict = (op === "trending" || op === "discover") && kind;
   const call = async (p: Provider): Promise<Entity[] & { total?: number | null; hasNext?: boolean } | null> => {
     try {
       const fn = (p as any)[op] as Function;
-      const result: any = await deadline(fn.call(p, c, params), op === "schedule" ? 12_000 : 7_000);
+      // trending(ctx, kind) takes the kind itself; the other list operations take a params object.
+      const arg = op === "trending" ? (params?.kind ?? kind) : params;
+      const result: any = await deadline(fn.call(p, c, arg), op === "schedule" ? 12_000 : 7_000);
       if (!result?.length) return null;
-      hit.push(p.id);
       const rows = result.map((e: Entity) => { e.score = e.score ?? 0; indexEntity(e, p.id, e.provenance.sources[0]?.url); return finalize(e); });
+      if (strict) {
+        const scoped = rows.filter((r: Entity) => idScope(r.kind) === idScope(kind!));
+        if (!scoped.length) return null;
+        hit.push(p.id);
+        return Object.assign(scoped, { total: result.total, hasNext: result.hasNext });
+      }
+      hit.push(p.id);
       const inFamily = family.size ? rows.filter((r: Entity) => family.has(r.kind)) : rows;
       return Object.assign(inFamily.length ? inFamily : rows, { total: result.total, hasNext: result.hasNext });
     } catch (err) {
@@ -384,6 +400,7 @@ export async function listEntities(op: Operation, kind: Kind | undefined, params
       const rows = await call(p);
       if (!rows) continue;
       const out = rows.slice(0, c.limit);
+      await deadline(bridgeScreenIds(out), 2_500).catch(() => undefined);
       for (const e of out) entityStore.put(e as any, { index: false });
       return { entities: out, unavailable, providers_hit: [...new Set(hit)], partial: unavailable.length > 0, total: rows.total ?? null, has_next: rows.hasNext };
     }

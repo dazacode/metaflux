@@ -1,7 +1,7 @@
 import { fetchJson } from "../core/http.ts";
 import type { Entity, Kind } from "../schema/entities.ts";
 import { addId, baseEntity, dateParts, num, src, tag } from "./_util.ts";
-import type { Provider } from "./_types.ts";
+import type { ListResult, Provider } from "./_types.ts";
 
 const BASE = "https://v3-cinemeta.strem.io";
 
@@ -15,7 +15,25 @@ function countryCode(raw: string): string | null {
   return COUNTRY[first] ?? (first.length === 2 ? first.toUpperCase() : null);
 }
 
-function map(m: any, kind: Kind): Entity {
+/** A page of a Cinemeta catalog. Catalogs are served 50 rows at a time; `skip` must be a multiple of 50. */
+async function catalogPage(kind: Kind, catalog: string, genre: string | null, page: number, limit: number): Promise<ListResult> {
+  const type = kind === "movie" ? "movie" : "series";
+  const offset = (Math.max(1, page) - 1) * limit;
+  const first = Math.floor(offset / 50) * 50;
+  const fetchAt = async (skip: number) => {
+    const extra = [genre ? `genre=${encodeURIComponent(genre)}` : null, skip ? `skip=${skip}` : null].filter(Boolean).join("&");
+    const res = await fetchJson<any>(`${BASE}/catalog/${type}/${catalog}${extra ? `/${extra}` : ""}.json`, { provider: "cinemeta", ttlMs: 6 * 3600_000 });
+    return (res.data.metas ?? []) as any[];
+  };
+  let metas = await fetchAt(first);
+  if (offset - first + limit > 50 && metas.length === 50) metas = metas.concat(await fetchAt(first + 50).catch(() => []));
+  const rows = metas.slice(offset - first, offset - first + limit).map((m) => map(m, kind, true)) as ListResult;
+  rows.hasNext = metas.length >= offset - first + limit;
+  rows.total = null;
+  return rows;
+}
+
+function map(m: any, kind: Kind, list = false): Entity {
   const e = baseEntity(kind, m.name, "cinemeta", `https://www.imdb.com/title/${m.imdb_id}/`);
   addId(e, "imdb", m.imdb_id);
   if (m.moviedb_id) addId(e, "tmdb", String(m.moviedb_id));
@@ -40,7 +58,7 @@ function map(m: any, kind: Kind): Entity {
   if (m.writer) for (const w of Array.isArray(m.writer) ? m.writer : [m.writer]) e.credits.push({ person: { name: w, kind: "person" }, role: "writer", department: "crew", voice: false, sources: [] });
   e.companies.production = (m.country ? [{ name: m.country, kind: "company" as const }] : []);
   e.availability.official_site = `https://www.imdb.com/title/${m.imdb_id}/`;
-  for (const v of m.videos ?? []) {
+  for (const v of list ? [] : m.videos ?? []) {
     e.episodes.push({
       id: String(v.id), season: v.season, number: v.number, title: v.name ?? v.episode, description: v.overview ? { en: v.overview } : {},
       air_date: v.firstAired ?? v.released, image: v.thumbnail ?? null, rating: v.rating ?? null, kind: "regular", sources: [],
@@ -52,7 +70,7 @@ function map(m: any, kind: Kind): Entity {
   }
   e.format = kind === "movie" ? "MOVIE" : "SERIES";
   if (m.country) e.broadcast.country = countryCode(m.country);
-  const seasons = [...new Set((m.videos ?? []).map((v: any) => v.season).filter((n: any) => typeof n === "number"))] as number[];
+  const seasons = [...new Set((list ? [] : m.videos ?? []).map((v: any) => v.season).filter((n: any) => typeof n === "number"))] as number[];
   for (const n of seasons.sort((a, b) => a - b)) {
     const eps = (m.videos ?? []).filter((v: any) => v.season === n);
     const dates = eps.map((v: any) => v.firstAired ?? v.released).filter(Boolean).sort();
@@ -65,7 +83,7 @@ function map(m: any, kind: Kind): Entity {
     e.technical.episode_count = 1;
   }
   for (const l of m.links ?? []) e.links.push({ url: l.url, site: l.name, kind: l.category });
-  e.raw.cinemeta = m;
+  e.raw.cinemeta = list ? { id: m.id, type: m.type, name: m.name } : m;
   tag(e, `type:${m.type}`);
   e.score = (num(m.imdbRating) ?? 0) * 10 + (num(m.popularity) ?? 0);
   return e;
@@ -74,7 +92,7 @@ function map(m: any, kind: Kind): Entity {
 export const cinemeta: Provider = {
   id: "cinemeta", name: "Cinemeta (Stremio)", domains: ["screen"], priority: 8,
   kinds: ["movie", "tv_show", "tv_episode"],
-  operations: ["search", "get", "discover", "related"],
+  operations: ["search", "get", "trending", "discover", "genres", "related"],
   namespaces: ["imdb"], scopes: ["movie", "tv", "screen"],
   auth: "none", base: BASE, license: "Stremio addon, IMDb-derived data",
   freshness: "6h", homepage: "https://v3-cinemeta.strem.io",
@@ -123,10 +141,32 @@ export const cinemeta: Provider = {
     }
     return null;
   },
+  async trending(ctx, kind) {
+    if (kind !== "movie" && kind !== "tv_show") return [];
+    return catalogPage(kind, "top", null, ctx.page ?? 1, ctx.limit);
+  },
   async discover(ctx, p) {
     if (p.kind !== "movie" && p.kind !== "tv_show") return [];
-    const res = await fetchJson<any>(`${BASE}/catalog/${p.kind === "movie" ? "movie" : "series"}/top.json`, { provider: "cinemeta", ttlMs: 3600_000 });
-    return (res.data.metas ?? []).slice(0, ctx.limit).map((m: any) => map(m, p.kind as Kind));
+    // Cinemeta cannot filter by origin country; MyDramaList answers the K/C/J/Thai/TW shelves.
+    if (p.country) return [];
+    const genres = [...(p.genres ?? []), ...(p.genre ? p.genre.split(",") : [])].map((g) => g.trim()).filter(Boolean);
+    const sort = p.sort === "popularity" ? "popular" : p.sort === "start_date_desc" ? "newest" : p.sort;
+    const byYear = sort === "newest" || (p.year && !genres.length);
+    const catalog = byYear ? "year" : sort === "score" ? "imdbRating" : "top";
+    const filter = byYear ? String(p.year ?? new Date().getFullYear()) : genres[0] ?? null;
+    const rows = await catalogPage(p.kind, catalog, filter, p.page ?? ctx.page ?? 1, ctx.limit);
+    const want = byYear ? genres : genres.slice(1);
+    const out = rows.filter((r) => want.every((g) => r.classification.genres.some((x) => x.toLowerCase() === g.toLowerCase()))
+      && (!p.year || byYear || r.dates.start?.year === p.year || r.dates.release?.year === p.year)) as ListResult;
+    out.hasNext = rows.hasNext;
+    out.total = null;
+    return out;
+  },
+  async genres(ctx, kind) {
+    const res = await fetchJson<any>(`${BASE}/manifest.json`, { provider: "cinemeta", ttlMs: 7 * 86_400_000 });
+    const type = kind === "movie" ? "movie" : "series";
+    const cat = (res.data.catalogs ?? []).find((c: any) => c.type === type && c.id === "top");
+    return (cat?.extra ?? []).find((e: any) => e.name === "genre")?.options ?? [];
   },
 };
 
