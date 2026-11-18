@@ -12,8 +12,29 @@ const KIND: Record<string, Kind> = {
 
 function person(p: any) {
   if (!p) return null;
-  return { id: `tvmaze_person_${p.id}`, name: p.name, kind: "person" as const, image: p.image?.medium ?? null,
-    url: p.url ?? null, external_ids: p.externals ? Object.fromEntries(Object.entries(p.externals).filter(([, v]) => v).map(([k, v]) => [k, [String(v)]])) : {} };
+  return { id: `tvmaze:person:${p.id}`, name: p.name, kind: "person" as const, image: p.image?.medium ?? null,
+    url: p.url ?? null, country: p.country?.code ?? null, external_ids: { tvmaze_person: [String(p.id)] } };
+}
+
+function mapPerson(p: any): Entity {
+  const e = baseEntity("person", p.name, "tvmaze", p.url);
+  addId(e, "tvmaze_person", String(p.id));
+  e.images.profile = [p.image?.original, p.image?.medium].filter(Boolean);
+  e.person.gender = p.gender ?? null;
+  e.person.birthday = p.birthday ?? null;
+  e.person.deathday = p.deathday ?? null;
+  e.person.nationality = p.country?.code ? [p.country.code] : [];
+  e.person.occupations = ["actor"];
+  if (p.birthday) e.dates.born = dateParts(p.birthday);
+  for (const c of p._embedded?.castcredits ?? []) {
+    const show = c._embedded?.show;
+    const href = c._links?.show?.href ?? "";
+    const showId = show?.id ?? href.split("/").pop();
+    const target = show ? map(show) : null;
+    e.person.filmography.push({ kind: "staff", target_id: `tvmaze:${showId}`, title: show?.name ?? c._links?.show?.name ?? null, role: c._links?.character?.name ?? "cast", target, direction: "outgoing", sources: [src("tvmaze", p.url)] });
+  }
+  e.raw.tvmaze = p;
+  return e;
 }
 
 function map(s: any): Entity {
@@ -53,7 +74,7 @@ function map(s: any): Entity {
     });
   }
   for (const c of s._embedded?.cast ?? []) {
-    e.credits.push({ person: person(c.person)!, character: c.character ? { name: c.character.name, kind: "character", image: c.character.image?.medium ?? null, url: c.character.url } : null, voice: c.voice ?? false, role: "cast", sources: [src("tvmaze", c.self)] });
+    e.credits.push({ person: person(c.person)!, character: c.character ? { id: `tvmaze:character:${c.character.id}`, name: c.character.name, kind: "character", image: c.character.image?.medium ?? null, url: c.character.url } : null, voice: c.voice ?? false, role: "cast", department: "cast", order: e.credits.length, sources: [src("tvmaze", c.person?.url)] });
   }
   for (const c of s._embedded?.crew ?? []) {
     e.credits.push({ person: person(c.person)!, role: c.type, job: c.type, department: "crew", voice: false, sources: [] });
@@ -62,7 +83,25 @@ function map(s: any): Entity {
     if (["poster", "background", "banner", "typography", "logo"].includes(i.type)) ((e.images as any)[i.type] ??= []).push(i.resolutions?.original?.url ?? i.url);
     else e.images.screenshots.push(i.resolutions?.original?.url ?? i.url);
   }
-  for (const aka of s._embedded?.akas ?? []) e.title.aliases.push(aka.name);
+  for (const aka of s._embedded?.akas ?? []) {
+    e.title.aliases.push(aka.name);
+    if (aka.country?.code) e.title.localized[aka.country.code.toLowerCase()] ??= aka.name;
+  }
+  for (const se of s._embedded?.seasons ?? []) {
+    e.seasons.push({
+      id: `tvmaze:season:${se.id}`, number: se.number, title: se.name || `Season ${se.number}`,
+      description: se.summary ? { en: stripHtml(se.summary) } : {}, air_date: se.premiereDate ?? null, end_date: se.endDate ?? null,
+      episodes: se.episodeOrder ?? null, image: se.image?.original ?? null, sources: [src("tvmaze", se.url)],
+    });
+  }
+  e.technical.season_count = e.seasons.length || null;
+  e.technical.episode_count = (s._embedded?.episodes ?? []).length || null;
+  const next = s._embedded?.nextepisode;
+  if (next?.airstamp) {
+    e.broadcast.next_episode = { number: next.number, season: next.season, title: next.name, airing_at: new Date(next.airstamp).toISOString(), time_until_s: Math.round((Date.parse(next.airstamp) - Date.now()) / 1000), precision: "minute" } as any;
+    e.dates.airing = { date: new Date(next.airstamp).toISOString(), precision: "minute" };
+  }
+  e.format = s.type === "Animation" ? "TV" : "SERIES";
   e.raw.tvmaze = s;
   tag(e, `type:${s.type}`);
   e.score = (s.weight ?? 0) / 10 + (s.rating?.average ?? 0);
@@ -73,6 +112,8 @@ export const tvmaze: Provider = {
   id: "tvmaze", name: "TVmaze", domains: ["screen"], priority: 20,
   kinds: ["tv_show", "tv_episode", "tv_special", "award_show", "person"],
   operations: ["search", "get", "schedule", "episodes", "people", "related"],
+  namespaces: ["tvmaze", "imdb", "tvdb", "tvmaze_person"], scopes: ["tv", "person"],
+  limits: { "api.tvmaze.com": { rate: 20, windowMs: 10_000, burst: 10, concurrency: 4 } },
   auth: "none", base: BASE, license: "TVmaze CC BY-SA 4.0",
   freshness: "1h; ETag aware", homepage: "https://www.tvmaze.com",
   notes: "Broadcast schedule, episode guide, cast/crew. 20 calls / 10 s.",
@@ -81,14 +122,20 @@ export const tvmaze: Provider = {
     return (res.data ?? []).map((r: any) => map(r.show));
   },
   async get(ctx, ref) {
-    const ext = ref.externalIds?.tvmaze ?? (ref.externalIds?.imdb ? null : ref.id);
-    if (ext) {
-      const res = await fetchJson<any>(`${BASE}/shows/${ext}?embed[]=episodes&embed[]=cast&embed[]=crew&embed[]=images&embed[]=akas`, { provider: "tvmaze", ttlMs: 3600_000 });
-      return map(res.data);
+    if (ref.kind === "person") {
+      if (ref.namespace !== "tvmaze_person" && ref.namespace !== "tvmaze") return null;
+      const res = await fetchJson<any>(`${BASE}/people/${ref.id}?embed[]=castcredits`, { provider: "tvmaze", ttlMs: 86_400_000, allowStatus: [404] });
+      return res.status === 404 ? null : mapPerson(res.data);
     }
-    const imdb = ref.externalIds!.imdb;
-    const look = await fetchJson<any>(`${BASE}/lookup/shows?imdb=${encodeURIComponent(imdb)}`, { provider: "tvmaze", ttlMs: 86_400_000 });
-    return look.data?.id ? map(look.data) : null;
+    let showId = ref.namespace === "tvmaze" ? ref.id : null;
+    if (!showId) {
+      const param = ref.namespace === "tvdb" ? "thetvdb" : "imdb";
+      const look = await fetchJson<any>(`${BASE}/lookup/shows?${param}=${encodeURIComponent(ref.id)}`, { provider: "tvmaze", ttlMs: 86_400_000, allowStatus: [404] });
+      showId = look.data?.id ? String(look.data.id) : null;
+    }
+    if (!showId) return null;
+    const res = await fetchJson<any>(`${BASE}/shows/${showId}?embed[]=episodes&embed[]=cast&embed[]=crew&embed[]=images&embed[]=akas&embed[]=seasons&embed[]=nextepisode`, { provider: "tvmaze", ttlMs: 3600_000, allowStatus: [404] });
+    return res.status === 404 ? null : map(res.data);
   },
   async schedule(ctx, p) {
     const out: Entity[] = [];

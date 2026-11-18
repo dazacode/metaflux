@@ -40,6 +40,27 @@ PASS radio     3507ms results=5  providers=iptv-org,radio-browser
 14/14 domains returned data across 36 providers
 ```
 
+## Yorozo parity pass (November 2026, branch feat/yorozo-parity)
+
+Gates: `bun run typecheck` clean; `bun run test` 36 pass / 0 fail (8 files, offline fixtures incl. recorded ani.zip, Shikimori and Kitsu payloads); `bun run smoke` 14/14 domains across 38 providers.
+
+Latency against the running instance (macOS arm64, warm SQLite, AniList at its live 30 req/min budget, Jikan unreachable from this network with its breaker open):
+
+| Call | cold p50 | cold p95 | cached p50 | cached p95 |
+| --- | --- | --- | --- | --- |
+| `GET /v1/search?kind=anime&q=…&limit=20` | 2.2–2.7 s | 3.5 s (deadline) | 2 ms | 6 ms |
+| `GET /v1/search?kinds=tv_show,movie&q=…` | 2.9 s | 3.5 s | 3 ms | 5 ms |
+| `GET /v1/anime/mal:<id>` (AniList + ani.zip + ARM + Kitsu + Shikimori) | 770 ms | 1.3 s | 4 ms | 6 ms |
+| `GET /v1/anime/mal:<id>/episodes` (after detail) | 3 ms | 5 ms | 3 ms | 5 ms |
+| `GET /v1/anime/mal:<id>/credits` (after detail) | 3 ms | 4 ms | 4 ms | 4 ms |
+| `GET /v1/tv_show/tmdb:tv:<id>` (Wikidata -> Cinemeta + TVmaze + MDL) | 640 ms | 770 ms | 1 ms | 2 ms |
+| `GET /v1/discover?kind=tv_show&country=KR` (MDL + Wikidata ids) | 1.1 s | — | 33 ms | — |
+| `GET /v1/calendar?kinds=anime` one week (118 rows, 3 AniList pages) | 1.1–2.5 s | — | — | — |
+
+Single-flight: six concurrent cold `GET /v1/anime/mal:820` returned in 516–520 ms with one entity id (one upstream fan-out). Cold search is bounded by the 3.5 s provider deadline; under a burst AniList's bucket is the wait, and Shikimori/Kitsu answer with MAL-keyed rows. A detail record is served from SQLite for 15 min, then stale-while-revalidate.
+
+Identity checks: `mal:21` -> ONE PIECE (one MAL, one AniList id); `mal:manga:13` -> One Piece manga; `tmdb:tv:1396` -> Breaking Bad (tv_show); `tmdb:movie:603` -> The Matrix; `tt5182866` under `/tv_show` -> Reply 1988 (tv_show); `anilist:95185` under `/person` -> the AniList staff record; `anilist:176754` under `/character` -> Frieren.
+
 ## Endpoint checks
 
 | Request | Result |
@@ -74,7 +95,8 @@ PASS radio     3507ms results=5  providers=iptv-org,radio-browser
 
 ## Known gaps
 
-- some sources were unreachable from the build network (Jikan, occasional ComicK/Gutendex); adapters exist and degrade
+- some sources were unreachable from the build network (Jikan, occasional ComicK/Gutendex); adapters exist and degrade. Without Jikan there are no MAL filler/recap episode flags.
+- live-action cast carries TVmaze person ids; there is no keyless source of TMDB person ids per cast row
 - Google Books unkeyed quota returns `429` from shared IPs
 - Kprofiles selector depth is shallow; a markup change returns empty
 - no subtitles, TV listings per market, or streaming-price normalisation yet

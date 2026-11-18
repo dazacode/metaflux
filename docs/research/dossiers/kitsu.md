@@ -5,19 +5,21 @@
 - **base:** `https://kitsu.io/api/edge`
 - **auth:** none
 - **freshness:** 6h cache
-- **limits:** 10 req/s soft
-- **evidence fixtures:** kitsu.json (6547 B) (6547 B)
+- **limits:** no published limit; held to 45/min burst 3. Requires Accept: application/vnd.api+json (406 otherwise)
+- **evidence fixtures:** kitsu.json (6547 B), kitsu_mappings.json (18536 B) (25083 B)
 
 ## Verified routes
 
 | method | path | status | note |
 | --- | --- | --- | --- |
 | GET | `/anime?filter[text]=&page[limit]=` | 200 | JSON:API search |
-| GET | `/anime/{id}?include=episodes,streaming-links` | 200 | record + relationships |
+| GET | `/anime?filter[text]=&page[limit]=&include=mappings` | 200 | rows + mappings (myanimelist/anime, anilist/anime, anidb, thetvdb) so fallback rows are MAL-keyed |
+| GET | `/anime/{id}?include=mappings` | 200 | record + id mappings |
+| GET | `/anime?sort=-userCount&page[limit]=&page[offset]=` | 200 | popular chart, paged |
 
 ## Observed field universe
 
-144 distinct key paths, preserved verbatim from evidence.
+165 distinct key paths, preserved verbatim from evidence.
 
 ```
 data
@@ -84,7 +86,12 @@ data.[].attributes.titles
 data.[].attributes.titles.en
 data.[].attributes.titles.en_jp
 data.[].attributes.titles.en_us
+data.[].attributes.titles.it_it
 data.[].attributes.titles.ja_jp
+data.[].attributes.titles.ko_kr
+data.[].attributes.titles.pt_br
+data.[].attributes.titles.th_th
+data.[].attributes.titles.zh_cn
 data.[].attributes.totalLength
 data.[].attributes.updatedAt
 data.[].attributes.userCount
@@ -130,6 +137,7 @@ data.[].relationships.installments.links
 data.[].relationships.installments.links.related
 data.[].relationships.installments.links.self
 data.[].relationships.mappings
+data.[].relationships.mappings.data
 data.[].relationships.mappings.links
 data.[].relationships.mappings.links.related
 data.[].relationships.mappings.links.self
@@ -158,6 +166,21 @@ data.[].relationships.streamingLinks.links
 data.[].relationships.streamingLinks.links.related
 data.[].relationships.streamingLinks.links.self
 data.[].type
+included
+included.[].attributes
+included.[].attributes.createdAt
+included.[].attributes.externalId
+included.[].attributes.externalSite
+included.[].attributes.updatedAt
+included.[].id
+included.[].links
+included.[].links.self
+included.[].relationships
+included.[].relationships.item
+included.[].relationships.item.links
+included.[].relationships.item.links.related
+included.[].relationships.item.links.self
+included.[].type
 links
 links.first
 links.last
@@ -170,3 +193,4 @@ meta.count
 
 - JSON:API sparse fieldsets
 - relationship ids need include
+- filter by MAL id is rejected (external_site not allowed)

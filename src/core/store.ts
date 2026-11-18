@@ -3,6 +3,8 @@ import { Database } from "bun:sqlite";
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import { config } from "./config.ts";
+import { idScope, indexableIds } from "./identity.ts";
+import type { Kind } from "../schema/entities.ts";
 
 let db: Database | null = null;
 
@@ -45,6 +47,13 @@ export function getDb(): Database {
       external_id TEXT NOT NULL,
       entity_id TEXT NOT NULL,
       PRIMARY KEY (provider, external_id)
+    );
+    CREATE TABLE IF NOT EXISTS entity_ids (
+      scope TEXT NOT NULL,
+      provider TEXT NOT NULL,
+      external_id TEXT NOT NULL,
+      entity_id TEXT NOT NULL,
+      PRIMARY KEY (scope, provider, external_id)
     );
     CREATE TABLE IF NOT EXISTS provider_state (
       provider TEXT PRIMARY KEY,
@@ -123,7 +132,8 @@ export async function singleflight<T>(key: string, fn: () => Promise<T>): Promis
 }
 
 export const entityStore = {
-  put(doc: { id: string; kind: string; domain: string; name: string; score?: number; title?: any; description?: any; classification?: any; external_ids?: Record<string, string[]> }) {
+  /** Persist a record. `index: false` keeps list rows out of the id index so they never shadow a detail record. */
+  put(doc: { id: string; kind: string; domain: string; name: string; score?: number; title?: any; description?: any; classification?: any; external_ids?: Record<string, string[]> }, opts: { index?: boolean } = {}) {
     const now = Date.now();
     const tx = getDb().transaction(() => {
       getDb().query(
@@ -136,11 +146,11 @@ export const entityStore = {
       const tags = [...(doc.classification?.genres ?? []), ...(doc.classification?.themes ?? []), ...(doc.classification?.keywords ?? [])].join(" ");
       getDb().query("INSERT INTO entities_fts(id,name,aliases,description,tags) VALUES(?,?,?,?,?)")
         .run(doc.id, doc.name, aliases, description, tags);
-      for (const [provider, ids] of Object.entries(doc.external_ids ?? {})) {
-        for (const external of ids ?? []) {
-          getDb().query("INSERT INTO ids(provider,external_id,entity_id) VALUES(?,?,?) ON CONFLICT(provider,external_id) DO UPDATE SET entity_id=excluded.entity_id")
-            .run(provider, String(external), doc.id);
-        }
+      // Scoped by kind group: MAL anime 13 and MAL manga 13 are different works.
+      const scope = idScope(doc.kind as Kind);
+      for (const [provider, external] of opts.index === false ? [] : indexableIds(doc as any)) {
+        getDb().query("INSERT INTO entity_ids(scope,provider,external_id,entity_id) VALUES(?,?,?,?) ON CONFLICT(scope,provider,external_id) DO UPDATE SET entity_id=excluded.entity_id")
+          .run(scope, provider, external, doc.id);
       }
     });
     tx();
@@ -149,8 +159,11 @@ export const entityStore = {
     const row = getDb().query<any, [string]>("SELECT doc FROM entities WHERE id = ?").get(id);
     return row ? JSON.parse(row.doc) : null;
   },
-  findId(provider: string, externalId: string): string | null {
-    const row = getDb().query<any, [string, string]>("SELECT entity_id FROM ids WHERE provider = ? AND external_id = ?").get(provider, externalId);
+  /** Entity id for `provider:externalId` within the kind's id scope (any scope when kind is omitted). */
+  findId(provider: string, externalId: string, kind?: Kind): string | null {
+    const row = kind
+      ? getDb().query<any, [string, string, string]>("SELECT entity_id FROM entity_ids WHERE scope = ? AND provider = ? AND external_id = ?").get(idScope(kind), provider, externalId)
+      : getDb().query<any, [string, string]>("SELECT entity_id FROM entity_ids WHERE provider = ? AND external_id = ?").get(provider, externalId);
     return row?.entity_id ?? null;
   },
   search(q: string, kinds: string[], limit: number, offset = 0): any[] {
@@ -182,7 +195,8 @@ export const providerState = {
     const now = Date.now();
     const row = this.get(provider);
     const failures = (row?.failures ?? 0) + 1;
-    const openedAt = failures >= config.breakerThreshold ? now : row?.opened_at ?? null;
+    // A failed half-open probe reopens at once; otherwise every cooldown would cost `threshold` slow calls.
+    const openedAt = failures >= config.breakerThreshold || row?.state === "half-open" ? now : row?.opened_at ?? null;
     getDb().query(
       `INSERT INTO provider_state(provider,state,failures,opened_at,last_ok,last_error) VALUES(?,?,?,?,?,?)
        ON CONFLICT(provider) DO UPDATE SET state=excluded.state,failures=excluded.failures,
@@ -199,7 +213,7 @@ export const providerState = {
     const row = this.get(provider);
     if (!row || row.state !== "open") return false;
     if (Date.now() - (row.opened_at ?? 0) > config.breakerCooldownMs) {
-      getDb().query("UPDATE provider_state SET state='half-open', failures=0 WHERE provider = ?").run(provider);
+      getDb().query("UPDATE provider_state SET state='half-open', failures=0, opened_at=NULL WHERE provider = ?").run(provider);
       return false;
     }
     return true;

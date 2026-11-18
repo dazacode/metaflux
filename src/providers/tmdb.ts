@@ -44,6 +44,7 @@ export const tmdb: Provider = {
   id: "tmdb", name: "TMDB (optional key)", domains: ["screen", "people"], priority: 4,
   kinds: ["movie", "tv_show", "tv_episode", "person", "collection"],
   operations: ["search", "get", "trending", "discover", "related", "people"],
+  namespaces: ["tmdb"], scopes: ["movie", "tv", "person"],
   auth: "optional-key", keyEnv: "TMDB_API_KEY", base: BASE, license: "TMDB terms",
   freshness: "6h", homepage: "https://www.themoviedb.org",
   notes: "Adds TMDB/IMDb ids, full credits, collections, translations. Disabled without a key.",

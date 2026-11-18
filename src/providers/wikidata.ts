@@ -20,6 +20,118 @@ const INSTANCE_KIND: Record<string, Kind> = {
   Q13219666: "radio_station", Q1616075: "tv_show",
 };
 
+/** Wikidata external-id properties -> our namespaces. */
+const ID_CLAIMS: Record<string, string> = {
+  P4947: "tmdb", P4983: "tmdb", P4835: "tvdb", P8600: "tvmaze", P4086: "mal", P4087: "mal",
+  P8729: "anilist", P8731: "anilist", P5646: "anidb", P3868: "mdl",
+};
+
+/** Which property holds a namespace's id for a given kind. */
+function lookupProps(ns: string, kind?: Kind): string[] {
+  const movie = kind === "movie" || kind === "anime_movie";
+  const tv = kind === "tv_show" || kind === "tv_season" || kind === "tv_special";
+  switch (ns) {
+    case "imdb": return ["P345"];
+    case "tmdb": return movie ? ["P4947"] : tv ? ["P4983"] : ["P4983", "P4947"];
+    case "tvdb": return ["P4835"];
+    case "tvmaze": return ["P8600"];
+    default: return [];
+  }
+}
+
+export interface ScreenIds { wikidata: string; imdb?: string; tmdb_tv?: string; tmdb_movie?: string; mdl?: string; tvmaze?: string; }
+
+/**
+ * Keyless TMDB ids for a page of rows in one SPARQL call: IMDb (P345) or
+ * MyDramaList (P3868) values -> Wikidata item -> TMDB TV (P4983) / film (P4947),
+ * IMDb, MDL and TVmaze ids. Cached 30 days per value set.
+ */
+export async function screenIdsBy(prop: "P345" | "P3868", values: string[]): Promise<Map<string, ScreenIds>> {
+  const out = new Map<string, ScreenIds>();
+  const clean = [...new Set(values.filter((v) => /^[\w-]+$/.test(v)))].slice(0, 100);
+  if (!clean.length) return out;
+  const key = prop === "P345" ? "imdb" : "mdl";
+  const literals = clean.map((v) => JSON.stringify(v)).join(" ");
+  // Wikidata stores MDL ids both bare ("18452") and with a slug that may be stale ("35729-emergency-lands-of-love").
+  const match = prop === "P345"
+    ? `VALUES ?imdb { ${literals} } ?item wdt:P345 ?imdb .`
+    : `?item wdt:P3868 ?raw . BIND(IF(CONTAINS(?raw, "-"), STRBEFORE(?raw, "-"), ?raw) AS ?mdl) VALUES ?mdl { ${literals} }`;
+  const sparql = `SELECT ?item ?${key} ?imdb2 ?tmdbtv ?tmdbm ?tvmaze WHERE { ${match} OPTIONAL{?item wdt:P345 ?imdb2} OPTIONAL{?item wdt:P4983 ?tmdbtv} OPTIONAL{?item wdt:P4947 ?tmdbm} OPTIONAL{?item wdt:P8600 ?tvmaze} }`;
+  const res = await fetchJson<any>(`${SPARQL}?format=json&query=${encodeURIComponent(sparql)}`, { provider: "wikidata", ttlMs: 2_592_000_000, timeoutMs: 4_000, headers: { accept: "application/sparql-results+json" } });
+  for (const b of res.data?.results?.bindings ?? []) {
+    const v = (k: string) => b[k]?.value?.split("/").pop();
+    const k = v(key);
+    if (!k || out.has(k)) continue;
+    out.set(k, { wikidata: v("item")!, imdb: key === "imdb" ? k : v("imdb2"), tmdb_tv: v("tmdbtv"), tmdb_movie: v("tmdbm"), mdl: key === "mdl" ? k : undefined, tvmaze: v("tvmaze") });
+  }
+  return out;
+}
+
+const norm = (s: string) => s.normalize("NFKD").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
+
+/**
+ * Last resort for rows with no IMDb id and an MDL id Wikidata does not carry:
+ * full-text search restricted to items that have a TMDB id, accepted only on an
+ * exact (normalized) label/alias match and a start year within one.
+ */
+async function screenIdsByTitle(rows: Entity[]): Promise<Map<Entity, ScreenIds>> {
+  const out = new Map<Entity, ScreenIds>();
+  if (!rows.length) return out;
+  const candidates = await Promise.all(rows.map(async (r) => {
+    const prop = r.kind === "movie" ? "P4947" : "P4983";
+    const res = await fetchJson<any>(`${WD}/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(`${r.name} haswbstatement:${prop}`)}&srlimit=3&format=json`, { provider: "wikidata", ttlMs: 7 * 86_400_000, timeoutMs: 3_000 }).catch(() => null);
+    return (res?.data?.query?.search ?? []).map((s: any) => s.title).filter((q: string) => /^Q\d+$/.test(q)) as string[];
+  }));
+  const qids = [...new Set(candidates.flat())];
+  if (!qids.length) return out;
+  const sparql = `SELECT ?item ?label ?alias ?tmdbtv ?tmdbm ?imdb ?tvmaze ?start WHERE { VALUES ?item { ${qids.map((q) => `wd:${q}`).join(" ")} } OPTIONAL{?item rdfs:label ?label FILTER(LANG(?label) IN ("en","ko","ja","zh"))} OPTIONAL{?item skos:altLabel ?alias FILTER(LANG(?alias) = "en")} OPTIONAL{?item wdt:P4983 ?tmdbtv} OPTIONAL{?item wdt:P4947 ?tmdbm} OPTIONAL{?item wdt:P345 ?imdb} OPTIONAL{?item wdt:P8600 ?tvmaze} OPTIONAL{?item wdt:P580|wdt:P577 ?start} }`;
+  const res = await fetchJson<any>(`${SPARQL}?format=json&query=${encodeURIComponent(sparql)}`, { provider: "wikidata", ttlMs: 7 * 86_400_000, timeoutMs: 4_000, headers: { accept: "application/sparql-results+json" } });
+  const items = new Map<string, { names: Set<string>; years: Set<number>; ids: ScreenIds }>();
+  for (const b of res.data?.results?.bindings ?? []) {
+    const v = (k: string) => b[k]?.value?.split("/").pop();
+    const q = v("item")!;
+    const it = items.get(q) ?? { names: new Set<string>(), years: new Set<number>(), ids: { wikidata: q } as ScreenIds };
+    for (const n of [b.label?.value, b.alias?.value]) if (n) it.names.add(norm(n));
+    if (b.start?.value) it.years.add(Number(b.start.value.slice(0, 4)));
+    it.ids.tmdb_tv ??= v("tmdbtv"); it.ids.tmdb_movie ??= v("tmdbm"); it.ids.imdb ??= v("imdb"); it.ids.tvmaze ??= v("tvmaze");
+    items.set(q, it);
+  }
+  rows.forEach((r, i) => {
+    const names = [r.name, r.title.english, r.title.native, ...r.title.aliases].filter(Boolean).map((n) => norm(n!));
+    const year = r.dates.start?.year ?? r.dates.release?.year ?? null;
+    const match = candidates[i].map((q) => items.get(q)).find((it) => it && names.some((n) => it.names.has(n))
+      && (!year || !it.years.size || [...it.years].some((y) => Math.abs(y - year) <= 1)));
+    if (match) out.set(r, match.ids);
+  });
+  return out;
+}
+
+/** Fill external_ids.tmdb (and imdb/mdl/tvmaze) on movie/tv rows that lack it. Never throws. */
+export async function bridgeScreenIds(rows: Entity[]): Promise<void> {
+  const screen = rows.filter((r) => (r.kind === "movie" || r.kind === "tv_show") && !r.external_ids.tmdb?.length);
+  if (!screen.length) return;
+  try {
+    const [byImdb, byMdl] = await Promise.all([
+      screenIdsBy("P345", screen.map((r) => r.external_ids.imdb?.[0]).filter(Boolean) as string[]),
+      screenIdsBy("P3868", screen.filter((r) => !r.external_ids.imdb?.length).map((r) => r.external_ids.mdl?.[0]).filter(Boolean) as string[]),
+    ]);
+    // Title matching is only for rows with no IMDb id (MDL cards); an IMDb row Wikidata does not know stays unkeyed rather than guessed.
+    const misses = screen.filter((r) => !r.external_ids.imdb?.length && !(r.external_ids.mdl?.[0] && byMdl.get(r.external_ids.mdl[0])));
+    const byTitle = await screenIdsByTitle(misses.slice(0, 12)).catch(() => new Map<Entity, ScreenIds>());
+    for (const r of screen) {
+      const hit = (r.external_ids.imdb?.[0] && byImdb.get(r.external_ids.imdb[0])) || (r.external_ids.mdl?.[0] && byMdl.get(r.external_ids.mdl[0])) || byTitle.get(r);
+      if (!hit) continue;
+      const tmdb = r.kind === "movie" ? hit.tmdb_movie : hit.tmdb_tv;
+      const via = { provider: "wikidata", url: `${WD}/wiki/${hit.wikidata}`, fetched_at: new Date().toISOString(), confidence: "verified" as const };
+      if (tmdb) { addId(r, "tmdb", tmdb); (r.provenance.field_sources["external_ids.tmdb"] ??= []).push(via); }
+      if (hit.imdb) addId(r, "imdb", hit.imdb);
+      if (hit.mdl) addId(r, "mdl", hit.mdl);
+      if (hit.tvmaze && r.kind === "tv_show") addId(r, "tvmaze", hit.tvmaze);
+      addId(r, "wikidata", hit.wikidata);
+    }
+  } catch { /* ids stay as they were */ }
+}
+
 interface Feed {
   qid: string;
   label: string;
@@ -72,6 +184,7 @@ function feedToEntity(feed: Feed, kind: Kind): Entity {
   e.classification.genres = claimValues(feed, "P136");
   e.classification.themes = claimValues(feed, "P921");
   for (const id of claimValues(feed, "P345")) addId(e, "imdb", id);
+  for (const [prop, key] of Object.entries(ID_CLAIMS)) for (const id of claimValues(feed, prop)) addId(e, key, id);
   for (const id of claimValues(feed, "P434")) addId(e, "musicbrainz", id);
   for (const id of claimValues(feed, "P212")) addId(e, "isbn13", id.replace(/-/g, ""));
   for (const id of claimValues(feed, "P957")) addId(e, "isbn10", id.replace(/-/g, ""));
@@ -143,6 +256,7 @@ export const wikidata: Provider = {
   id: "wikidata", name: "Wikidata", domains: ["meta", "people", "screen", "reading", "music", "sports"], priority: 40,
   kinds: [...new Set(Object.values(INSTANCE_KIND))],
   operations: ["search", "get", "resolve", "related"],
+  namespaces: ["wikidata"],
   auth: "none", base: WD, license: "CC0",
   freshness: "24h", homepage: "https://www.wikidata.org",
   notes: "Identity backbone: cross-provider ids, people, dates, awards, franchises. SPARQL + EntityData.",
@@ -168,8 +282,20 @@ export const wikidata: Provider = {
     const kind = inst.map((i) => INSTANCE_KIND[i]).find(Boolean) ?? (ref.kind ?? "person");
     return feedToEntity(feed, kind);
   },
-  async resolve(ctx, ids) {
-    if (ids.wikidata) return this.get!(ctx, { id: ids.wikidata });
+  async resolve(ctx, ids, kind) {
+    if (ids.wikidata) return this.get!(ctx, { id: ids.wikidata, kind });
+    // Anime and manga have ARM/AniList/ani.zip; Wikidata is the keyless bridge for screen ids (TMDB -> IMDb).
+    if (kind && ["anime", "anime_movie", "anime_episode", "manga", "manhwa", "manhua", "webtoon", "person", "character"].includes(kind)) return null;
+    for (const [ns, id] of Object.entries(ids)) {
+      for (const prop of lookupProps(ns, kind)) {
+        const res = await fetchJson<any>(`${WD}/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(`haswbstatement:${prop}=${id}`)}&srlimit=1&format=json`, { provider: "wikidata", ttlMs: 2_592_000_000 });
+        const qid = res.data?.query?.search?.[0]?.title;
+        if (qid && /^Q\d+$/.test(qid)) {
+          const e = await this.get!(ctx, { id: qid, kind });
+          if (e) { addId(e, ns, id); return e; }
+        }
+      }
+    }
     return null;
   },
   async related(ctx, id) {

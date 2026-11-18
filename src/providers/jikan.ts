@@ -53,37 +53,58 @@ function map(d: any): Entity {
   return e;
 }
 
+export function mapEpisodeRow(showId: string, ep: any): Entity {
+  const e = baseEntity("anime_episode", ep.title ?? `Episode ${ep.mal_id}`, "jikan", ep.url);
+  addId(e, "mal", showId);
+  const titles: Record<string, string> = {};
+  if (ep.title) titles.en = ep.title;
+  if (ep.title_romanji) titles["x-jat"] = ep.title_romanji;
+  if (ep.title_japanese) titles.ja = ep.title_japanese;
+  e.episodes = [{
+    id: `mal:${showId}:ep:${ep.mal_id}`, number: ep.mal_id, title: ep.title ?? ep.title_romanji ?? null, titles,
+    air_date: ep.aired ?? null, rating: ep.score ?? null, is_filler: ep.filler === true, is_recap: ep.recap === true,
+    kind: ep.recap ? "recap" : ep.filler ? "filler" : "regular", sources: [src("jikan", ep.url ?? `https://myanimelist.net/anime/${showId}`)],
+  }];
+  return e;
+}
+
 export const jikan: Provider = {
   id: "jikan", name: "Jikan (MyAnimeList)", domains: ["anime", "reading"], priority: 18,
   kinds: ["anime", "anime_movie", "manga"],
   operations: ["search", "get", "schedule", "episodes", "related"],
+  namespaces: ["mal"], scopes: ["anime", "manga"],
+  limits: { "api.jikan.moe": { rate: 60, windowMs: 60_000, burst: 2, concurrency: 2 } },
   auth: "none", base: BASE, license: "MAL data via Jikan; CC BY-SA for wiki text",
   freshness: "1h", homepage: "https://jikan.moe", notes: "MAL mirror. 3 rps, 60 rpm. Sometimes unreachable from some hosts.",
   async search(ctx, q) {
     const [anime, manga] = await Promise.all([
-      fetchJson<any>(`${BASE}/anime?q=${encodeURIComponent(q)}&limit=${Math.min(ctx.limit, 25)}&sfw`, { provider: "jikan", ttlMs: 3600_000 }).catch(() => null),
-      fetchJson<any>(`${BASE}/manga?q=${encodeURIComponent(q)}&limit=${Math.min(ctx.limit, 25)}&sfw`, { provider: "jikan", ttlMs: 3600_000 }).catch(() => null),
+      fetchJson<any>(`${BASE}/anime?q=${encodeURIComponent(q)}&limit=${Math.min(ctx.limit, 25)}&sfw`, { provider: "jikan", ttlMs: 3600_000, timeoutMs: 2_500, retries: 0 }).catch(() => null),
+      fetchJson<any>(`${BASE}/manga?q=${encodeURIComponent(q)}&limit=${Math.min(ctx.limit, 25)}&sfw`, { provider: "jikan", ttlMs: 3600_000, timeoutMs: 2_500, retries: 0 }).catch(() => null),
     ]);
     return [...(anime?.data?.data ?? []), ...(manga?.data?.data ?? [])].map(map);
   },
   async get(ctx, ref) {
-    const id = ref.externalIds?.mal ?? ref.id;
-    const kind = ref.kind === "manga" ? "manga" : "anime";
-    const res = await fetchJson<any>(`${BASE}/${kind}/${id}/full`, { provider: "jikan", ttlMs: 3600_000 });
+    const id = ref.id;
+    const kind = ["manga", "manhwa", "manhua"].includes(ref.kind ?? "") ? "manga" : "anime";
+    const res = await fetchJson<any>(`${BASE}/${kind}/${id}/full`, { provider: "jikan", ttlMs: 3600_000, timeoutMs: 2_500, retries: 0, allowStatus: [404] });
+    if (res.status === 404) return null;
     return res.data.data ? map(res.data.data) : null;
   },
   async schedule(ctx, p) {
-    const res = await fetchJson<any>(`${BASE}/schedules?start_date=${p.from.slice(0, 10)}&end_date=${p.to.slice(0, 10)}&sfw`, { provider: "jikan", ttlMs: 600_000 });
+    const res = await fetchJson<any>(`${BASE}/schedules?start_date=${p.from.slice(0, 10)}&end_date=${p.to.slice(0, 10)}&sfw`, { provider: "jikan", ttlMs: 600_000, timeoutMs: 2_500, retries: 0 });
     return (res.data.data ?? []).map((d: any) => { const e = map(d); e.kind = "anime_episode"; return e; });
   },
+  /** Every episode of a MAL anime, with MAL's filler and recap flags (the only source of them). */
   async episodes(ctx, id) {
-    const res = await fetchJson<any>(`${BASE}/anime/${id}/episodes`, { provider: "jikan", ttlMs: 3600_000 });
-    return (res.data.data ?? []).map((ep: any) => {
-      const e = baseEntity("anime_episode", ep.title ?? `Episode ${ep.mal_id}`, "jikan", ep.url);
-      addId(e, "mal", String(ep.mal_id));
-      e.episodes = [{ id: `mal_ep_${ep.mal_id}`, number: ep.mal_id, title: ep.title, air_date: ep.aired, kind: "regular", sources: [src("jikan", ep.url)] }];
-      return e;
-    });
+    if (!/^\d+$/.test(id)) return [];
+    const out: Entity[] = [];
+    for (let page = 1; page <= 12; page++) {
+      const res = await fetchJson<any>(`${BASE}/anime/${id}/episodes?page=${page}`, { provider: "jikan", ttlMs: 24 * 3600_000, timeoutMs: 2_500, retries: 0, allowStatus: [404] });
+      if (res.status === 404) break;
+      for (const ep of res.data.data ?? []) out.push(mapEpisodeRow(id, ep));
+      if (!res.data.pagination?.has_next_page) break;
+    }
+    return out;
   },
   async related(ctx, id) {
     const res = await fetchJson<any>(`${BASE}/anime/${id}/relations`, { provider: "jikan", ttlMs: 3600_000 });

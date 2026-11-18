@@ -83,8 +83,13 @@ export function baseEntity(kind: Entity["kind"], name: string, provider: string,
   return e;
 }
 
+/**
+ * Record an internal `namespace:value` marker (`type:series`, `source:MANGA`).
+ * Markers live in classification.keywords so classification.tags stays
+ * human-readable (G20).
+ */
 export function tag(e: Entity, label: string) {
-  if (!e.classification.tags.some((t) => t.name === label)) e.classification.tags.push({ name: label });
+  if (!e.classification.keywords.includes(label)) e.classification.keywords.push(label);
 }
 
 export function addId(e: Entity, provider: string, id: string | null | undefined) {

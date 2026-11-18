@@ -1,7 +1,35 @@
 import { fetchText } from "../core/http.ts";
 import type { Entity } from "../schema/entities.ts";
 import { addId, baseEntity, decodeEntities, src, stripHtml, tag } from "./_util.ts";
-import type { Provider } from "./_types.ts";
+import type { ListResult, Provider } from "./_types.ts";
+
+/** MyDramaList advanced-search codes (verified against /search?adv=titles). */
+const MDL_COUNTRY: Record<string, number> = { JP: 1, CN: 2, KR: 3, HK: 4, TW: 5, TH: 6 };
+const MDL_TYPE = { tv_show: 68, movie: 77 } as const;
+
+function cardEntity(c: ReturnType<typeof searchCards>[number]): Entity {
+  // "Korean Drama - 2016, 16 episodes" / "Korean Movie - 2019"
+  const kind = /\bMovie\b/i.test(c.meta) ? "movie" : "tv_show";
+  const e = baseEntity(kind, c.title, "mydramalist", `${BASE}/${c.slug}`);
+  addId(e, "mdl", c.id);
+  if (c.synopsis) e.description.short = { en: c.synopsis };
+  e.images.poster = c.image ? [c.image] : [];
+  // searchCards scales the card's "8.8" to 0.88.
+  e.metrics.score = c.score != null ? Math.round(c.score * 100) / 10 : null;
+  e.metrics.score_scale = c.score != null ? 10 : null;
+  e.metrics.rank = c.rank;
+  e.broadcast.country = countryOf(c.meta);
+  const year = c.meta.match(/(\d{4})/)?.[1];
+  if (year) {
+    e.dates.start = { year: Number(year), precision: "year" };
+    if (kind === "movie") e.dates.release = { year: Number(year), precision: "year" };
+  }
+  const eps = c.meta.match(/(\d+) episodes?/)?.[1];
+  e.format = kind === "movie" ? "MOVIE" : "SERIES";
+  e.technical.episode_count = kind === "movie" ? 1 : eps ? Number(eps) : null;
+  e.score = 20 - (c.rank ?? 100) / 100;
+  return e;
+}
 
 const BASE = "https://mydramalist.com";
 const HEADERS = {
@@ -30,7 +58,7 @@ function searchCards(html: string): { id: string; slug: string; title: string; i
     const tail = html.slice(m.index, m.index + 3000);
     const meta = tail.match(/<span class="text-muted">([\s\S]*?)<\/span>/)?.[1] ?? "";
     const rank = tail.match(/<div class="ranking pull-right"><span>#(\d+)<\/span>/)?.[1];
-    const score = tail.match(/class="score">([\d.]+)<\/span>/)?.[1];
+    const score = tail.match(/class="[^"]*\bscore">([\d.]+)<\/span>/)?.[1];
     const syn = tail.match(/<p>([\s\S]*?)<\/p>/)?.[1] ?? "";
     out.push({ id: m[1], slug: m[2], image: m[3], title: decodeEntities(m[4]), meta: stripHtml(meta), rank: rank ? Number(rank) : null, score: score ? Number(score) / 10 : null, synopsis: stripHtml(syn) });
   }
@@ -95,22 +123,30 @@ function detail(html: string, id: string, slug: string): Entity {
 export const mydramalist: Provider = {
   id: "mydramalist", name: "MyDramaList", domains: ["screen"], priority: 30,
   kinds: ["tv_show", "movie", "tv_episode", "person"],
-  operations: ["search", "get", "episodes", "people", "schedule"],
+  operations: ["search", "get", "discover", "episodes", "people", "schedule"],
+  namespaces: ["mdl", "mdl_person"], scopes: ["movie", "tv", "person"],
+  limits: { "mydramalist.com": { rate: 20, windowMs: 60_000, burst: 3, concurrency: 2 } },
   auth: "none", base: BASE, license: "MyDramaList community data",
   freshness: "12h", homepage: "https://mydramalist.com",
   notes: "K/C/J/Thai drama catalogue with cast, synopsis, ratings. Browser headers are required.",
   async search(ctx, q) {
     const res = await fetchText(`${BASE}/search?q=${encodeURIComponent(q)}`, { provider: "mydramalist", headers: HEADERS, ttlMs: 43_200_000 });
-    return searchCards(res.data).slice(0, ctx.limit).map((c) => {
-      const e = baseEntity("tv_show", c.title, "mydramalist", `${BASE}/${c.id}-${c.slug}`);
-      addId(e, "mdl", c.id);
-      e.description.short = { en: c.synopsis };
-      e.images.poster = c.image ? [c.image] : [];
-      e.metrics.score = c.score;
-      e.metrics.rank = c.rank;
-      e.score = 20 - (c.rank ?? 100) / 100;
-      return e;
-    });
+    return searchCards(res.data).slice(0, ctx.limit).map(cardEntity);
+  },
+  /** The K/C/J/Thai/TW/HK drama and film shelves: popular or top-rated, by origin country. */
+  async discover(ctx, p) {
+    if (p.kind !== "tv_show" && p.kind !== "movie") return [];
+    const codes = (p.country ?? "").split(",").map((c) => MDL_COUNTRY[c.trim().toUpperCase()]).filter(Boolean);
+    if (!codes.length) return [];
+    const so = p.sort === "score" ? "top" : "popular";
+    const page = p.page ?? ctx.page ?? 1;
+    // `re=Y,Y` is MDL's release-year range; filtering one popular page locally found nothing for a new year (G21).
+    const years = p.year ? `&re=${p.year},${p.year}` : "";
+    const res = await fetchText(`${BASE}/search?adv=titles&ty=${MDL_TYPE[p.kind]}&co=${codes.join(",")}${years}&so=${so}&page=${page}`, { provider: "mydramalist", headers: HEADERS, ttlMs: 6 * 3600_000 });
+    const rows = searchCards(res.data).map(cardEntity).filter((r) => !p.year || r.dates.start?.year === p.year).slice(0, ctx.limit) as ListResult;
+    rows.hasNext = /rel="next"|class="page-item next"/.test(res.data);
+    rows.total = null;
+    return rows;
   },
   async get(ctx, ref) {
     const idSlug = ref.externalIds?.mdl ?? ref.id;

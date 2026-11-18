@@ -54,6 +54,18 @@ export const DOMAIN_KINDS: Record<string, Kind[]> = {
   meta: ["award", "genre", "country", "language", "schedule_entry", "collection"],
 };
 
+/** Like parseKinds, but a name that is itself a kind (`anime`) is not widened to its domain. */
+export function parseExactKinds(input?: string | string[]): Kind[] {
+  if (!input) return [];
+  const raw = (Array.isArray(input) ? input : input.split(",")).map((s) => s.trim().toLowerCase()).filter(Boolean);
+  const out = new Set<Kind>();
+  for (const item of raw) {
+    if (KIND_SET.has(item)) out.add(item as Kind);
+    else if (DOMAIN_KINDS[item]) for (const k of DOMAIN_KINDS[item]) out.add(k);
+  }
+  return [...out];
+}
+
 export function parseKinds(input?: string | string[]): Kind[] {
   if (!input) return [];
   const raw = (Array.isArray(input) ? input : input.split(",")).map((s) => s.trim().toLowerCase()).filter(Boolean);

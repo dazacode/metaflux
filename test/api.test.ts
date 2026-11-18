@@ -28,13 +28,16 @@ function anilistMedia(id: number, title: string) {
 
 beforeEach(() => {
   calls = 0;
-  globalThis.fetch = (async (input: any) => {
+  globalThis.fetch = (async (input: any, init?: any) => {
     calls++;
     const url = String(input?.url ?? input);
     if (url.includes("graphql.anilist.co")) {
-      const body = JSON.parse(String(input.init?.body ?? input.body ?? "{}"));
+      const body = JSON.parse(String(init?.body ?? input.init?.body ?? input.body ?? "{}"));
       const isManga = body.variables?.type === "MANGA";
       const media = isManga ? [] : [anilistMedia(1, "Sousou no Frieren")];
+      if (/Media\((id|idMal):/.test(body.query ?? "")) {
+        return new Response(JSON.stringify({ data: { Media: isManga ? null : media[0] } }), { status: 200, headers: { "content-type": "application/json" } });
+      }
       return new Response(JSON.stringify({ data: { Page: { media, airingSchedules: [] } } }), { status: 200, headers: { "content-type": "application/json" } });
     }
     if (url.includes("arm.haglund.dev")) {

@@ -2,7 +2,7 @@
 
 **All entertainment metadata. One API. No API keys.**
 
-MetaFlux is a self-hostable aggregation API for film, TV, anime, manga, manhwa, manhua, webtoons, comics, books, music, K-pop idols, vtubers, live IPTV, radio, sports and ticketed events. It merges 36 free upstreams into one dense, attributed record schema. You clone it, run it, and every project gets the metadata it needs without a signup, a key, a credit card or a per-call quota.
+MetaFlux is a self-hostable aggregation API for film, TV, anime, manga, manhwa, manhua, webtoons, comics, books, music, K-pop idols, vtubers, live IPTV, radio, sports and ticketed events. It merges 38 free upstreams into one dense, attributed record schema. You clone it, run it, and every project gets the metadata it needs without a signup, a key, a credit card or a per-call quota.
 
 ```
 GET /v1/search?q=frieren&kind=anime
@@ -18,7 +18,7 @@ GET /v1/music/lyrics?artist=IU&track=Love%20wins%20all
 
 Every media project starts the same way: five API keys, five pricing pages, five schemas, five sets of rate limits, and a database that still has empty posters. MetaFlux removes the key ceremony. Upstreams are free public APIs, snapshots and open data; MetaFlux adds the parts that make them usable:
 
-- one **superset schema** instead of 36 shapes
+- one **superset schema** instead of 38 shapes
 - **field-level provenance** (`provenance.field_sources`) with provider, URL and timestamp
 - **raw payloads** preserved for every record
 - **merge and identity resolution** across IMDb/TMDB/TVDB/AniList/MAL/MangaDex/ISBN/MusicBrainz/Wikidata/ESPN
@@ -31,7 +31,7 @@ Every media project starts the same way: five API keys, five pricing pages, five
 | Domain | What you can get | Keyless upstreams |
 | --- | --- | --- |
 | Film / TV | titles, year, runtime, cast, crew, episodes, artwork, trailers, streaming links, broadcast schedule | Cinemeta, TVmaze, Wikipedia, Wikidata |
-| Anime | full media record, airing schedule, studios, characters, staff, rankings, relations, streaming links | AniList, Jikan, Kitsu, ARM |
+| Anime | full media record, airing schedule, next episode, studios, characters with voice actors, staff, people, per-episode titles/stills/runtimes, clearlogos, rankings, relations | AniList, ani.zip, Jikan, Shikimori, Kitsu, ARM |
 | Manga / manhwa / manhua / webtoons | alt titles, description, tags, demographic, chapters, scanlation groups, covers | MangaDex, MangaUpdates, ComicK |
 | Comics | series, issues, publishers, creators, formats, years | GCD, ComicK, Internet Archive |
 | Books | work/edition data, ISBN-10/13, pages, subjects, lending, full text | Open Library, Gutendex, Google Books, Crossref, Internet Archive |
@@ -117,6 +117,10 @@ Every entity is the same superset shape, whichever domain it comes from. Missing
 | GET | `/v1/{kind}/{id}` | Entity by `mf_*`, `provider:id`, IMDb, Wikidata QID or ISBN |
 | GET | `/v1/{kind}/{id}/{section}` | `credits`, `episodes`, `chapters`, `seasons`, `tracks`, `related`, `people`, `streams`, `availability`, `lyrics` |
 | GET | `/v1/trending`, `/v1/discover`, `/v1/calendar` | Charts, catalogue browse, schedules |
+| GET | `/v1/discover?kind=&q=&genres=&format=&status=&season=&year=&country=&sort=&page=&limit=` | Browse with every filter; `meta.total`, `meta.has_next` |
+| GET | `/v1/trending?kind=&country=&genres=&year=…` | With any discover filter, trending is discover sorted by trending; unknown params are a 400 |
+| GET | `/v1/genres?kind=anime\|manga\|tv_show\|movie` | Genre vocabulary `discover` accepts |
+| GET | `any?fields=title,images` | Project entities to those top-level keys |
 | GET | `/v1/resolve?ids=imdb:tt1375666,tmdb:27205` | Canonical identity resolution |
 | GET | `/v1/sports/scoreboard?league=basketball/nba` | Live score + odds |
 | GET | `/v1/sports/standings?league=football/nfl` | Tables |
@@ -171,6 +175,6 @@ MetaFlux code is MIT. Upstream data keeps its own licence: Wikidata is CC0, Open
 
 ## Status
 
-`0.1.0` is a working foundation: 36 keyless providers, all domains, 50+ kinds, tests, cache, snapshots, SDK, CLI, MCP, OpenAPI. The roadmap and acceptance criteria are in [`PLAN.md`](PLAN.md); the architecture is in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+`0.1.0` is a working foundation: 38 providers (37 keyless, 1 optional-key), all domains, 50+ kinds, tests, cache, snapshots, SDK, CLI, MCP, OpenAPI. The roadmap and acceptance criteria are in [`PLAN.md`](PLAN.md); the architecture is in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 Contributions are welcome, especially adapters, fixtures and schema fields. Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`docs/research/README.md`](docs/research/README.md).
