@@ -161,16 +161,18 @@ export function map(m: any): Entity {
     const character = personRef(edge.node, "character");
     const role = String(edge.role ?? "BACKGROUND").toUpperCase();
     const vas = edge.voiceActors ?? [];
+    // Per-credit sources are omitted: every credit comes from the same document,
+    // and provenance.field_sources["credits"] already names it (keeps a 25-character cast under 100 KB).
     e.credits.push({
       person: character, role, department: "characters", character: null, voice: false,
-      voices: vas.map((va: any) => ({ person: personRef(va, "person"), language: va.languageV2 ?? null })),
-      sources: [src("anilist", url)],
+      voices: vas.map((va: any) => ({ person: { id: `anilist:staff:${va.id}`, name: va.name?.full ?? va.name?.native ?? "Unknown" }, language: va.languageV2 ?? null })),
     });
-    // The same voices as flat rows: person = the voice actor, character = who they voice.
+    // The same voices as flat rows: person = the voice actor (full ref), character = who they voice.
+    const charRef = { id: character.id, name: character.name, native_name: character.native_name, kind: "character" };
     for (const va of vas) {
       e.credits.push({
-        person: personRef(va, "person"), character, role, department: "voice", job: "Voice Actor", voice: true,
-        language: va.languageV2 ?? null, sources: [src("anilist", url)],
+        person: personRef(va, "person"), character: charRef, role, department: "voice", job: "Voice Actor", voice: true,
+        language: va.languageV2 ?? null,
       });
     }
   }
@@ -178,7 +180,7 @@ export function map(m: any): Entity {
     if (!edge.node?.id) continue;
     e.credits.push({
       person: personRef(edge.node, "person"),
-      role: edge.role, job: edge.role, character: null, voice: false, department: "staff", sources: [src("anilist", url)],
+      role: edge.role, job: edge.role, character: null, voice: false, department: "staff",
     });
   }
   for (const edge of m.studios?.edges ?? []) {

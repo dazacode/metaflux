@@ -4,7 +4,8 @@ import { collapse, consolidateEpisodes, finalize, indexEntity, mergeEntity, reco
 import { entityStore } from "./store.ts";
 import { titleSimilarity } from "./id.ts";
 import { effectiveKind, idScope, idsConflict, isIdentityKey, parseExternal, type ExternalRef } from "./identity.ts";
-import { singleflight } from "./store.ts";
+import { cache, singleflight } from "./store.ts";
+import { sha256 } from "./id.ts";
 import { chain, getProvider, ownedNamespaces, type Operation, type Provider, type ProviderContext } from "../providers/_types.ts";
 import { kindFamily, kindsForDomain } from "../schema/kinds.ts";
 import { bridgeScreenIds } from "../providers/wikidata.ts";
@@ -52,9 +53,35 @@ export interface Outcome {
   partial: boolean;
 }
 
+const SEARCH_FRESH_MS = 5 * 60_000;
+const SEARCH_STALE_MS = 6 * 3600_000;
+
+/**
+ * Merged search results are cached as a whole (fresh 5 min, then served stale
+ * while one background refresh runs), so a repeated query costs one SQLite read
+ * instead of a provider fan-out bounded by the slowest deadline.
+ */
 export async function searchEntities(q: string, kinds: Kind[], opts: QueryOptions = {}): Promise<Outcome> {
   const query = q.trim();
   if (!query) throw badRequest("q is required");
+  if (opts.force) return searchFresh(query, kinds, opts);
+  const key = `search:${sha256(JSON.stringify([query.toLowerCase(), [...kinds].sort(), opts.limit ?? null, opts.page ?? 1, opts.providers ?? null, opts.region ?? null]))}`;
+  const hit = cache.get(key);
+  const now = Date.now();
+  const run = () => singleflight(key, async () => {
+    const out = await searchFresh(query, kinds, opts);
+    // A result that lost providers to deadlines is kept briefly so the next call retries them.
+    if (out.entities.length) cache.set(key, { status: 200, body: JSON.stringify(out), ttlMs: out.partial ? 60_000 : SEARCH_FRESH_MS, staleMs: SEARCH_STALE_MS });
+    return out;
+  });
+  if (hit && now < hit.staleUntil) {
+    if (now >= hit.expiresAt) void run().catch(() => undefined);
+    return JSON.parse(hit.body) as Outcome;
+  }
+  return run();
+}
+
+async function searchFresh(query: string, kinds: Kind[], opts: QueryOptions): Promise<Outcome> {
   const families = [...new Set(kinds.flatMap((k) => kindFamily(k)))];
   const c = { ...ctx(opts), kinds };
   const candidates: Entity[] = [];

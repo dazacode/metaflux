@@ -78,8 +78,8 @@ export const jikan: Provider = {
   freshness: "1h", homepage: "https://jikan.moe", notes: "MAL mirror. 3 rps, 60 rpm. Sometimes unreachable from some hosts.",
   async search(ctx, q) {
     const [anime, manga] = await Promise.all([
-      fetchJson<any>(`${BASE}/anime?q=${encodeURIComponent(q)}&limit=${Math.min(ctx.limit, 25)}&sfw`, { provider: "jikan", ttlMs: 3600_000 }).catch(() => null),
-      fetchJson<any>(`${BASE}/manga?q=${encodeURIComponent(q)}&limit=${Math.min(ctx.limit, 25)}&sfw`, { provider: "jikan", ttlMs: 3600_000 }).catch(() => null),
+      fetchJson<any>(`${BASE}/anime?q=${encodeURIComponent(q)}&limit=${Math.min(ctx.limit, 25)}&sfw`, { provider: "jikan", ttlMs: 3600_000, timeoutMs: 2_500, retries: 0 }).catch(() => null),
+      fetchJson<any>(`${BASE}/manga?q=${encodeURIComponent(q)}&limit=${Math.min(ctx.limit, 25)}&sfw`, { provider: "jikan", ttlMs: 3600_000, timeoutMs: 2_500, retries: 0 }).catch(() => null),
     ]);
     return [...(anime?.data?.data ?? []), ...(manga?.data?.data ?? [])].map(map);
   },

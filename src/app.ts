@@ -62,6 +62,18 @@ function slim(value: unknown, debug: boolean): unknown {
   return copy;
 }
 
+/** Always kept by `?fields=`: what a client needs to key and route a row. */
+const KEEP = new Set(["id", "kind", "domain", "name", "external_ids"]);
+
+/** `?fields=title,images,format` projects entities to those top-level keys (plus id/kind/name/external_ids). */
+function project(data: unknown, fields: string[] | null): unknown {
+  if (!fields?.length) return data;
+  const want = new Set([...KEEP, ...fields]);
+  const one = (e: any) => e && typeof e === "object" && "kind" in e && "external_ids" in e
+    ? Object.fromEntries(Object.entries(e).filter(([k]) => want.has(k))) : e;
+  return Array.isArray(data) ? data.map(one) : one(data);
+}
+
 function envelope(data: unknown, meta: Record<string, unknown>, start: number, status = 200) {
   const debug = meta.debug === true;
   return json({ data: slim(data, debug), meta: { request_id: crypto.randomUUID(), elapsed_ms: elapsed(start), version: config.version, ...meta } }, status, {
@@ -70,7 +82,14 @@ function envelope(data: unknown, meta: Record<string, unknown>, start: number, s
 }
 
 export const app = new Hono();
-app.use("*", async (c, next) => { await next(); });
+app.use("*", async (c, next) => {
+  await next();
+  const f = c.req.query("fields");
+  if (!f || c.res.status !== 200 || !(c.res.headers.get("content-type") ?? "").includes("json")) return;
+  const body: any = await c.res.json();
+  if (body && "data" in body) body.data = project(body.data, f.split(",").map((s) => s.trim()).filter(Boolean));
+  c.res = new Response(JSON.stringify(body), { status: 200, headers: c.res.headers });
+});
 
 app.use("*", cors({ origin: config.cors, allowMethods: ["GET", "POST", "OPTIONS"], allowHeaders: ["content-type", "authorization"], maxAge: 86400 }));
 if (config.logLevel !== "silent") app.use("*", logger());
