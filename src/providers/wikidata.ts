@@ -115,7 +115,8 @@ export async function bridgeScreenIds(rows: Entity[]): Promise<void> {
       screenIdsBy("P345", screen.map((r) => r.external_ids.imdb?.[0]).filter(Boolean) as string[]),
       screenIdsBy("P3868", screen.filter((r) => !r.external_ids.imdb?.length).map((r) => r.external_ids.mdl?.[0]).filter(Boolean) as string[]),
     ]);
-    const misses = screen.filter((r) => !((r.external_ids.imdb?.[0] && byImdb.get(r.external_ids.imdb[0])) || (r.external_ids.mdl?.[0] && byMdl.get(r.external_ids.mdl[0]))));
+    // Title matching is only for rows with no IMDb id (MDL cards); an IMDb row Wikidata does not know stays unkeyed rather than guessed.
+    const misses = screen.filter((r) => !r.external_ids.imdb?.length && !(r.external_ids.mdl?.[0] && byMdl.get(r.external_ids.mdl[0])));
     const byTitle = await screenIdsByTitle(misses.slice(0, 12)).catch(() => new Map<Entity, ScreenIds>());
     for (const r of screen) {
       const hit = (r.external_ids.imdb?.[0] && byImdb.get(r.external_ids.imdb[0])) || (r.external_ids.mdl?.[0] && byMdl.get(r.external_ids.mdl[0])) || byTitle.get(r);

@@ -65,7 +65,8 @@ async function page(ctx: ProviderContext, kind: Kind, params: Record<string, str
 export const shikimori: Provider = {
   id: "shikimori", name: "Shikimori", domains: ["anime", "reading"], priority: 24,
   kinds: ["anime", "anime_movie", "manga", "manhwa", "manhua"],
-  operations: ["search", "trending", "discover"],
+  operations: ["search", "get", "trending", "discover"],
+  namespaces: ["mal"], scopes: ["anime", "manga"],
   limits: { "shikimori.io": { rate: 90, windowMs: 60_000, burst: 2, concurrency: 2 } },
   auth: "none", base: BASE, license: "Shikimori data (MAL ids)",
   freshness: "30min", homepage: SITE,
@@ -76,6 +77,28 @@ export const shikimori: Provider = {
     if (wants.some((k) => !isManga(k))) out.push(...await page(ctx, "anime", { search: q, order: "popularity" }));
     if (wants.some((k) => isManga(k))) out.push(...await page(ctx, "manga", { search: q, order: "popularity" }));
     return out;
+  },
+  /**
+   * MAL's own counts when AniList has none (AniList lists Vagabond with null
+   * chapters; MAL has 327/37). Deliberately sparse: genres, studios and the
+   * Russian synopsis are left to AniList so arrays do not fill with near-duplicates.
+   */
+  async get(ctx, ref) {
+    if (!/^\d+$/.test(ref.id)) return null;
+    const medium = isManga(ref.kind) ? "manga" : "anime";
+    const res = await fetchJson<any>(`${BASE}/${medium === "manga" ? "mangas" : "animes"}/${ref.id}`, { provider: "shikimori", ttlMs: 6 * 3600_000, allowStatus: [404] });
+    if (res.status === 404 || !res.data?.id) return null;
+    const d = res.data;
+    const e = map(d, medium);
+    e.title.english = d.english?.[0] ?? null;
+    e.title.native = d.japanese?.[0] ?? null;
+    e.title.aliases = (d.synonyms ?? []).filter(Boolean);
+    if (medium === "anime" && d.duration) e.technical.episode_runtime_minutes = d.duration;
+    if (medium === "anime" && d.next_episode_at && d.episodes_aired != null) {
+      e.broadcast.next_episode = { number: d.episodes_aired + 1, airing_at: new Date(d.next_episode_at).toISOString(), precision: "minute" };
+    }
+    e.raw.shikimori = { id: d.id, kind: d.kind, status: d.status, episodes: d.episodes, episodes_aired: d.episodes_aired, chapters: d.chapters, volumes: d.volumes, aired_on: d.aired_on, released_on: d.released_on, url: d.url };
+    return e;
   },
   async trending(ctx, kind) {
     return page(ctx, kind, { order: "popularity", status: "ongoing" });
