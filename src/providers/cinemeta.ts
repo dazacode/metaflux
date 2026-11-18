@@ -46,8 +46,11 @@ function map(m: any, kind: Kind, list = false): Entity {
   e.images.poster = [m.poster].filter(Boolean);
   e.images.backdrop = [m.background].filter(Boolean);
   e.images.logo = [m.logo].filter(Boolean);
-  e.dates.release = dateParts(m.released) ?? null;
-  e.dates.start = dateParts(m.released) ?? null;
+  // Catalog rows often carry only `year` ("2026", "2015–2016") or `releaseInfo`.
+  const firstYear = Number(String(m.year ?? m.releaseInfo ?? "").match(/\d{4}/)?.[0]);
+  const fallbackYear = firstYear ? { year: firstYear, precision: "year" as const } : null;
+  e.dates.release = dateParts(m.released) ?? fallbackYear;
+  e.dates.start = dateParts(m.released) ?? fallbackYear;
   e.status.state = m.status === "Continuing" ? "airing" : m.status === "Ended" ? "ended" : "unknown";
   e.classification.genres = m.genres ?? m.genre ?? [];
   e.metrics.score = num(m.imdbRating);
@@ -158,7 +161,8 @@ export const cinemeta: Provider = {
     const rows = await catalogPage(p.kind, catalog, filter, p.page ?? ctx.page ?? 1, ctx.limit);
     const want = byYear ? genres : genres.slice(1);
     const out = rows.filter((r) => want.every((g) => r.classification.genres.some((x) => x.toLowerCase() === g.toLowerCase()))
-      && (!p.year || byYear || r.dates.start?.year === p.year || r.dates.release?.year === p.year)) as ListResult;
+      // The year catalog is not strict upstream (a 1932 film under 2026); keep only rows dated in the year.
+      && (!p.year || r.dates.start?.year === p.year || r.dates.release?.year === p.year)) as ListResult;
     out.hasNext = rows.hasNext;
     out.total = null;
     return out;

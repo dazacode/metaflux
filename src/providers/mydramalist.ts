@@ -20,7 +20,10 @@ function cardEntity(c: ReturnType<typeof searchCards>[number]): Entity {
   e.metrics.rank = c.rank;
   e.broadcast.country = countryOf(c.meta);
   const year = c.meta.match(/(\d{4})/)?.[1];
-  if (year) e.dates.start = { year: Number(year), precision: "year" };
+  if (year) {
+    e.dates.start = { year: Number(year), precision: "year" };
+    if (kind === "movie") e.dates.release = { year: Number(year), precision: "year" };
+  }
   const eps = c.meta.match(/(\d+) episodes?/)?.[1];
   e.format = kind === "movie" ? "MOVIE" : "SERIES";
   e.technical.episode_count = kind === "movie" ? 1 : eps ? Number(eps) : null;
@@ -137,7 +140,9 @@ export const mydramalist: Provider = {
     if (!codes.length) return [];
     const so = p.sort === "score" ? "top" : "popular";
     const page = p.page ?? ctx.page ?? 1;
-    const res = await fetchText(`${BASE}/search?adv=titles&ty=${MDL_TYPE[p.kind]}&co=${codes.join(",")}&so=${so}&page=${page}`, { provider: "mydramalist", headers: HEADERS, ttlMs: 6 * 3600_000 });
+    // `re=Y,Y` is MDL's release-year range; filtering one popular page locally found nothing for a new year (G21).
+    const years = p.year ? `&re=${p.year},${p.year}` : "";
+    const res = await fetchText(`${BASE}/search?adv=titles&ty=${MDL_TYPE[p.kind]}&co=${codes.join(",")}${years}&so=${so}&page=${page}`, { provider: "mydramalist", headers: HEADERS, ttlMs: 6 * 3600_000 });
     const rows = searchCards(res.data).map(cardEntity).filter((r) => !p.year || r.dates.start?.year === p.year).slice(0, ctx.limit) as ListResult;
     rows.hasNext = /rel="next"|class="page-item next"/.test(res.data);
     rows.total = null;
