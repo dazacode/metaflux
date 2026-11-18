@@ -52,18 +52,26 @@ export const OPENAPI = {
         responses: { 200: list("Ranked, merged entities"), 400: { description: "bad request", content: { "application/json": { schema: err } } } },
       },
     },
-    "/v1/trending": { get: { tags: ["search"], summary: "Trending across providers", parameters: [param("kind", "kind or domain"), param("region", "ISO country")], responses: { 200: list("trending") } } },
+    "/v1/trending": { get: { tags: ["search"], summary: "Trending for one kind, in the answering provider's order", parameters: [param("kind", "kind or domain"), param("page", "1-based page", false, { type: "integer" }), param("limit", "rows per page (max 50 for AniList)", false, { type: "integer" }), param("region", "ISO country")], responses: { 200: list("trending") } } },
     "/v1/discover": {
       get: {
-        tags: ["search"], summary: "Browse a catalogue",
-        parameters: [param("kind", "kind", true), param("genre", "genre"), param("year", "year", false, { type: "integer" }), param("country", "ISO country"), param("sort", "provider sort")],
+        tags: ["search"], summary: "Browse a catalogue with every filter at once; meta.total and meta.has_next",
+        parameters: [
+          param("kind", "kind", true), param("q", "title text"), param("genres", "comma list, AND"), param("genre", "single genre (legacy)"),
+          param("format", "TV, TV_SHORT, MOVIE, SPECIAL, OVA, ONA, MUSIC, MANGA, NOVEL, ONE_SHOT"), param("status", "releasing, finished, upcoming, cancelled, hiatus"),
+          param("season", "winter, spring, summer, fall"), param("year", "year", false, { type: "integer" }),
+          param("country", "ISO-3166 origin country; for tv_show/movie KR, JP, CN, HK, TW, TH use MyDramaList shelves"),
+          param("sort", "popular|popularity, trending, score, newest|start_date_desc, title, episodes"),
+          param("page", "1-based page", false, { type: "integer" }), param("limit", "rows per page", false, { type: "integer" }),
+        ],
         responses: { 200: list("discover") },
       },
     },
+    "/v1/genres": { get: { tags: ["search"], summary: "Genre vocabulary discover accepts for a kind", parameters: [param("kind", "anime, manga, tv_show, movie")], responses: { 200: list("genre names") } } },
     "/v1/calendar": {
       get: {
-        tags: ["search"], summary: "Airings, matches, concerts, releases",
-        parameters: [param("from", "ISO datetime", true), param("to", "ISO datetime", true), param("kinds", "comma separated"), param("region", "ISO country")],
+        tags: ["search"], summary: "Airings, matches, concerts, releases; anime rows carry broadcast.next_episode {number, airing_at}",
+        parameters: [param("from", "ISO datetime", true), param("to", "ISO datetime (window <= 31 days)", true), param("kinds", "comma separated"), param("limit", "max rows (<= 1000)", false, { type: "integer" }), param("region", "ISO country")],
         responses: { 200: list("calendar") },
       },
     },

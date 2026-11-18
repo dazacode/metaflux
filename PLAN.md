@@ -34,11 +34,11 @@ One self-hostable API that returns **dense, attributed metadata** for any entert
 | Criterion | Target | Result |
 | --- | --- | --- |
 | Domains with a working live provider | 12 | 12 |
-| Keyless providers | ≥ 20 | 35 keyless + 1 optional-key |
+| Keyless providers | ≥ 20 | 37 keyless + 1 optional-key |
 | Required env for a working install | 0 | 0 |
 | Entity kinds in schema | ≥ 40 | 57 |
 | Scalar/array fields available in schema | ≥ 300 | ~420 |
-| Provider + route + field dossier for every source | 100% | 36/36 |
+| Provider + route + field dossier for every source | 100% | 38/38 |
 | Offline test suite | pass | 20 tests pass |
 | Live smoke across domains | pass | `bun run smoke` |
 | Failure never blanks a merged record | yes | stale cache + partial + `unavailable` |
