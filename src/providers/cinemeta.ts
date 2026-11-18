@@ -39,7 +39,8 @@ function map(m: any, kind: Kind, list = false): Entity {
   if (m.moviedb_id) addId(e, "tmdb", String(m.moviedb_id));
   if (m.tvdb_id) addId(e, "tvdb", String(m.tvdb_id));
   e.title.english = m.name;
-  e.title.aliases = [m.slug, m.releaseInfo].filter(Boolean);
+  // `slug` ("series/reply-1988-5182866") and `releaseInfo` ("2015–2016") are not titles.
+  e.title.aliases = [];
   e.description.long = { en: m.description ?? "" };
   e.description.synopsis = { en: m.description ?? "" };
   e.images.poster = [m.poster].filter(Boolean);
@@ -56,7 +57,7 @@ function map(m: any, kind: Kind, list = false): Entity {
   for (const c of m.cast ?? []) e.credits.push({ person: { name: c, kind: "person" }, role: "cast", voice: false, sources: [] });
   if (m.director) for (const d of Array.isArray(m.director) ? m.director : [m.director]) e.credits.push({ person: { name: d, kind: "person" }, role: "director", department: "crew", voice: false, sources: [] });
   if (m.writer) for (const w of Array.isArray(m.writer) ? m.writer : [m.writer]) e.credits.push({ person: { name: w, kind: "person" }, role: "writer", department: "crew", voice: false, sources: [] });
-  e.companies.production = (m.country ? [{ name: m.country, kind: "company" as const }] : []);
+  // `country` is the origin country, not a production company; it lands in broadcast.country below.
   e.availability.official_site = `https://www.imdb.com/title/${m.imdb_id}/`;
   for (const v of list ? [] : m.videos ?? []) {
     e.episodes.push({
