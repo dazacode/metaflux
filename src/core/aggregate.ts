@@ -1,6 +1,6 @@
 import { config } from "./config.ts";
 import { badRequest, notFound, unsupported } from "./errors.ts";
-import { collapse, finalize, indexEntity, mergeEntity, recordSource } from "./merge.ts";
+import { collapse, consolidateEpisodes, finalize, indexEntity, mergeEntity, recordSource } from "./merge.ts";
 import { entityStore } from "./store.ts";
 import { titleSimilarity } from "./id.ts";
 import { effectiveKind, idScope, idsConflict, isIdentityKey, parseExternal, type ExternalRef } from "./identity.ts";
@@ -414,8 +414,44 @@ export function resolveKind(input?: string): Kind | undefined {
 }
 void getProvider; void recordSource; void kindsForDomain;
 
+/**
+ * The detail record already merges AniList, ani.zip, Cinemeta and TVmaze episodes.
+ * The section adds per-episode sources that cost extra calls (Jikan filler/recap
+ * flags, paged), merged by episode number under a short deadline.
+ */
+async function episodeSection(entity: Entity, opts: QueryOptions) {
+  const c = ctx(opts);
+  const unavailable: Outcome["unavailable"] = [];
+  const providers: string[] = [...new Set((entity.provenance.field_sources?.episodes ?? []).map((s) => s.provider))];
+  const mal = entity.external_ids.mal?.[0];
+  const copy = structuredClone(entity);
+  if (entity.domain === "anime" && mal) {
+    const jikan = getProvider("jikan");
+    if (jikan?.episodes && allowed(jikan, opts)) {
+      try {
+        // Soft deadline: a slow Jikan keeps filling the HTTP cache in the background for the next call.
+        const rows = await deadline(jikan.episodes(c, mal), 1_500);
+        if (rows.length) {
+          providers.push("jikan");
+          for (const r of rows) for (const ep of r.episodes) {
+            // Jikan only contributes flags and titles; it never adds an episode the others do not know about.
+            const cur = copy.episodes.find((x) => x.number === ep.number && x.kind !== "special" && x.season !== 0);
+            if (cur) { cur.is_filler = Boolean(cur.is_filler) || Boolean(ep.is_filler); cur.is_recap = Boolean(cur.is_recap) || Boolean(ep.is_recap); cur.title ??= ep.title; cur.titles = { ...(ep.titles ?? {}), ...(cur.titles ?? {}) }; cur.sources = [...(cur.sources ?? []), ...(ep.sources ?? [])]; }
+            else if (!copy.episodes.length || (ep.air_date && Date.parse(ep.air_date) <= Date.now())) copy.episodes.push(ep);
+          }
+          consolidateEpisodes(copy);
+        }
+      } catch (err) {
+        unavailable.push({ provider: "jikan", error: err instanceof Error ? err.message : String(err) });
+      }
+    }
+  }
+  return { rows: copy.episodes as unknown[], providers, unavailable };
+}
+
 export async function getSection(kind: Kind, id: string, section: string, opts: QueryOptions = {}): Promise<{ rows: unknown[]; providers: string[]; unavailable: Outcome["unavailable"] }> {
   const entity = await getEntity(kind, id, opts);
+  if (section === "episodes") return episodeSection(entity, opts);
   if (["credits", "episodes", "chapters", "seasons", "tracks"].includes(section)) {
     return { rows: ((entity as any)[section] ?? []) as unknown[], providers: [], unavailable: [] };
   }

@@ -119,8 +119,63 @@ export function makeEntity(kind: Kind, name: string, provider: string): Entity {
   return e;
 }
 
+/**
+ * One row per episode. Providers number episodes differently (AniList and
+ * ani.zip by the work's own numbering, Cinemeta and TVmaze per season), so
+ * anime episodes key on (special?, number) and screen episodes on
+ * (season, number). Earlier rows win per field, flags OR, sources union.
+ */
+export function consolidateEpisodes(entity: Entity) {
+  if (entity.episodes.length < 2) return;
+  const anime = entity.domain === "anime";
+  const groups = new Map<string, any>();
+  const order: string[] = [];
+  for (const ep of entity.episodes as any[]) {
+    if (ep.number == null) { const k = `id:${ep.id}`; groups.set(k, ep); order.push(k); continue; }
+    const special = ep.kind === "special" || ep.season === 0;
+    const key = anime ? `${special ? "S" : "E"}${ep.number}` : `${ep.season ?? 1}:${ep.number}`;
+    const cur = groups.get(key);
+    if (!cur) { groups.set(key, { ...ep }); order.push(key); continue; }
+    for (const [k, v] of Object.entries(ep)) {
+      if (k === "sources") { cur.sources = [...(cur.sources ?? []), ...((v as any[]) ?? [])]; continue; }
+      if (k === "is_filler" || k === "is_recap") { cur[k] = Boolean(cur[k]) || Boolean(v); continue; }
+      if ((k === "description" || k === "titles" || k === "external_ids") && v && typeof v === "object") { cur[k] = { ...(v as object), ...(cur[k] ?? {}) }; continue; }
+      if (cur[k] === null || cur[k] === undefined || cur[k] === "") cur[k] = v;
+    }
+  }
+  const rows = order.map((k) => groups.get(k));
+  const isSpecial = (e: any) => e.kind === "special" || e.season === 0;
+  // Stable ids keyed on the work's client id, whichever provider supplied the row first.
+  const owner = anime
+    ? (entity.external_ids.mal?.[0] ? `mal:${entity.external_ids.mal[0]}` : entity.external_ids.anilist?.[0] ? `anilist:${entity.external_ids.anilist[0]}` : null)
+    : (entity.external_ids.imdb?.[0] ? `imdb:${entity.external_ids.imdb[0]}` : entity.external_ids.tvmaze?.[0] ? `tvmaze:${entity.external_ids.tvmaze[0]}` : null);
+  if (owner) for (const ep of rows) {
+    if (ep.number == null) continue;
+    ep.id = anime ? `${owner}:ep:${isSpecial(ep) ? "S" : ""}${ep.number}` : `${owner}:s${ep.season ?? 1}e${ep.number}`;
+  }
+  rows.sort((a, b) => Number(isSpecial(a)) - Number(isSpecial(b)) || (anime ? 0 : (a.season ?? 1) - (b.season ?? 1)) || (a.number ?? 0) - (b.number ?? 0));
+  entity.episodes = rows;
+}
+
+/** One row per season number; earlier rows win per field. */
+export function consolidateSeasons(entity: Entity) {
+  if (entity.seasons.length < 2) return;
+  const by = new Map<number, any>();
+  for (const s of entity.seasons as any[]) {
+    const cur = by.get(s.number);
+    if (!cur) { by.set(s.number, { ...s }); continue; }
+    for (const [k, v] of Object.entries(s)) {
+      if (k === "sources") cur.sources = [...(cur.sources ?? []), ...((v as any[]) ?? [])];
+      else if (cur[k] === null || cur[k] === undefined || cur[k] === "" || (k === "description" && !Object.keys(cur[k] ?? {}).length)) cur[k] = v;
+    }
+  }
+  entity.seasons = [...by.values()].sort((a, b) => a.number - b.number);
+}
+
 export function finalize(entity: Entity): Entity {
   entity.provenance.generated_at = new Date().toISOString();
+  consolidateEpisodes(entity);
+  consolidateSeasons(entity);
   entity.name = entity.title.display || entity.name;
   entity.title.aliases = dedupeArray(entity.title.aliases) as string[];
   entity.description.long = entity.description.long ?? entity.description.synopsis ?? {};

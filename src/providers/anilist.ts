@@ -76,7 +76,7 @@ function personRef(n: any, kind: "person" | "character") {
     url: `https://anilist.co/${kind === "character" ? "character" : "staff"}/${n.id}`,
     language: n.languageV2 ?? null,
     occupations: n.primaryOccupations ?? undefined,
-    external_ids: { [kind === "character" ? "anilist_character" : "anilist_staff"]: [String(n.id)] },
+    external_ids: { anilist: [String(n.id)], [kind === "character" ? "anilist_character" : "anilist_staff"]: [String(n.id)] },
   };
 }
 
@@ -158,13 +158,21 @@ export function map(m: any): Entity {
   }
   for (const edge of m.characters?.edges ?? []) {
     if (!edge.node?.id) continue;
+    const character = personRef(edge.node, "character");
+    const role = String(edge.role ?? "BACKGROUND").toUpperCase();
+    const vas = edge.voiceActors ?? [];
     e.credits.push({
-      person: personRef(edge.node, "character"),
-      role: String(edge.role ?? "BACKGROUND").toLowerCase(),
-      department: "characters", character: null, voice: false,
-      voices: (edge.voiceActors ?? []).map((va: any) => ({ person: personRef(va, "person"), language: va.languageV2 ?? null })),
+      person: character, role, department: "characters", character: null, voice: false,
+      voices: vas.map((va: any) => ({ person: personRef(va, "person"), language: va.languageV2 ?? null })),
       sources: [src("anilist", url)],
     });
+    // The same voices as flat rows: person = the voice actor, character = who they voice.
+    for (const va of vas) {
+      e.credits.push({
+        person: personRef(va, "person"), character, role, department: "voice", job: "Voice Actor", voice: true,
+        language: va.languageV2 ?? null, sources: [src("anilist", url)],
+      });
+    }
   }
   for (const edge of m.staff?.edges ?? []) {
     if (!edge.node?.id) continue;
