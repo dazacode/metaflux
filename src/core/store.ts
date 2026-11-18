@@ -195,7 +195,8 @@ export const providerState = {
     const now = Date.now();
     const row = this.get(provider);
     const failures = (row?.failures ?? 0) + 1;
-    const openedAt = failures >= config.breakerThreshold ? now : row?.opened_at ?? null;
+    // A failed half-open probe reopens at once; otherwise every cooldown would cost `threshold` slow calls.
+    const openedAt = failures >= config.breakerThreshold || row?.state === "half-open" ? now : row?.opened_at ?? null;
     getDb().query(
       `INSERT INTO provider_state(provider,state,failures,opened_at,last_ok,last_error) VALUES(?,?,?,?,?,?)
        ON CONFLICT(provider) DO UPDATE SET state=excluded.state,failures=excluded.failures,
@@ -212,7 +213,7 @@ export const providerState = {
     const row = this.get(provider);
     if (!row || row.state !== "open") return false;
     if (Date.now() - (row.opened_at ?? 0) > config.breakerCooldownMs) {
-      getDb().query("UPDATE provider_state SET state='half-open', failures=0 WHERE provider = ?").run(provider);
+      getDb().query("UPDATE provider_state SET state='half-open', failures=0, opened_at=NULL WHERE provider = ?").run(provider);
       return false;
     }
     return true;

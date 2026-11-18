@@ -36,6 +36,7 @@ import { gcd } from "./gcd.ts";
 import { arm } from "./arm.ts";
 import { tmdb } from "./tmdb.ts";
 import { anizip } from "./anizip.ts";
+import { shikimori } from "./shikimori.ts";
 
 let loaded = false;
 
@@ -47,7 +48,7 @@ export function loadProviders() {
     wikidata, wikipedia, mydramalist, thesportsdb, espn, jolpica, openligadb, mlb, nhl,
     iptv, radio, openlibrary, gutendex, googlebooks, crossref, internetarchive,
     musicbrainz, deezer, itunes, audiodb, lrclib, holodex, youtubeRss, vtuberWiki,
-    kprofiles, gcd, arm, tmdb, anizip,
+    kprofiles, gcd, arm, tmdb, anizip, shikimori,
   ];
   for (const p of list) if (p) register(p);
 }

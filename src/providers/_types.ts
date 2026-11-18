@@ -123,9 +123,14 @@ export function allProviders(): Provider[] {
   return [...providers.values()];
 }
 
+/** Optional-key adapters without their key are not in any chain: they would only return []. */
+function usable(p: Provider): boolean {
+  return p.auth !== "optional-key" || !p.keyEnv || Boolean(process.env[p.keyEnv]);
+}
+
 export function chain(op: Operation, kind?: Kind): Provider[] {
   return allProviders()
-    .filter((p) => p.operations.includes(op))
+    .filter((p) => p.operations.includes(op) && typeof (p as any)[op] === "function" && usable(p))
     .filter((p) => !kind || p.kinds.includes(kind))
     .sort((a, b) => a.priority - b.priority);
 }
