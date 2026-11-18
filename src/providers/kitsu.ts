@@ -4,6 +4,8 @@ import { addId, baseEntity, dateParts, stripHtml } from "./_util.ts";
 import type { Provider } from "./_types.ts";
 
 const BASE = "https://kitsu.io/api/edge";
+/** Kitsu is JSON:API and answers a plain `application/json` Accept with 406. */
+const H = { accept: "application/vnd.api+json" };
 
 function map(d: any): Entity {
   const a = d.attributes ?? {};
@@ -42,27 +44,30 @@ export const kitsu: Provider = {
   id: "kitsu", name: "Kitsu", domains: ["anime", "reading"], priority: 27,
   kinds: ["anime", "anime_movie", "manga", "manhwa", "manhua"],
   operations: ["search", "get", "trending", "episodes"],
+  namespaces: ["kitsu"], scopes: ["anime", "manga"],
+  limits: { "kitsu.io": { rate: 45, windowMs: 60_000, burst: 3, concurrency: 3 } },
   auth: "none", base: BASE, license: "Kitsu data; community",
   freshness: "6h", homepage: "https://kitsu.io",
   notes: "Anime/manga catalogue with titles, ratings, poster/cover art, relationships.",
   async search(ctx, q) {
     const [anime, manga] = await Promise.all([
-      fetchJson<any>(`${BASE}/anime?filter[text]=${encodeURIComponent(q)}&page[limit]=${Math.min(ctx.limit, 15)}`, { provider: "kitsu", ttlMs: 21_600_000 }).catch(() => null),
-      fetchJson<any>(`${BASE}/manga?filter[text]=${encodeURIComponent(q)}&page[limit]=${Math.min(ctx.limit, 15)}`, { provider: "kitsu", ttlMs: 21_600_000 }).catch(() => null),
+      fetchJson<any>(`${BASE}/anime?filter[text]=${encodeURIComponent(q)}&page[limit]=${Math.min(ctx.limit, 15)}`, { provider: "kitsu", headers: H, ttlMs: 21_600_000 }).catch(() => null),
+      fetchJson<any>(`${BASE}/manga?filter[text]=${encodeURIComponent(q)}&page[limit]=${Math.min(ctx.limit, 15)}`, { provider: "kitsu", headers: H, ttlMs: 21_600_000 }).catch(() => null),
     ]);
     return [...(anime?.data?.data ?? []), ...(manga?.data?.data ?? [])].map(map);
   },
   async get(ctx, ref) {
     const type = ["manga", "manhwa", "manhua"].includes(ref.kind ?? "") ? "manga" : "anime";
-    const res = await fetchJson<any>(`${BASE}/${type}/${ref.id}`, { provider: "kitsu", ttlMs: 21_600_000, allowStatus: [404] });
+    if (!/^\d+$/.test(ref.id)) return null;
+    const res = await fetchJson<any>(`${BASE}/${type}/${ref.id}?include=mappings`, { provider: "kitsu", headers: H, ttlMs: 21_600_000, allowStatus: [404] });
     return res.data?.data ? map(res.data.data) : null;
   },
   async trending(ctx) {
-    const res = await fetchJson<any>(`${BASE}/anime?sort=-userCount&page[limit]=${ctx.limit}`, { provider: "kitsu", ttlMs: 3_600_000 });
+    const res = await fetchJson<any>(`${BASE}/anime?sort=-userCount&page[limit]=${ctx.limit}`, { provider: "kitsu", headers: H, ttlMs: 3_600_000 });
     return (res.data.data ?? []).map(map);
   },
   async episodes(ctx, id) {
-    const res = await fetchJson<any>(`${BASE}/anime/${id}/episodes?page[limit]=100`, { provider: "kitsu", ttlMs: 21_600_000 }).catch(() => null);
+    const res = await fetchJson<any>(`${BASE}/anime/${id}/episodes?page[limit]=100`, { provider: "kitsu", headers: H, ttlMs: 21_600_000 }).catch(() => null);
     return (res?.data?.data ?? []).map((ep: any) => {
       const e = baseEntity("anime_episode", ep.attributes?.canonicalTitle ?? `Episode ${ep.attributes?.number}`, "kitsu");
       e.episodes = [{ id: String(ep.id), number: ep.attributes?.number, title: ep.attributes?.canonicalTitle, air_date: ep.attributes?.airdate, sources: [] }];

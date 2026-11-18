@@ -20,6 +20,25 @@ const INSTANCE_KIND: Record<string, Kind> = {
   Q13219666: "radio_station", Q1616075: "tv_show",
 };
 
+/** Wikidata external-id properties -> our namespaces. */
+const ID_CLAIMS: Record<string, string> = {
+  P4947: "tmdb", P4983: "tmdb", P4835: "tvdb", P8600: "tvmaze", P4086: "mal", P4087: "mal",
+  P8729: "anilist", P8731: "anilist", P5646: "anidb", P3868: "mdl",
+};
+
+/** Which property holds a namespace's id for a given kind. */
+function lookupProps(ns: string, kind?: Kind): string[] {
+  const movie = kind === "movie" || kind === "anime_movie";
+  const tv = kind === "tv_show" || kind === "tv_season" || kind === "tv_special";
+  switch (ns) {
+    case "imdb": return ["P345"];
+    case "tmdb": return movie ? ["P4947"] : tv ? ["P4983"] : ["P4983", "P4947"];
+    case "tvdb": return ["P4835"];
+    case "tvmaze": return ["P8600"];
+    default: return [];
+  }
+}
+
 interface Feed {
   qid: string;
   label: string;
@@ -72,6 +91,7 @@ function feedToEntity(feed: Feed, kind: Kind): Entity {
   e.classification.genres = claimValues(feed, "P136");
   e.classification.themes = claimValues(feed, "P921");
   for (const id of claimValues(feed, "P345")) addId(e, "imdb", id);
+  for (const [prop, key] of Object.entries(ID_CLAIMS)) for (const id of claimValues(feed, prop)) addId(e, key, id);
   for (const id of claimValues(feed, "P434")) addId(e, "musicbrainz", id);
   for (const id of claimValues(feed, "P212")) addId(e, "isbn13", id.replace(/-/g, ""));
   for (const id of claimValues(feed, "P957")) addId(e, "isbn10", id.replace(/-/g, ""));
@@ -143,6 +163,7 @@ export const wikidata: Provider = {
   id: "wikidata", name: "Wikidata", domains: ["meta", "people", "screen", "reading", "music", "sports"], priority: 40,
   kinds: [...new Set(Object.values(INSTANCE_KIND))],
   operations: ["search", "get", "resolve", "related"],
+  namespaces: ["wikidata"],
   auth: "none", base: WD, license: "CC0",
   freshness: "24h", homepage: "https://www.wikidata.org",
   notes: "Identity backbone: cross-provider ids, people, dates, awards, franchises. SPARQL + EntityData.",
@@ -168,8 +189,20 @@ export const wikidata: Provider = {
     const kind = inst.map((i) => INSTANCE_KIND[i]).find(Boolean) ?? (ref.kind ?? "person");
     return feedToEntity(feed, kind);
   },
-  async resolve(ctx, ids) {
-    if (ids.wikidata) return this.get!(ctx, { id: ids.wikidata });
+  async resolve(ctx, ids, kind) {
+    if (ids.wikidata) return this.get!(ctx, { id: ids.wikidata, kind });
+    // Anime and manga have ARM/AniList/ani.zip; Wikidata is the keyless bridge for screen ids (TMDB -> IMDb).
+    if (kind && ["anime", "anime_movie", "anime_episode", "manga", "manhwa", "manhua", "webtoon", "person", "character"].includes(kind)) return null;
+    for (const [ns, id] of Object.entries(ids)) {
+      for (const prop of lookupProps(ns, kind)) {
+        const res = await fetchJson<any>(`${WD}/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(`haswbstatement:${prop}=${id}`)}&srlimit=1&format=json`, { provider: "wikidata", ttlMs: 2_592_000_000 });
+        const qid = res.data?.query?.search?.[0]?.title;
+        if (qid && /^Q\d+$/.test(qid)) {
+          const e = await this.get!(ctx, { id: qid, kind });
+          if (e) { addId(e, ns, id); return e; }
+        }
+      }
+    }
     return null;
   },
   async related(ctx, id) {

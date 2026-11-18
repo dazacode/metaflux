@@ -96,6 +96,8 @@ export const mydramalist: Provider = {
   id: "mydramalist", name: "MyDramaList", domains: ["screen"], priority: 30,
   kinds: ["tv_show", "movie", "tv_episode", "person"],
   operations: ["search", "get", "episodes", "people", "schedule"],
+  namespaces: ["mdl", "mdl_person"], scopes: ["movie", "tv", "person"],
+  limits: { "mydramalist.com": { rate: 20, windowMs: 60_000, burst: 3, concurrency: 2 } },
   auth: "none", base: BASE, license: "MyDramaList community data",
   freshness: "12h", homepage: "https://mydramalist.com",
   notes: "K/C/J/Thai drama catalogue with cast, synopsis, ratings. Browser headers are required.",

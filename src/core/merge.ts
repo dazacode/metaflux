@@ -1,6 +1,7 @@
 /** Field-level provenance + conservative multi-provider merge. */
 import { emptyEntity, type Entity, type Kind, type SourceRef } from "../schema/entities.ts";
 import { entityId } from "./id.ts";
+import { idsConflict, idsShared } from "./identity.ts";
 
 type Any = Record<string, any>;
 
@@ -87,7 +88,9 @@ export function collapse(candidates: Entity[]): Entity[] {
     let merged = false;
     for (const existing of out) {
       if (existing.kind !== cand.kind) continue;
-      if (sharesId(existing, cand) || sameName(existing, cand)) {
+      // Two different MAL/AniList/IMDb ids are two different works, whatever the title says.
+      if (idsConflict(existing, cand) || idsConflict(cand, existing)) continue;
+      if (idsShared(existing, cand) || sameName(existing, cand)) {
         const src: SourceRef = { provider: cand.provenance.sources[0]?.provider ?? "merge", fetched_at: new Date().toISOString(), confidence: "probable" };
         mergeEntity(existing, cand, src);
         merged = true; break;
@@ -98,12 +101,6 @@ export function collapse(candidates: Entity[]): Entity[] {
   return out;
 }
 
-function sharesId(a: Entity, b: Entity): boolean {
-  for (const [p, ids] of Object.entries(a.external_ids)) {
-    if ((b.external_ids[p] ?? []).some((id) => ids.includes(id))) return true;
-  }
-  return false;
-}
 function sameName(a: Entity, b: Entity): boolean {
   const names = [a.name, a.title.english, a.title.romaji, ...a.title.aliases].filter(Boolean).map((s) => normalize(s!));
   const others = [b.name, b.title.english, b.title.romaji, ...b.title.aliases].filter(Boolean).map((s) => normalize(s!));

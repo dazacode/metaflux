@@ -31,6 +31,7 @@ function map(d: any): Entity {
 export const comick: Provider = {
   id: "comick", name: "ComicK", domains: ["reading"], priority: 32,
   kinds: ["comic", "comic_series", "manhwa", "manhua", "webtoon"],
+  namespaces: ["comick"],
   operations: ["search", "get", "chapters", "related"],
   auth: "none", base: BASE, license: "ComicK data",
   freshness: "10min", homepage: "https://comick.io",

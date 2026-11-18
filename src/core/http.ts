@@ -2,8 +2,9 @@
 import { config } from "./config.ts";
 import { MetaFluxError, providerError } from "./errors.ts";
 import { cache, providerState, singleflight } from "./store.ts";
+import { hostLimits } from "../providers/_types.ts";
 
-interface Bucket { tokens: number; last: number; concurrency: number; }
+interface Bucket { tokens: number; last: number; concurrency: number; pausedUntil: number; }
 const buckets = new Map<string, Bucket>();
 let globalActive = 0;
 const globalQueue: (() => void)[] = [];
@@ -18,16 +19,32 @@ function releaseGlobal() {
   if (next) next();
 }
 
+/** The budget for a host: the provider's documented limit, else the global default. */
+export function hostBudget(host: string) {
+  const l = hostLimits.get(host);
+  const rate = l?.rate ?? config.hostRate;
+  const windowMs = l?.windowMs ?? config.hostWindowMs;
+  return { rate, windowMs, burst: l?.burst ?? rate, concurrency: l?.concurrency ?? config.hostConcurrency };
+}
+
 async function hostSlot(host: string) {
+  const budget = hostBudget(host);
   let b = buckets.get(host);
-  if (!b) { b = { tokens: config.hostRate, last: Date.now(), concurrency: 0 }; buckets.set(host, b); }
+  if (!b) { b = { tokens: budget.burst, last: Date.now(), concurrency: 0, pausedUntil: 0 }; buckets.set(host, b); }
   for (;;) {
     const now = Date.now();
-    b.tokens = Math.min(config.hostRate, b.tokens + ((now - b.last) / config.hostWindowMs) * config.hostRate);
+    b.tokens = Math.min(budget.burst, b.tokens + ((now - b.last) / budget.windowMs) * budget.rate);
     b.last = now;
-    if (b.tokens >= 1 && b.concurrency < config.hostConcurrency) { b.tokens -= 1; b.concurrency++; return; }
-    await Bun.sleep(Math.max(15, (config.hostWindowMs / config.hostRate) * (1 - Math.min(1, b.tokens))));
+    if (now >= b.pausedUntil && b.tokens >= 1 && b.concurrency < budget.concurrency) { b.tokens -= 1; b.concurrency++; return; }
+    const refill = (budget.windowMs / budget.rate) * (1 - Math.min(1, b.tokens));
+    await Bun.sleep(Math.max(15, b.pausedUntil > now ? b.pausedUntil - now : refill));
   }
+}
+
+/** A 429 drains the host's bucket until the upstream says it is open again. */
+function pauseHost(host: string, ms: number) {
+  const b = buckets.get(host);
+  if (b) { b.tokens = 0; b.pausedUntil = Math.max(b.pausedUntil, Date.now() + ms); }
 }
 function releaseHost(host: string) {
   const b = buckets.get(host);
@@ -126,6 +143,7 @@ export async function fetchRaw(url: string, opts: FetchOptions): Promise<FetchRe
             signal: AbortSignal.timeout(opts.timeoutMs ?? config.requestTimeoutMs),
             redirect: "follow",
           });
+          if (res.status === 429) pauseHost(host, retryDelay(attempt, res.headers.get("retry-after")));
           if (res.status === 429 || res.status >= 500) {
             if (attempt < retries) {
               await Bun.sleep(retryDelay(attempt, res.headers.get("retry-after")));

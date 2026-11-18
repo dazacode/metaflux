@@ -46,6 +46,8 @@ export const mangadex: Provider = {
   id: "mangadex", name: "MangaDex", domains: ["reading"], priority: 14,
   kinds: ["manga", "manhwa", "manhua"],
   operations: ["search", "get", "chapters", "related"],
+  namespaces: ["mangadex"], scopes: ["manga"],
+  limits: { "api.mangadex.org": { rate: 5, windowMs: 1_000, burst: 5, concurrency: 4 } },
   auth: "none", base: BASE, license: "MangaDex API ToS; scanlation data",
   freshness: "5min search / 1h chapter", homepage: "https://mangadex.org",
   notes: "Primary manga/manhwa/manhua source. Chapter feeds + At-Home page URLs.",

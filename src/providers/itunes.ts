@@ -46,6 +46,7 @@ function map(r: any): Entity {
 export const itunes: Provider = {
   id: "itunes", name: "Apple iTunes", domains: ["music", "screen", "reading", "people"], priority: 25,
   kinds: ["music_track", "music_album", "music_artist", "music_video", "movie", "tv_show", "book", "audiobook", "podcast", "software"],
+  namespaces: ["itunes"],
   operations: ["search", "get", "discover"],
   auth: "none", base: BASE, license: "Apple iTunes Search API terms",
   freshness: "24h", homepage: "https://itunes.apple.com",

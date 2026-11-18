@@ -5,6 +5,9 @@ import type { Provider } from "./_types.ts";
 
 const BASE = "https://arm.haglund.dev/api/v2";
 
+/** Our namespace -> ARM `source` parameter. */
+const ARM_SOURCE: Record<string, string> = { anilist: "anilist", mal: "myanimelist", anidb: "anidb", kitsu: "kitsu" };
+
 const SOURCE_MAP: Record<string, string> = {
   anilist: "anilist", myanimelist: "mal", anidb: "anidb", kitsu: "kitsu",
   imdb: "imdb", themoviedb: "tmdb", thetvdb: "tvdb", trakt: "trakt", "themoviedb-season": "tmdb_season", "thetvdb-season": "tvdb_season",
@@ -17,14 +20,19 @@ export const arm: Provider = {
   id: "arm", name: "Anime Relational Mapping", domains: ["meta", "anime"], priority: 12,
   kinds: ["anime", "anime_movie", "manga"],
   operations: ["resolve", "get"],
+  namespaces: ["anilist", "mal", "anidb", "kitsu"], scopes: ["anime"],
+  limits: { "arm.haglund.dev": { rate: 60, windowMs: 60_000, burst: 10, concurrency: 4 } },
   auth: "none", base: BASE, license: "ARM community mapping",
   freshness: "30d", homepage: "https://arm.haglund.dev",
   notes: "Cross-provider anime id map (AniList, MAL, AniDB, Kitsu, IMDb, TMDB, TVDB, Trakt).",
-  async resolve(ctx, ids) {
-    const [source, id] = Object.entries(ids)[0] ?? [];
-    if (!source || !id) return null;
-    const res = await fetchJson<any>(`${BASE}/ids?source=${encodeURIComponent(source)}&id=${encodeURIComponent(id)}`, { provider: "arm", ttlMs: 2_592_000_000, allowStatus: [404] });
-    if (!res.data || res.data.error) return null;
+  async resolve(ctx, ids, kind) {
+    // ARM maps anime only; a MAL manga id would resolve to the anime with the same number.
+    if (kind && !["anime", "anime_movie", "anime_episode"].includes(kind)) return null;
+    const [ns, id] = Object.entries(ids).find(([k]) => ARM_SOURCE[k]) ?? [];
+    if (!ns || !id || !/^\d+$/.test(id)) return null;
+    const source = ARM_SOURCE[ns];
+    const res = await fetchJson<any>(`${BASE}/ids?source=${encodeURIComponent(source)}&id=${encodeURIComponent(id)}`, { provider: "arm", ttlMs: 2_592_000_000, allowStatus: [400, 404] });
+    if (res.status >= 400 || !res.data || res.data.error) return null;
     const e = baseEntity("anime", res.data.title?.romaji ?? res.data.title?.english ?? `ARM ${id}`, "arm");
     for (const [key, value] of Object.entries(res.data)) {
       const mapped = SOURCE_MAP[key];
@@ -37,9 +45,8 @@ export const arm: Provider = {
     return e;
   },
   async get(ctx, ref) {
-    const [source, id] = Object.entries(ref.externalIds ?? {})[0] ?? [];
-    if (!source || !id) return null;
-    return this.resolve!(ctx, { [source]: id });
+    if (!ref.namespace) return null;
+    return this.resolve!(ctx, { [ref.namespace]: ref.id }, ref.kind);
   },
 };
 export default arm;

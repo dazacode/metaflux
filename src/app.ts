@@ -5,7 +5,8 @@ import { z } from "zod";
 import { config } from "./core/config.ts";
 import { MetaFluxError, badRequest, errorResponse, json, notFound, unsupported } from "./core/errors.ts";
 import { getEntity, getSection, listEntities, resolveIds, searchEntities, type QueryOptions } from "./core/aggregate.ts";
-import { parseKinds, DOMAIN_KINDS } from "./schema/kinds.ts";
+import { parseExternal } from "./core/identity.ts";
+import { parseExactKinds, parseKinds, DOMAIN_KINDS } from "./schema/kinds.ts";
 import { KINDS, type Kind } from "./schema/entities.ts";
 import { allProviders, loadProviders, providerPublic } from "./providers/index.ts";
 import { cache, entityStore, providerState } from "./core/store.ts";
@@ -32,7 +33,8 @@ function opts(c: any, extra: Partial<QueryOptions> = {}): QueryOptions {
   return {
     region: p.region?.toLowerCase(),
     lang: p.lang?.toLowerCase(),
-    limit: p.limit ? Number(p.limit) : undefined,
+    limit: p.limit ? Number(p.limit) : p.per_page ? Number(p.per_page) : undefined,
+    page: p.page ? Number(p.page) : undefined,
     providers: p.providers ? p.providers.split(",") : undefined,
     provider: p.provider,
     debug: p.debug === "true" || p.debug === "1",
@@ -81,7 +83,7 @@ app.get("/v1", (c) => c.json({
   tagline: "All entertainment metadata in one place. No keys required.",
   domains: Object.keys(DOMAIN_KINDS),
   kinds: KINDS,
-  endpoints: ["/v1/search", "/v1/discover", "/v1/trending", "/v1/calendar", "/v1/resolve", "/v1/{kind}/{id}", "/v1/providers", "/v1/sports/scoreboard", "/v1/iptv/channels", "/v1/music/lyrics"],
+  endpoints: ["/v1/search", "/v1/discover", "/v1/trending", "/v1/calendar", "/v1/genres", "/v1/resolve", "/v1/{kind}/{id}", "/v1/providers", "/v1/sports/scoreboard", "/v1/iptv/channels", "/v1/music/lyrics"],
   docs: "/docs",
   openapi: "/openapi.json",
 }));
@@ -120,39 +122,76 @@ app.get("/v1/discover", async (c) => {
   const start = performance.now();
   const kind = (c.req.query("kind") ?? "movie") as Kind;
   if (!KINDS.includes(kind)) throw badRequest(`unknown kind ${kind}`);
+  const q = c.req.query();
+  const season = q.season?.toLowerCase();
+  if (season && !["winter", "spring", "summer", "fall"].includes(season)) throw badRequest("season must be winter|spring|summer|fall");
   const result = await listEntities("discover", kind, {
-    kind, genre: c.req.query("genre"), year: c.req.query("year") ? Number(c.req.query("year")) : undefined,
-    country: c.req.query("country"), sort: c.req.query("sort"),
+    kind, genre: q.genre, genres: q.genres ? q.genres.split(",").map((g) => g.trim()).filter(Boolean) : undefined,
+    year: q.year ? Number(q.year) : undefined, season: season as any, format: q.format, status: q.status,
+    country: q.country, sort: q.sort, query: q.q, page: q.page ? Number(q.page) : undefined,
   }, opts(c));
-  return envelope(result.entities, { count: result.entities.length, providers: result.providers_hit, partial: result.partial, unavailable: result.unavailable }, start);
+  return envelope(result.entities, {
+    count: result.entities.length, page: Number(q.page ?? 1), total: result.total ?? null, has_next: result.has_next ?? null,
+    providers: result.providers_hit, partial: result.partial, unavailable: result.unavailable,
+  }, start);
 });
 
 app.get("/v1/trending", async (c) => {
   const start = performance.now();
-  const kinds = parseKinds(c.req.query("kind") ?? c.req.query("kinds") ?? "movie");
+  const kinds = parseExactKinds(c.req.query("kind") ?? c.req.query("kinds") ?? "movie");
   const results = await Promise.all(kinds.slice(0, 4).map((k) => listEntities("trending", k, { kind: k }, opts(c))));
-  const rows = results.flatMap((r) => r.entities).sort((a, b) => (b.score ?? 0) - (a.score ?? 0)).slice(0, Number(c.req.query("limit") ?? config.searchLimit));
+  // One kind keeps the upstream's trending order; several kinds interleave round-robin.
+  const lists = results.map((r) => r.entities);
+  const rows: any[] = [];
+  for (let i = 0; rows.length < Number(c.req.query("limit") ?? config.searchLimit) && lists.some((l) => i < l.length); i++) {
+    for (const l of lists) if (l[i]) rows.push(l[i]);
+  }
   const unavailable = results.flatMap((r) => r.unavailable);
-  return envelope(rows, { count: rows.length, providers: [...new Set(results.flatMap((r) => r.providers_hit))], partial: unavailable.length > 0, unavailable }, start);
+  return envelope(rows, { count: rows.length, page: Number(c.req.query("page") ?? 1), has_next: results.some((r) => r.has_next), providers: [...new Set(results.flatMap((r) => r.providers_hit))], partial: unavailable.length > 0, unavailable }, start);
 });
 
 app.get("/v1/calendar", async (c) => {
   const start = performance.now();
   const from = c.req.query("from") ?? new Date().toISOString();
   const to = c.req.query("to") ?? new Date(Date.now() + 7 * 86_400_000).toISOString();
-  const kinds = parseKinds(c.req.query("kinds") ?? c.req.query("kind") ?? "anime,tv_show,sports_event,concert");
-  const results = await Promise.all(kinds.slice(0, 4).map((k) => listEntities("schedule", k, { kind: k, from, to, region: c.req.query("region") }, opts(c))));
-  const rows = results.flatMap((r) => r.entities).sort((a, b) => (a.dates.start?.date ?? "").localeCompare(b.dates.start?.date ?? "")).slice(0, Number(c.req.query("limit") ?? 50));
-  return envelope(rows, { count: rows.length, from, to, partial: results.some((r) => r.partial) }, start);
+  const kinds = parseExactKinds(c.req.query("kinds") ?? c.req.query("kind") ?? "anime,tv_show,sports_event,concert");
+  if (!Number.isFinite(Date.parse(from)) || !Number.isFinite(Date.parse(to))) throw badRequest("from/to must be ISO dates");
+  if (Date.parse(to) - Date.parse(from) > 31 * 86_400_000) throw badRequest("calendar window is at most 31 days");
+  const limit = Math.min(Number(c.req.query("limit") ?? 200), 1000);
+  const results = await Promise.all(kinds.slice(0, 4).map((k) => listEntities("schedule", k, { kind: k, from, to, region: c.req.query("region"), limit }, opts(c))));
+  const at = (e: any) => e.broadcast?.next_episode?.airing_at ?? e.dates.airing?.date ?? e.dates.start?.date ?? "";
+  const rows = results.flatMap((r) => r.entities).sort((a, b) => at(a).localeCompare(at(b))).slice(0, limit);
+  const unavailable = results.flatMap((r) => r.unavailable);
+  return envelope(rows, { count: rows.length, from, to, providers: [...new Set(results.flatMap((r) => r.providers_hit))], partial: unavailable.length > 0, unavailable }, start);
+});
+
+app.get("/v1/genres", async (c) => {
+  const start = performance.now();
+  const kind = (c.req.query("kind") ?? "anime") as Kind;
+  if (!KINDS.includes(kind)) throw badRequest(`unknown kind ${kind}`);
+  const o = opts(c);
+  const ctxv = { region: o.region ?? "us", lang: o.lang ?? "en", now: new Date(), limit: 100 };
+  const providers = allProviders().filter((p) => p.genres && p.kinds.includes(kind)).sort((a, b) => a.priority - b.priority);
+  for (const p of providers) {
+    try {
+      const genres = await p.genres!(ctxv, kind);
+      if (genres.length) return envelope(genres, { kind, count: genres.length, providers: [p.id] }, start);
+    } catch { /* next provider */ }
+  }
+  return envelope([], { kind, count: 0, providers: [] }, start);
 });
 
 app.get("/v1/resolve", async (c) => {
   const start = performance.now();
   const raw = c.req.query("ids");
   if (!raw) throw badRequest("ids=imdb:tt...,tmdb:123");
-  const ids = Object.fromEntries(raw.split(",").map((pair) => pair.split(":")).filter((p) => p.length === 2) as [string, string][]);
-  if (!Object.keys(ids).length) throw badRequest("ids must be provider:id pairs");
-  const e = await resolveIds(ids, opts(c));
+  const refs = raw.split(",").map((s) => parseExternal(s.trim())).filter(Boolean) as NonNullable<ReturnType<typeof parseExternal>>[];
+  if (!refs.length) throw badRequest("ids must be provider:id pairs");
+  const kindParam = c.req.query("kind") as Kind | undefined;
+  const kind = refs[0].kindHint ?? (kindParam && KINDS.includes(kindParam) ? kindParam : undefined);
+  const ids = Object.fromEntries(refs.map((r) => [r.provider, r.id]));
+  // With a kind, resolution is a scoped lookup; without, ask the resolvers which kind it is.
+  const e = kind ? await getEntity(kind, raw.split(",")[0].trim(), opts(c)) : await resolveIds(ids, opts(c));
   return envelope(e, { resolved_from: ids, providers: e.provenance.sources.map((s) => s.provider) }, start);
 });
 

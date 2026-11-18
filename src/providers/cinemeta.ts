@@ -48,6 +48,7 @@ export const cinemeta: Provider = {
   id: "cinemeta", name: "Cinemeta (Stremio)", domains: ["screen"], priority: 8,
   kinds: ["movie", "tv_show", "tv_episode"],
   operations: ["search", "get", "discover", "related"],
+  namespaces: ["imdb"], scopes: ["movie", "tv", "screen"],
   auth: "none", base: BASE, license: "Stremio addon, IMDb-derived data",
   freshness: "6h", homepage: "https://v3-cinemeta.strem.io",
   notes: "Keyless IMDb/TMDB bridge with rich descriptions, cast, videos and art. IMDB-id keyed.",

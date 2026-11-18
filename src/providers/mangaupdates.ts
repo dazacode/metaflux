@@ -28,6 +28,7 @@ function map(d: any): Entity {
 export const mangaupdates: Provider = {
   id: "mangaupdates", name: "MangaUpdates", domains: ["reading"], priority: 28,
   kinds: ["manga", "manhwa", "manhua"],
+  namespaces: ["mangaupdates"], scopes: ["manga"],
   operations: ["search", "get", "related"],
   auth: "none", base: "https://api.mangaupdates.com/v1", license: "MangaUpdates data",
   freshness: "24h", homepage: "https://www.mangaupdates.com",

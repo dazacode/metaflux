@@ -178,6 +178,8 @@ export const Metrics = z.object({
 export const PersonRef = z.object({
   id: z.string().nullish(),
   name: z.string(),
+  native_name: z.string().nullish(),
+  occupations: Strings.optional(),
   kind: z.string().default("person"),
   image: z.string().nullish(),
   url: z.string().nullish(),
@@ -196,6 +198,10 @@ export const Credit = z.object({
   job: z.string().nullish(),
   as: z.string().nullish(),
   episodes: z.array(z.string()).optional(),
+  /** Spoken language of a voice credit (`Japanese`, `English`). */
+  language: z.string().nullish(),
+  /** On a character credit: who voices the character, per language. */
+  voices: z.array(z.object({ person: PersonRef, language: z.string().nullish() }).passthrough()).optional(),
   sources: z.array(SourceRef).optional(),
 }).passthrough();
 
@@ -222,6 +228,8 @@ export const RelationEdge = z.object({
   target: z.lazy((): z.ZodTypeAny => Entity).nullish(),
   title: z.string().nullish(),
   direction: z.enum(["outgoing", "incoming"]).optional(),
+  /** Free-text role on a person->work edge (`Director`, `MAIN`, `Voice Actor`). */
+  role: z.string().nullish(),
   weight: z.number().nullish(),
   note: Text.optional(),
   sources: z.array(SourceRef).optional(),
@@ -247,6 +255,8 @@ export const Episode = z.object({
   number: z.number().nullish(),
   absolute_number: z.number().nullish(),
   title: z.string().nullish(),
+  /** Episode title per language (`en`, `ja`, `x-jat` romaji, ...). */
+  titles: Text.optional(),
   description: Text.optional(),
   air_date: z.string().nullish(),
   air_time: z.string().nullish(),
@@ -254,6 +264,10 @@ export const Episode = z.object({
   image: z.string().nullish(),
   rating: z.number().nullish(),
   votes: z.number().nullish(),
+  is_filler: z.boolean().nullish(),
+  is_recap: z.boolean().nullish(),
+  /** Ids of this episode at other services (`tvdb`, `anidb`, `tmdb`, `imdb`). */
+  external_ids: ExternalIds.optional(),
   kind: z.enum(["regular", "special", "recap", "ova", "ona", "movie", "filler", "unknown"]).optional(),
   sources: z.array(SourceRef).optional(),
 }).passthrough();
@@ -320,6 +334,9 @@ export const Availability = z.object({
 export const Technical = z.object({
   runtime_minutes: z.number().nullish(),
   episode_runtime_minutes: z.number().nullish(),
+  episode_count: z.number().nullish(),
+  special_count: z.number().nullish(),
+  season_count: z.number().nullish(),
   total_runtime_minutes: z.number().nullish(),
   resolution: z.string().nullish(),
   width: z.number().nullish(),
@@ -354,6 +371,8 @@ export const Broadcast = z.object({
   time: z.string().nullish(),
   days: Strings.default([]),
   schedule: z.array(z.object({ day: z.string(), time: z.string().nullish(), timezone: z.string().nullish() })).default([]),
+  /** The next scheduled broadcast, when one is announced. */
+  next_episode: z.object({ number: z.number(), airing_at: z.string(), time_until_s: z.number().nullish(), precision: z.enum(["minute", "day"]).nullish() }).passthrough().nullish(),
   is_simulcast: z.boolean().nullish(),
   is_subbed: z.boolean().nullish(),
   is_dubbed: z.boolean().nullish(),
@@ -373,6 +392,8 @@ export const MangaInfo = z.object({
   original_language: z.string().nullish(),
   translated_languages: Strings.default([]),
   available_chapters: z.number().nullish(),
+  chapter_count: z.number().nullish(),
+  volume_count: z.number().nullish(),
   latest_chapter: z.string().nullish(),
   latest_volume: z.string().nullish(),
   chapter_reset_on_volume: z.boolean().nullish(),
@@ -645,6 +666,10 @@ export const Entity = z.object({
   domain: z.enum(DOMAINS),
   name: z.string(),
   title: Title,
+  /** Release format: TV, TV_SHORT, MOVIE, SPECIAL, OVA, ONA, MUSIC, MANGA, NOVEL, ONE_SHOT, SERIES. */
+  format: z.string().nullish(),
+  /** Broadcast season (anime): `{ name: "fall", year: 2023 }`. */
+  season: z.object({ name: z.enum(["winter", "spring", "summer", "fall"]).nullish(), year: z.number().nullish() }).passthrough().nullish(),
   description: Description.default({} as any),
   images: ImageSet.default({} as any),
   external_ids: ExternalIds.default({} as any),
@@ -721,6 +746,8 @@ export function emptyEntity(kind: Kind, name: string): Entity {
   e.images = ImageSet.parse({});
   e.external_ids = ExternalIds.parse({});
   e.urls = {};
+  e.format = null;
+  e.season = null;
   e.dates = Dates.parse({});
   e.status = Status.parse({});
   e.classification = Classification.parse({});

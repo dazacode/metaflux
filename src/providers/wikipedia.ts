@@ -24,6 +24,7 @@ export const wikipedia: Provider = {
   id: "wikipedia", name: "Wikipedia", domains: ["meta", "people"], priority: 55,
   kinds: ["movie", "tv_show", "anime", "manga", "book", "comic", "music_artist", "music_album", "music_track", "sports_player", "person", "vtuber", "idol", "award", "company"],
   operations: ["search", "get"],
+  namespaces: ["wikipedia"],
   auth: "none", base: BASE, license: "CC BY-SA 4.0",
   freshness: "24h", homepage: "https://en.wikipedia.org",
   notes: "Descriptive fallback and biography source. MediaWiki Action API + REST summary.",
