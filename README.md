@@ -118,6 +118,7 @@ Every entity is the same superset shape, whichever domain it comes from. Missing
 | GET | `/v1/{kind}/{id}/{section}` | `credits`, `episodes`, `chapters`, `seasons`, `tracks`, `related`, `people`, `streams`, `availability`, `lyrics` |
 | GET | `/v1/trending`, `/v1/discover`, `/v1/calendar` | Charts, catalogue browse, schedules |
 | GET | `/v1/discover?kind=&q=&genres=&format=&status=&season=&year=&country=&sort=&page=&limit=` | Browse with every filter; `meta.total`, `meta.has_next` |
+| GET | `/v1/trending?kind=&country=&genres=&year=…` | With any discover filter, trending is discover sorted by trending; unknown params are a 400 |
 | GET | `/v1/genres?kind=anime\|manga\|tv_show\|movie` | Genre vocabulary `discover` accepts |
 | GET | `any?fields=title,images` | Project entities to those top-level keys |
 | GET | `/v1/resolve?ids=imdb:tt1375666,tmdb:27205` | Canonical identity resolution |

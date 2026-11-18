@@ -52,7 +52,7 @@ export const OPENAPI = {
         responses: { 200: list("Ranked, merged entities"), 400: { description: "bad request", content: { "application/json": { schema: err } } } },
       },
     },
-    "/v1/trending": { get: { tags: ["search"], summary: "Trending for one kind, in the answering provider's order", parameters: [param("kind", "kind or domain"), param("page", "1-based page", false, { type: "integer" }), param("limit", "rows per page (max 50 for AniList)", false, { type: "integer" }), param("region", "ISO country")], responses: { 200: list("trending") } } },
+    "/v1/trending": { get: { tags: ["search"], summary: "Trending for one kind, in the answering provider's order. Any discover filter (q, genres, genre, year, season, format, status, country, sort) makes it discover sorted by trending; unknown parameters are a 400", parameters: [param("kind", "kind or domain"), param("country", "ISO-3166 origin countries, comma list"), param("page", "1-based page", false, { type: "integer" }), param("limit", "rows per page (max 50 for AniList)", false, { type: "integer" }), param("region", "ISO country")], responses: { 200: list("trending") } } },
     "/v1/discover": {
       get: {
         tags: ["search"], summary: "Browse a catalogue with every filter at once; meta.total and meta.has_next",

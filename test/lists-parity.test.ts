@@ -26,6 +26,8 @@ beforeAll(() => {
     if (url.startsWith("https://shikimori.io/api/animes")) return json(SHIKI);
     if (url.startsWith("https://kitsu.io/api/edge/anime")) return json(KITSU);
     if (url.startsWith("https://mydramalist.com/search?adv=titles&ty=68&co=3")) return new Response(MDL_PAGE, { status: 200, headers: { "content-type": "text/html" } });
+    if (url.startsWith("https://mydramalist.com/search?adv=titles&ty=77&co=3,1,2")) return new Response(MDL_PAGE.replace("Korean Drama - 2016, 16 episodes", "Korean Movie - 2016"), { status: 200, headers: { "content-type": "text/html" } });
+    if (url.includes("cinemeta")) return json({ metas: [{ id: "tt0000001", imdb_id: "tt0000001", type: "movie", name: "Hollywood Chart Film", country: "United States", year: "2026" }] });
     if (url.startsWith("https://query.wikidata.org/sparql")) {
       const q = decodeURIComponent(url);
       if (q.includes("P3868")) return json({ results: { bindings: [{ item: { value: "http://www.wikidata.org/entity/Q24859151" }, mdl: { value: "18452" }, imdb2: { value: "tt5994364" }, tmdbtv: { value: "67915" }, tvmaze: { value: "16150" } }] } });
@@ -62,6 +64,19 @@ describe("list parity", () => {
     expect(s2.title.localized.ru).toBeTruthy();
     expect(s2.format).toBe("TV");
     expect(s2.metrics.score_scale).toBe(100);
+  });
+
+  test("trending honours country like discover does, and rejects unknown params", async () => {
+    const { app } = await import("../src/app.ts");
+    const plain = await (await app.request("/v1/trending?kind=movie&limit=5")).json() as any;
+    expect(plain.meta.providers).toEqual(["cinemeta"]);
+    const byCountry = await (await app.request("/v1/trending?kind=movie&country=KR,JP,CN&limit=5")).json() as any;
+    expect(byCountry.meta.providers).toEqual(["mydramalist"]);
+    expect(byCountry.data[0].kind).toBe("movie");
+    expect(byCountry.data.every((r: any) => r.broadcast.country === "KR")).toBe(true);
+    const bad = await app.request("/v1/trending?kind=movie&countries=KR");
+    expect(bad.status).toBe(400);
+    expect((await bad.json() as any).error.message).toContain("countries");
   });
 
   test("the K-drama shelf comes from MyDramaList and is keyed by TMDB via Wikidata", async () => {

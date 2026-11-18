@@ -137,18 +137,28 @@ app.get("/v1/search", async (c) => {
   }, start);
 });
 
+/** Catalogue filters shared by /v1/discover and a filtered /v1/trending. */
+const FILTER_PARAMS = ["q", "genre", "genres", "year", "season", "format", "status", "country", "sort"] as const;
+/** Paging, routing and output params every list endpoint takes. */
+const LIST_PARAMS = ["kind", "kinds", "page", "limit", "per_page", "region", "lang", "providers", "provider", "fields", "debug", "force"];
+
+function discoverParams(q: Record<string, string>, kind: Kind, defaultSort?: string) {
+  const season = q.season?.toLowerCase();
+  if (season && !["winter", "spring", "summer", "fall"].includes(season)) throw badRequest("season must be winter|spring|summer|fall");
+  if (q.year && !/^\d{4}$/.test(q.year)) throw badRequest("year must be a four-digit year");
+  return {
+    kind, genre: q.genre, genres: q.genres ? q.genres.split(",").map((g) => g.trim()).filter(Boolean) : undefined,
+    year: q.year ? Number(q.year) : undefined, season: season as any, format: q.format, status: q.status,
+    country: q.country, sort: q.sort ?? defaultSort, query: q.q, page: q.page ? Number(q.page) : undefined,
+  };
+}
+
 app.get("/v1/discover", async (c) => {
   const start = performance.now();
   const kind = (c.req.query("kind") ?? "movie") as Kind;
   if (!KINDS.includes(kind)) throw badRequest(`unknown kind ${kind}`);
   const q = c.req.query();
-  const season = q.season?.toLowerCase();
-  if (season && !["winter", "spring", "summer", "fall"].includes(season)) throw badRequest("season must be winter|spring|summer|fall");
-  const result = await listEntities("discover", kind, {
-    kind, genre: q.genre, genres: q.genres ? q.genres.split(",").map((g) => g.trim()).filter(Boolean) : undefined,
-    year: q.year ? Number(q.year) : undefined, season: season as any, format: q.format, status: q.status,
-    country: q.country, sort: q.sort, query: q.q, page: q.page ? Number(q.page) : undefined,
-  }, opts(c));
+  const result = await listEntities("discover", kind, discoverParams(q, kind), opts(c));
   return envelope(result.entities, {
     count: result.entities.length, page: Number(q.page ?? 1), total: result.total ?? null, has_next: result.has_next ?? null,
     providers: result.providers_hit, partial: result.partial, unavailable: result.unavailable,
@@ -157,8 +167,17 @@ app.get("/v1/discover", async (c) => {
 
 app.get("/v1/trending", async (c) => {
   const start = performance.now();
-  const kinds = parseExactKinds(c.req.query("kind") ?? c.req.query("kinds") ?? "movie");
-  const results = await Promise.all(kinds.slice(0, 4).map((k) => listEntities("trending", k, { kind: k }, opts(c))));
+  const q = c.req.query();
+  // Unknown params are rejected rather than silently ignored (a dropped `country` returned US films for a K-drama lane).
+  const unknown = Object.keys(q).filter((k) => !LIST_PARAMS.includes(k) && !(FILTER_PARAMS as readonly string[]).includes(k));
+  if (unknown.length) throw badRequest(`unsupported parameter(s) for /v1/trending: ${unknown.join(", ")}`, { supported: [...LIST_PARAMS, ...FILTER_PARAMS] });
+  const kinds = parseExactKinds(q.kind ?? q.kinds ?? "movie");
+  if (!kinds.length) throw badRequest(`unknown kind ${q.kind ?? q.kinds}`);
+  // With any catalogue filter, trending is discover sorted by trending, so every filter discover honours applies here too.
+  const filtered = FILTER_PARAMS.some((k) => (k === "sort" ? q.sort && q.sort !== "trending" : q[k] !== undefined && q[k] !== ""));
+  const results = await Promise.all(kinds.slice(0, 4).map((k) => filtered
+    ? listEntities("discover", k, discoverParams(q, k, "trending"), opts(c))
+    : listEntities("trending", k, { kind: k }, opts(c))));
   // One kind keeps the upstream's trending order; several kinds interleave round-robin.
   const lists = results.map((r) => r.entities);
   const rows: any[] = [];
