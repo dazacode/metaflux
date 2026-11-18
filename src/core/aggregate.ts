@@ -8,6 +8,7 @@ import { singleflight } from "./store.ts";
 import { chain, getProvider, ownedNamespaces, type Operation, type Provider, type ProviderContext } from "../providers/_types.ts";
 import { kindFamily, kindsForDomain } from "../schema/kinds.ts";
 import { bridgeScreenIds } from "../providers/wikidata.ts";
+import { describeFallback } from "../providers/wikipedia.ts";
 import type { Entity, Kind } from "../schema/entities.ts";
 
 export interface QueryOptions {
@@ -251,6 +252,9 @@ async function fetchEntity(kind: Kind, external: ExternalRef, opts: QueryOptions
     for (const value of ids) addIdSafe(e, provider, value);
   }
   finalize(e);
+  if (["anime", "manga", "movie", "tv"].includes(idScope(e.kind))) {
+    await deadline(describeFallback(e), 4_000).catch(() => false);
+  }
   e.provenance.unavailable = [...new Set(unavailable.map((u) => u.provider))];
   e.provenance.partial = unavailable.length > 0;
   e.provenance.coverage = { ...(e.provenance.coverage ?? {}), detail: "full" };
