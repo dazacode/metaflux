@@ -10,6 +10,7 @@ import { chain, getProvider, ownedNamespaces, type Operation, type Provider, typ
 import { kindFamily, kindsForDomain } from "../schema/kinds.ts";
 import { bridgeScreenIds } from "../providers/wikidata.ts";
 import { describeFallback } from "../providers/wikipedia.ts";
+import { chapterFeed, findByLinks } from "../providers/mangadex.ts";
 import type { Entity, Kind } from "../schema/entities.ts";
 
 export interface QueryOptions {
@@ -463,6 +464,34 @@ export function resolveKind(input?: string): Kind | undefined {
 void getProvider; void recordSource; void kindsForDomain;
 
 /**
+ * Chapters for a manga keyed by MAL/AniList: MangaDex is found by title and
+ * accepted only when its own links name the work; then its feed is paged in
+ * the requested language (`?lang=en`, default en). The MangaDex id is kept on
+ * the stored record so the search happens once.
+ */
+async function chapterSection(entity: Entity, opts: QueryOptions & { lang?: string }) {
+  const unavailable: Outcome["unavailable"] = [];
+  if (entity.chapters.length) return { rows: entity.chapters as unknown[], providers: [], unavailable };
+  if (!allowed({ id: "mangadex" }, opts)) return { rows: [], providers: [], unavailable };
+  try {
+    let id: string | null = entity.external_ids.mangadex?.[0] ?? null;
+    if (!id) {
+      id = await deadline(findByLinks([entity.title.english, entity.title.romaji, entity.name, ...entity.title.aliases].filter(Boolean) as string[], { mal: entity.external_ids.mal?.[0], anilist: entity.external_ids.anilist?.[0] }), 6_000);
+      if (id) {
+        const stored = entityStore.get(entity.id);
+        if (stored) { (stored.external_ids.mangadex ??= []).push(id); entityStore.put(stored); }
+      }
+    }
+    if (!id) return { rows: [], providers: [], unavailable: [{ provider: "mangadex", error: "no MangaDex title links to this work" }] };
+    const rows = await deadline(chapterFeed(id, opts.lang ?? "en"), 10_000);
+    return { rows, providers: ["mangadex"], unavailable };
+  } catch (err) {
+    unavailable.push({ provider: "mangadex", error: err instanceof Error ? err.message : String(err) });
+    return { rows: [], providers: [], unavailable };
+  }
+}
+
+/**
  * The detail record already merges AniList, ani.zip, Cinemeta and TVmaze episodes.
  * The section adds per-episode sources that cost extra calls (Jikan filler/recap
  * flags, paged), merged by episode number under a short deadline.
@@ -500,6 +529,7 @@ async function episodeSection(entity: Entity, opts: QueryOptions) {
 export async function getSection(kind: Kind, id: string, section: string, opts: QueryOptions = {}): Promise<{ rows: unknown[]; providers: string[]; unavailable: Outcome["unavailable"] }> {
   const entity = await getEntity(kind, id, opts);
   if (section === "episodes") return episodeSection(entity, opts);
+  if (section === "chapters" && idScope(entity.kind) === "manga") return chapterSection(entity, opts);
   if (["credits", "episodes", "chapters", "seasons", "tracks"].includes(section)) {
     return { rows: ((entity as any)[section] ?? []) as unknown[], providers: [], unavailable: [] };
   }

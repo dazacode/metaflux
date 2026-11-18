@@ -42,6 +42,43 @@ function map(d: any): Entity {
   return e;
 }
 
+/**
+ * MangaDex has no lookup by MAL/AniList id (links[mal]= filters are rejected),
+ * so find the title by name and accept only a row whose own `links.mal` /
+ * `links.al` names the work. Never a title-only match.
+ */
+export async function findByLinks(titles: string[], ids: { mal?: string; anilist?: string }): Promise<string | null> {
+  for (const title of [...new Set(titles.filter(Boolean))].slice(0, 3)) {
+    const res = await fetchJson<any>(`${BASE}/manga?title=${encodeURIComponent(title)}&limit=10&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica`, { provider: "mangadex", ttlMs: 7 * 86_400_000 }).catch(() => null);
+    for (const d of res?.data?.data ?? []) {
+      const links = d.attributes?.links ?? {};
+      if ((ids.mal && links.mal === ids.mal) || (ids.anilist && links.al === ids.anilist)) return d.id;
+    }
+  }
+  return null;
+}
+
+/** Every chapter in one language, oldest first, paged through the feed (MangaDex caps a page at 500). */
+export async function chapterFeed(id: string, lang = "en", max = 2000) {
+  const out: any[] = [];
+  for (let offset = 0; offset < max; offset += 500) {
+    const res = await fetchJson<any>(`${BASE}/manga/${id}/feed?limit=500&offset=${offset}&translatedLanguage[]=${encodeURIComponent(lang)}&includes[]=scanlation_group&order[volume]=asc&order[chapter]=asc&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&contentRating[]=pornographic`, { provider: "mangadex", ttlMs: 3_600_000 });
+    const rows = res.data.data ?? [];
+    for (const c of rows) {
+      const a = c.attributes ?? {};
+      out.push({
+        id: `mangadex:chapter:${c.id}`, number: a.chapter ?? null, volume: a.volume ?? null, title: a.title || null,
+        language: a.translatedLanguage ?? lang, pages: a.pages ?? null, published_at: a.publishAt ?? a.readableAt ?? null, updated_at: a.updatedAt ?? null,
+        external_url: a.externalUrl ?? `https://mangadex.org/chapter/${c.id}`,
+        scanlation_group: (c.relationships ?? []).find((r: any) => r.type === "scanlation_group")?.attributes?.name ?? null,
+        sources: [{ provider: "mangadex", url: `https://mangadex.org/chapter/${c.id}`, fetched_at: new Date().toISOString(), confidence: "verified" as const }],
+      });
+    }
+    if (rows.length < 500 || offset + 500 >= (res.data.total ?? 0)) break;
+  }
+  return out;
+}
+
 export const mangadex: Provider = {
   id: "mangadex", name: "MangaDex", domains: ["reading"], priority: 14,
   kinds: ["manga", "manhwa", "manhua"],
